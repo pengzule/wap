@@ -17,14 +17,12 @@
       </div>
     </div>
   </header>
-  <input type="hidden" id="prodId" value="663"/>
-  <input id="currSkuId" value="" type="hidden"/>
   <div class="container">
     <div class="row white-bg">
       <div id="slide">
         <div class="hd">
           <ul>
-            <ul><li class="on">1</li><li class="on">2</li><li class="on">3</li></ul>
+            <ul><li class="on"></li><li class="on"></li><li class="on"></li></ul>
         </div>
         <div class="bd">
           <div class="tempWrap" style="overflow:hidden; position:relative;">
@@ -51,18 +49,6 @@
     </div>
     <script charset="utf-8" src="/js/TouchSlide.js"></script>
 
-    <script type="text/javascript">
-
-      TouchSlide({
-        slideCell:"#slide",
-        titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
-        mainCell:".bd ul",
-        effect:"left",
-        autoPlay:true,//自动播放
-        autoPage:true, //自动分页
-        switchLoad:"_src" //切换加载，真实图片路径为"_src"
-      });
-    </script>
 
 
     <div class="row gary-bg">
@@ -70,17 +56,9 @@
         <h1 class="item-name" id="prodName">艾吉贝2015新款多层收纳真皮单肩斜挎包女包头层牛皮斜跨小包包女</h1>
         <ul>
           <li>
-            <label>商城价格：</label>
+            <label>价格：</label>
             <span class="price">¥<span class="price" id="prodCash">179.00</span></span>
-          </li>
-          <li id="choose_0" index="0" >
-            <label id="propName" propname="颜色">颜色：</label>
-            <dl>
-              <dd key="208:635" valId="635" >黑色<span></span></dd>
-              <dd class="check" key="208:636" valId="636" >红色<span></span></dd>
-              <dd key="208:661" valId="661" >黄色<span></span></dd>
-            </dl>
-          </li>
+          </li>   
           <li>
             <label>数量：</label>
             <div class="count_div" style="height: 30px; width: 130px;">
@@ -105,7 +83,7 @@
           <div style="width: 2304px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translateX(0px);" class="bd">
             <ul style="display: table-cell; vertical-align: top; max-width: 768px;width: 100%;" class="property">
               <div class="prop-area" style="min-height:300px;overflow: hidden;">
-                <img src="/img/8a9740c7-7f8e-4f20-ba64-1e90dd596ebe.jpg" alt="" /></div>
+                <img src="/img/8a9740c7-7f8e-4f20-ba64-1e90dd596ebe.jpg" alt="" /><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p>啊实打实大大的撒的撒打算打算打算的撒的撒打算打打</div>
             </ul>
             <ul class="txt-imgs" style="display: table-cell; vertical-align: top; max-width: 768px;width: 100%;">
               <div class="desc-area" style="padding: 0px 10px 0 10px;">

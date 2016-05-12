@@ -139,7 +139,7 @@ h1, h2, h3{font-family: "Microsoft Yahei",Arial, Helvetica, sans-serif;}
 .tb_box .tab_tit .more:after{content:"";width:10px;height:10px;border-right:1px solid #6a91ee; border-bottom:1px solid #6a91ee;top:50%; right:5px;margin-top:-5px;position:absolute;-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg); -ms-transform:rotate(-45deg);-o-transform:rotate(-45deg);transform:rotate(-45deg);}
 .tb_box .tb_type{border-top:1px solid #e5e5e5; overflow:hidden;}
 .tb_type .tb_pic{width:100%; display:block;}
-.tb_type .th_link{border-bottom: 1px solid #dadada;border-width: 0 0 1px;float: right; width: 50%;}
+.tb_type .th_link{border-bottom: 1px solid #dadada;border-right: 1px solid #dadada;border-width: 0 0 1px;float: right; width: 50%;}
 .tb_floor{width:50%;float:left;border-right: 1px solid #dadada; margin-left:-1px;} 
 .tb_type .tb_last{border-bottom:none;}
 .tb_type_even .tb_floor{float:right; border-left: 1px solid #dadada; border-right:none;}

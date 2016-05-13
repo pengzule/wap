@@ -22,6 +22,7 @@ class BookController extends Controller
 
   public function toProduct($category_id)
   {
+
     $products = Product::where('category_id', $category_id)->get();
     return view('product')->with('products', $products);
   }

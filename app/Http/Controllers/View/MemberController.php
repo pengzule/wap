@@ -18,8 +18,9 @@ class MemberController extends Controller
     return view('register');
   }
 
-  public function toMyhome($value='')
+  public function toMyhome(Request $request)
   {
-    return view('personal');
+    $member = $request->session()->get('member', '');
+    return view('personal')->with('member',$member);
   }
 }

@@ -14,7 +14,7 @@
               <img class="img-circle" src="images/noavatar.png">
             </div>
             <div  class="member_m_z member_m_z_1">
-              <div class="member_m_x">萧雅哲</div>
+              <div class="member_m_x">{{$member->name}}</div>
             </div>
             <div class="member_m_r">账户管理、收货地址&gt;
             </div>

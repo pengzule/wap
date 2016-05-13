@@ -156,7 +156,7 @@ class MemberController extends Controller
       $m3_result->message = '该用户不存在';
       return $m3_result->toJson();
     } else {
-      if(md5('bk' + $password) != $member->password) {
+      if(md5('bk' . $password) != $member->password) {
         $m3_result->status = 3;
         $m3_result->message = '密码不正确';
         return $m3_result->toJson();

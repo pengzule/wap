@@ -1,6 +1,6 @@
 @extends('default')
 
-@section('title', '艾吉贝2015新款多层收纳真皮单肩斜挎包女包头层牛皮斜跨小包包女')
+@section('title',$product->name)
 
 @section('content')
 
@@ -22,26 +22,22 @@
       <div id="slide">
         <div class="hd">
           <ul>
-            <ul><li class="on"></li><li class="on"></li><li class="on"></li></ul>
+            <ul>
+              @foreach($pdt_images as $pdt_image)
+              <li class="on"></li>
+              @endforeach
+            </ul>
         </div>
         <div class="bd">
           <div class="tempWrap" style="overflow:hidden; position:relative;">
             <ul style="width: 3072px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translateX(-768px);">
+              @foreach($pdt_images as $pdt_image)
               <li style="display: table-cell; vertical-align: top; width: 768px;">
-                <a href="#" target="_blank">
-                  <img src="/img/products/1.jpg" alt="EOC" ppsrc="/img/products/1.jpg">
-                </a>
+
+                  <img src="{{$pdt_image->image_path}}" alt="EOC" ppsrc="{{$pdt_image->image_path}}">
+
               </li>
-              <li style="display: table-cell; vertical-align: top; width: 768px;">
-                <a href="#" target="_blank">
-                  <img src="/img/products/2.jpg" alt="EOC" ppsrc="/img/products/2.jpg">
-                </a>
-              </li>
-              <li style="display: table-cell; vertical-align: top; width: 768px;">
-                <a href="#" target="_blank">
-                  <img src="/img/products/3.jpg" alt="EOC" ppsrc="/img/products/3.jpg">
-                </a>
-              </li>
+                @endforeach
             </ul>
           </div>
         </div>
@@ -53,17 +49,17 @@
 
     <div class="row gary-bg">
       <div class="white-bg p10 details_con">
-        <h1 class="item-name" id="prodName">艾吉贝2015新款多层收纳真皮单肩斜挎包女包头层牛皮斜跨小包包女</h1>
+        <h1 class="item-name" id="prodName">{{$product->name}}</h1>
         <ul>
           <li>
             <label>价格：</label>
-            <span class="price">¥<span class="price" id="prodCash">179.00</span></span>
+            <span class="price">¥<span class="price" id="prodCash">{{$product->price}}</span></span>
           </li>   
           <li>
             <label>数量：</label>
             <div class="count_div" style="height: 30px; width: 130px;">
               <a href="javascript:void(0);" class="minus" ></a>
-              <input type="text" class="count" value="1" id="prodCount" readonly="readonly"/>
+              <input type="text" class="count" value="1" id="pro_count" readonly="readonly"/>
               <a href="javascript:void(0);" class="add" ></a>
             </div>
           </li>
@@ -83,7 +79,14 @@
           <div style="width: 2304px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translateX(0px);" class="bd">
             <ul style="display: table-cell; vertical-align: top; max-width: 768px;width: 100%;" class="property">
               <div class="prop-area" style="min-height:300px;overflow: hidden;">
-                <img src="/img/8a9740c7-7f8e-4f20-ba64-1e90dd596ebe.jpg" alt="" /><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p><p>sasssasassa</p>啊实打实大大的撒的撒打算打算打算的撒的撒打算打打</div>
+                @foreach($pdt_images as $pdt_image)
+                  <img src="{{$pdt_image->image_path}}" alt="" />
+                @endforeach
+              @if($pdt_content != null)
+                {!! $pdt_content->content !!}
+              @else
+
+              @endif
             </ul>
             <ul class="txt-imgs" style="display: table-cell; vertical-align: top; max-width: 768px;width: 100%;">
               <div class="desc-area" style="padding: 0px 10px 0 10px;">
@@ -109,13 +112,13 @@
       <a class="btn-fav" href="javascript:void(0);" onclick="addInterest(this,'663');">
         <i class="i-fav"></i><span>收藏</span>
       </a>
-      <a class="cart-wrap" href="/shopcart">
+      <a class="cart-wrap" href="/cart">
         <i class="i-cart"></i>
         <span>购物车</span>
-        <span class="add-num" id="totalNum">0</span>
+        <span class="add-num" id="totalNum">{{$count}}</span>
       </a>
       <div class="buy-btn-fix">
-        <a class="btn  btn-cart"  onclick="addShopCart();" href="javascript:void(0);">加入购物车</a>
+        <a class="btn  btn-cart"  onclick="_addCart();" href="javascript:void(0);">加入购物车</a>
         <a class="btn  btn-buy" onclick="buyNow();" href="javascript:void(0);">立即购买</a>
       </div>
     </div>
@@ -182,27 +185,16 @@
 
 @section('my-js')
 <script type="text/javascript">
-  var bullets = document.getElementById('position').getElementsByTagName('li');
-  Swipe(document.getElementById('mySwipe'), {
-    auto: 2000,
-    continuous: true,
-    disableScroll: false,
-    callback: function(pos) {
-      var i = bullets.length;
-      while (i--) {
-        bullets[i].className = '';
-      }
-      bullets[pos].className = 'cur';
-    }
-  });
 
   function _addCart() {
     var product_id = "{{$product->id}}";
+    var pro_count =  $("#pro_count").val();
     $.ajax({
       type: "GET",
       url: '/service/cart/add/' + product_id,
       dataType: 'json',
       cache: false,
+      data: {pro_count: pro_count, _token: "{{csrf_token()}}"},
       success: function(data) {
         if(data == null) {
           $('.bk_toptips').show();
@@ -217,9 +209,9 @@
           return;
         }
 
-        var num = $('#cart_num').html();
+        var num = $('#totalNum').html();
         if(num == '') num = 0;
-        $('#cart_num').html(Number(num) + 1);
+        $('#totalNum').html(Number(num) + 1);
 
       },
       error: function(xhr, status, error) {

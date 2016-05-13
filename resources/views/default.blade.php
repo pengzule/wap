@@ -58,7 +58,7 @@
 
 @yield('content')
 
-
+<div class="bk_toptips"><span></span></div>
 </body>
 @yield('my-js')
 </html>

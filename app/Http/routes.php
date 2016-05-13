@@ -49,6 +49,7 @@ Route::group(['prefix' => 'service'], function () {
 
 
 Route::match(['get', 'post'], '/order_commit', 'View\OrderController@toOrderCommit')->middleware(['check.cart', 'check.weixin']);
+Route::match(['get', 'post'], '/order_confirm', 'View\OrderController@toOrderConfirm')->middleware(['check.cart', 'check.weixin']);
 Route::get('/order_list', 'View\OrderController@toOrderList')->middleware(['check.login']);
 
 /***********************************后台相关***********************************/

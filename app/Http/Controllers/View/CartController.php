@@ -21,7 +21,7 @@ class CartController extends Controller
     $member = $request->session()->get('member', '');
     if($member != '') {
       $cart_items = $this->syncCart($member->id, $bk_cart_arr);
-      return response()->view('cart', ['cart_items' => $cart_items])->withCookie('bk_cart', null);
+      return response()->view('cart', ['cart_items' => $cart_items]);
     }
 
     foreach ($bk_cart_arr as $key => $value) {

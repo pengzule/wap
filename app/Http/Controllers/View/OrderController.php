@@ -85,6 +85,12 @@ class OrderController extends Controller
                                ->with('bk_wx_js_config', $bk_wx_js_config);
   }
 
+  public function toOrderConfirm(Request $request)
+  {
+
+    return view('order_confirm');
+  }
+
   public function toOrderList(Request $request)
   {
     $member = $request->session()->get('member', '');

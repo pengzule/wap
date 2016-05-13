@@ -103,6 +103,8 @@ a{font-size: 12px;}
 .member_top_bg img{width:100%;}
 .member_top{overflow:hidden;position: relative;}
 
+.memberimg_m_pic{width:25%;text-align: center;position: absolute;top:6%;right:9%;height: 100%}
+.memberimg_m_pic img{width:100%;height:90%;border-radius: 50%;}
 .member_m_pic{width:25%;text-align: center;position: absolute;top:6%;left: 3%;height: 100%}
 .member_m_pic img{width:100%;height:90%;border-radius: 50%;}
 .member_m_z{width:30%;position: absolute;left: 32%;top:10%;}
@@ -150,6 +152,9 @@ a{font-size: 12px;}
 .wallet_des p{margin:15px 0; color:#666;}
 .wallet_des p span{color:#333; font-weight:bold;}
  
+.list_user_img{float:left; margin-top:-3px; margin-right:10px;}
+.list_user_img img{width: 46px;}
+ 
 .list_group_img{float:left; margin-top:-3px; margin-right:5px;}
 .list_group_img img{width: 23px;}
 .tip{padding-right:30px; position:relative; font-size:14px;}
@@ -178,6 +183,8 @@ a{font-size: 12px;}
 .member_list_group .list-group-item .m_name{margin:5px 0 3px; color:#333;}
 .member_list_group .m_img{margin: 0 auto; text-align: center; width: 35%; margin-bottom:3px;}
  
+
+
 
 /*搜索，功能*/
 .order_sou{float:right;line-height:28px;width: 85%;padding-top: 6px;position: relative;}

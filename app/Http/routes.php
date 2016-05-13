@@ -49,9 +49,10 @@ Route::group(['prefix' => 'service'], function () {
 
 
 Route::match(['get', 'post'], '/order_commit', 'View\OrderController@toOrderCommit')->middleware(['check.cart', 'check.weixin']);
-Route::match(['get', 'post'], '/order_confirm', 'View\OrderController@toOrderConfirm')->middleware(['check.cart', 'check.weixin']);
+Route::match(['get', 'post'], '/order_confirm', 'View\OrderController@toOrderConfirm');
+Route::match(['get', 'post'], '/editaddress', 'View\OrderController@toeditaddress');
 Route::get('/order_list', 'View\OrderController@toOrderList')->middleware(['check.login']);
-
+Route::get('/userinfo', 'View\MemberController@toUserInfo')->middleware(['check.login']);
 /***********************************后台相关***********************************/
 
 Route::group(['prefix' => 'admin'], function () {

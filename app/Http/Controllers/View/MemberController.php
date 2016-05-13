@@ -23,4 +23,10 @@ class MemberController extends Controller
     $member = $request->session()->get('member', '');
     return view('personal')->with('member',$member);
   }
+  
+    public function toUserInfo(Request $request)
+  {
+    $member = $request->session()->get('member', '');
+    return view('userinfo')->with('member',$member);
+  }
 }

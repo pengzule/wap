@@ -87,8 +87,38 @@ class OrderController extends Controller
 
   public function toOrderConfirm(Request $request)
   {
+      
 
-    return view('order_confirm');
+    $product_ids = $request->input('product_ids', '');
+
+    $product_ids_arr = ($product_ids!='' ? explode(',', $product_ids) : array());
+
+    $member = $request->session()->get('member', '');
+    $cart_items = CartItem::where('member_id', $member->id)->whereIn('product_id', $product_ids_arr)->get();
+
+    
+
+    $cart_items_arr = array();
+    $cart_items_ids_arr = array();
+    $total_price = 0;
+    $name = '';
+    foreach ($cart_items as $cart_item) {
+      $cart_item->product = Product::find($cart_item->product_id);
+      if($cart_item->product != null) {
+        $total_price += $cart_item->product->price * $cart_item->count;
+        $name .= ('《'.$cart_item->product->name.'》');
+        array_push($cart_items_arr, $cart_item);
+        array_push($cart_items_ids_arr, $cart_item->id);
+      }
+    }
+   
+
+  
+   
+
+    return view('order_confirm')->with('cart_items', $cart_items_arr)
+                               ->with('total_price', $total_price);
+
   }
 
   public function toOrderList(Request $request)
@@ -105,4 +135,12 @@ class OrderController extends Controller
 
     return view('order_list')->with('orders', $orders);
   }
+  
+   public function toeditaddress()
+  {
+      
+    return view('editaddress');
+
+  }
+
 }

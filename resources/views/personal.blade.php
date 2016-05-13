@@ -7,7 +7,7 @@
   <div class="maincontainer">
     <div class="container" style="max-width:768px;margin:0 auto;">
       <div class="row">
-        <a href="/p/userInfo">
+        <a href="/userinfo">
           <div class="member_top member_top_1">
             <div class="member_top_bg"><img  src="images/member_bg.png"></div>
             <div class="member_m_pic member_m_pic_1">

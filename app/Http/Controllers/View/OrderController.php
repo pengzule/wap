@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
+use Faker\Provider\cs_CZ\Address;
 use Illuminate\Http\Request;
 use App\Entity\CartItem;
 use App\Entity\Product;
+use App\Entity\Addr;
 use App\Entity\Order;
 use App\Entity\OrderItem;
 use App\Models\BKWXJsConfig;
@@ -95,7 +97,7 @@ class OrderController extends Controller
 
     $member = $request->session()->get('member', '');
     $cart_items = CartItem::where('member_id', $member->id)->whereIn('product_id', $product_ids_arr)->get();
-
+    $address = Addr::where('member_id',$member->id)->where('default',1)->first();
     
 
     $cart_items_arr = array();
@@ -117,7 +119,8 @@ class OrderController extends Controller
    
 
     return view('order_confirm')->with('cart_items', $cart_items_arr)
-                               ->with('total_price', $total_price);
+                                ->with('total_price', $total_price)
+                                ->with('address',$address);
 
   }
 
@@ -138,8 +141,12 @@ class OrderController extends Controller
   
    public function toeditaddress()
   {
-      
-    return view('editaddress');
+    // 获取上一次请求的url
+    $return_url = '';
+    if(isset($_SERVER['HTTP_REFERER'])) {
+      $return_url = $_SERVER['HTTP_REFERER'];
+    }
+    return view('editaddress')->with('return_url',$return_url);
 
   }
 

@@ -57,7 +57,8 @@ border-radius:3px;
 .U-guodu-box { padding:5px 15px;  background:#3c3c3f; filter:alpha(opacity=90); -moz-opacity:0.9; -khtml-opacity: 0.9; opacity: 0.9;  min-heigh:200px; border-radius:10px;}
 .U-guodu-box div{ color:#fff; line-height:20px; font-size:12px; margin:0px auto; height:100%; padding-top:10%; padding-bottom:10%;}
 </style>
-@yield('content')    
+@yield('content')
+<div class="bk_toptips"><span></span></div>
 </body>
 @yield('my-js')
 <!-- <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script> -->

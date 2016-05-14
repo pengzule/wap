@@ -21,7 +21,7 @@
           </div></a>
         <div class="member_mp_img" data-toggle="modal" data-target="#myModalmin" data-title="我的名片" data-tpl="mp"><img src="images/member_mp_img.png"></div>
         <div class="list-group mb10">
-          <a href="/p/userOrder" class="list-group-item tip">
+          <a href="/order_list" class="list-group-item tip">
             <div class="list_group_img">
               <img src="images/member_img16.png"></div>
             我的订单
@@ -106,7 +106,7 @@
                 <div class="member_mp_t_img" >
                   <img src="images/noavatar.png">
                 </div>
-                <div class="member_mp_t_m">萧雅哲</div>
+                <div class="member_mp_t_m">{{$member->name}}</div>
                 <div class="member_mp_t_m_m">
                   <img src="img/a909bfc1-cada-4008-81c0-556ff86aace1.jpg">
                 </div>

@@ -13,7 +13,6 @@
 <div class="bk_title_bar">
   <img class="bk_back" src="/images/back.png" alt="" onclick="history.go(-1);">
   <p class="bk_title_content"></p>
-  <img class="bk_menu" src="/images/menu.png" alt="" onclick="onMenuClick();">
 </div>
 
 
@@ -23,27 +22,9 @@
 
 <!-- tooltips -->
 <div class="bk_toptips"><span></span></div>
-<div class=" bk_fix_bottom">
-    <div><a href="javascript:;">我的设备</a></div>
-    <div><a href="javascript:;">购物中心</a></div>
-    <div><a href="javascript:;">个人中心</a></div>
 
-</div>
 <!--BEGIN actionSheet-->
-<div id="actionSheet_wrap">
-    <div class="weui_mask_transition" id="mask"></div>
-    <div class="weui_actionsheet" id="weui_actionsheet">
-        <div class="weui_actionsheet_menu">
-            <div class="weui_actionsheet_cell" onclick="onMenuItemClick(1)">主页</div>
-            <div class="weui_actionsheet_cell" onclick="onMenuItemClick(2)">书籍类别</div>
-            <div class="weui_actionsheet_cell" onclick="onMenuItemClick(3)">购物车</div>
-            <div class="weui_actionsheet_cell" onclick="onMenuItemClick(4)">我的订单</div>
-        </div>
-        <div class="weui_actionsheet_action">
-            <div class="weui_actionsheet_cell" id="actionsheet_cancel">取消</div>
-        </div>
-    </div>
-</div>
+
 
 </body>
  <script src="/js/jquery-1.11.2.min.js"></script>

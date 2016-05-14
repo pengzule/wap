@@ -17,10 +17,10 @@
     <div class="list-group mb10">
         <a href="/editaddress" class="list-group-item tip">
 
-            <span style="float:left">收货人：彭祖乐</span>
-            <span style="float:right">13338286204</span>
+            <span style="float:left">收货人：{{$address->realname}}</span>
+            <span style="float:right">{{$address->phone}}</span>
             <br/>
-            <span style="font-size:80%; ">收货地址：福建省福州市仓山区福建农林大学</span>
+            <span style="font-size:80%; ">收货地址：{{$address->province}}{{$address->city}}{{$address->county}}{{$address->street}}</span>
 
 
         </a>
@@ -30,11 +30,11 @@
         <input type="hidden" id="ListTotal" value="1">
         @foreach($cart_items as $cart_item)
         <input type="hidden" name="cart_item" id="{{$cart_item->product->id}}" >
-        <a href="/product/">
+        <a href="/product/{{$cart_item->product->id}}">
             <div class="hproduct clearfix" style="background:#fff;border-top:0px;">
                 <div class="p-pic"><img style="max-height:100px;margin:auto;" class="img-responsive" src="{{$cart_item->product->preview}}"></div>
                 <div class="p-info">
-                    <p class="p-title">金钱猫EOC三合一局端CEH7140F </p>
+                    <p class="p-title">{{$cart_item->product->name}} </p>
                     <br/>
                     <p class="p-origin"><em class="price">¥{{$cart_item->product->price}}<span style="float: right">x{{$cart_item->count}}</span></em>
                     </p>
@@ -46,7 +46,9 @@
         <div class="list-group mb10">
             <a href="#" class="list-group-item tip">
                 <div class="list_group_img"><img src="images/order_bg_10.png"></div>
-                常见问题
+                问题
+
+
             </a>
 
         </div>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\M3Result;
 use App\Entity\Member;
 use App\Entity\TempPhone;
+use App\Entity\Addr;
 use App\Entity\TempEmail;
 use App\Models\M3Email;
 use App\Tool\UUID;
@@ -169,4 +170,42 @@ class MemberController extends Controller
     $m3_result->message = '登录成功';
     return $m3_result->toJson();
   }
-}
+
+  public function editaddress(Request $request)
+  {
+
+    $member = $request->session()->get('member', '');
+    $member_id = $member->id;
+
+    $addrs = Addr::where('member_id',$member_id)->get();
+    foreach($addrs as $addr)
+    {
+        $addr->default = 0;
+        $addr->save();
+    }
+
+    $realname = $request->input('realname', '');
+    $phone = $request->input('phone', '');
+    $s_province = $request->input('s_province', '');
+    $s_city = $request->input('s_city', '');
+    $s_county = $request->input('s_county', '');
+    $street = $request->input('street', '');
+
+    $address = new Addr;
+    $address->member_id = $member_id;
+    $address->realname = $realname;
+    $address->phone = $phone;
+    $address->province = $s_province;
+    $address->city = $s_city;
+    $address->county = $s_county;
+    $address->street = $street;
+    $address->save();
+
+    $m3_result = new M3Result;
+    $m3_result->status = 0;
+    $m3_result->message = '成功';
+    return $m3_result->toJson();
+    }
+  }
+
+

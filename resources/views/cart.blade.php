@@ -54,7 +54,8 @@
       @endforeach
     </div>
   </div>
-  <div class="fixed-foot">
+  <footer class="footer">
+      <div class="fixed-foot">
     <div class="fixed_inner">
       <div class="pay-point">
         <div class="icheck pull-left mr10">
@@ -70,6 +71,7 @@
       </div>
     </div>
   </div>
+  </footer>
   <div class="clear"></div>
 
 

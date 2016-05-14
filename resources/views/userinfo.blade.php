@@ -27,7 +27,7 @@
           <a href="#" class="list-group-item tip">
            
             会员名
-            <span class="gary pull-right">{{$member->nickname}}</span>
+            <span class="gary pull-right">{{$member->name}}</span>
           </a>
           <a href="#" class="list-group-item tip">
           

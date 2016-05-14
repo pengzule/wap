@@ -14,6 +14,7 @@
           <span class="weui_icon_checked"></span>
       </div>
   </label>
+
   <label class="weui_cell weui_check_label" for="x12">
       <div class="weui_cell_bd weui_cell_primary">
           <p>邮箱注册</p>
@@ -28,7 +29,7 @@
   <div class="weui_cell">
       <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
       <div class="weui_cell_bd weui_cell_primary">
-          <input class="weui_input" type="number" placeholder="" name="phone"/>
+          <input class="weui_input" type="number" placeholder="" id="phone" name="phone"/>
       </div>
   </div>
   <div class="weui_cell">
@@ -82,6 +83,7 @@
       </div>
   </div>
 </div>
+
 <div class="weui_cells_tips"></div>
 <div class="weui_btn_area">
   <a class="weui_btn weui_btn_primary" href="javascript:" onclick="onRegisterClick();">注册</a>
@@ -113,7 +115,31 @@
     $(this).attr('src', '/service/validate_code/create?random=' + Math.random());
   });
 
+  $(document).ready(function(){
+    //当光标离开 姓名时，验证姓名
+    $("#username").blur(function(){
+      checkName();
+    });
+
+    //当光标离开 手机时，验证手机
+    $("#phone").blur(function(){
+      checkPhone();
+    });
+
+//当光标离开 密码时，验证密码
+    $("#password").blur(function(){
+      checkPassword();
+    });
+
+
+
+
+  });
+
+
 </script>
+
+
 <script type="text/javascript">
   var enable = true;
   $('.bk_phone_code_send').click(function(event) {
@@ -186,6 +212,90 @@
 </script>
 <script type="text/javascript">
 
+  /**判断是否为空**/
+  function isBlank(_value){
+    if(_value==null || _value=="" || _value==undefined){
+      return true;
+    }
+    return false;
+  }
+
+  /**检查是否为手机号码形式**/
+  function isPhone(str){
+    var mobile = /^1\d{10}$/;
+    return mobile.test(str);
+  }
+
+  /**检查手机号码是否存在**/
+  function isPhoneExist(phone) {
+    var result = true;
+
+
+    $.ajax({
+      type: "POST",
+      url: '/service/isPhoneExist',
+      dataType: 'json',
+      cache: false,
+      data: {phone: phone, _token: "{{csrf_token()}}"},
+      success: function(data) {
+        if(data == null) {
+          $('.bk_toptips').show();
+          $('.bk_toptips span').html('服务端错误');
+          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          return;
+        }
+        if(data.status != 0) {
+          $('.bk_toptips').show();
+          $('.bk_toptips span').html(data.message);
+          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          return;
+        }
+
+      },
+      error: function(xhr, status, error) {
+        console.log(xhr);
+        console.log(status);
+        console.log(error);
+      }
+    });
+    return result;
+  }
+
+  function checkPhone(){
+
+    var mobile = $('input[name=phone]').val();
+
+    if(isBlank(mobile)){
+      $('.bk_toptips').show();
+      $('.bk_toptips span').html('请输入手机号');
+      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+      return false;
+    }
+
+    if(!isPhone(mobile)){
+      $('.bk_toptips').show();
+      $('.bk_toptips span').html('手机格式不正确');
+      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+      return false;
+    }
+
+    if(!isPhoneExist(mobile)){
+      $('.bk_toptips').show();
+      $('.bk_toptips span').html('该手机号码已存在！');
+      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+      return false;
+    }
+
+    return true;
+  }
+
+
+
+
+
+
+
+
   function onRegisterClick() {
 
     $('input:radio[name=register_type]').each(function(index, el) {
@@ -240,6 +350,8 @@
             $('.bk_toptips').show();
             $('.bk_toptips span').html('注册成功');
             setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+
+            location.href = "/login";
           },
           error: function(xhr, status, error) {
             console.log(xhr);

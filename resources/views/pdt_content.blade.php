@@ -87,11 +87,12 @@
               @else
 
               @endif
+              </div>
             </ul>
             <ul class="txt-imgs" style="display: table-cell; vertical-align: top; max-width: 768px;width: 100%;">
               <div class="desc-area" style="padding: 0px 10px 0 10px;">
                 <li style="height:30px;">
-                  <div id="ajax_loading" style="margin: 10px  auto 15px;text-align:center;">dddddadaddsdas </div>
+                  <div id="ajax_loading" style="margin: 10px  auto 15px;text-align:center;"> </div>
                 </li>
               </div>
             </ul>
@@ -101,32 +102,34 @@
               </div>
               <div class="wap_page" style="display: none;" onclick="next_comments(this)"><span>下一页</span></div>
             </ul>
-          </div>
+            </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="fixed-foot">
-    <div class="fixed_inner">
-      <a class="btn-fav" href="javascript:void(0);" onclick="addInterest(this,'663');">
-        <i class="i-fav"></i><span>收藏</span>
-      </a>
-      <a class="cart-wrap" href="/cart">
-        <i class="i-cart"></i>
-        <span>购物车</span>
-        <span class="add-num" id="totalNum">{{$count}}</span>
-      </a>
-      <div class="buy-btn-fix">
-        <a class="btn  btn-cart"  onclick="_addCart();" href="javascript:void(0);">加入购物车</a>
-        <a class="btn  btn-buy" onclick="buyNow();" href="javascript:void(0);">立即购买</a>
+
+  <footer class="footer">
+    <div class="fixed-foot">
+      <div class="fixed_inner">
+        <a class="btn-fav" href="javascript:void(0);" onclick="addInterest(this,'663');">
+          <i class="i-fav"></i><span>收藏</span>
+        </a>
+        <a class="cart-wrap" href="/cart">
+          <i class="i-cart"></i>
+          <span>购物车</span>
+          <span class="add-num" id="totalNum">{{$count}}</span>
+        </a>
+        <div class="buy-btn-fix">
+          <a class="btn  btn-cart"  onclick="_addCart();" href="javascript:void(0);">加入购物车</a>
+          <a class="btn  btn-buy" onclick="buyNow();" href="javascript:void(0);">立即购买</a>
+        </div>
       </div>
     </div>
-  </div>
+  </footer>
+
 
   <div class="clear"></div>
-
-
 
   <script type="text/javascript">
 

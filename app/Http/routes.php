@@ -16,7 +16,7 @@ Route::get('/home', 'View\HomeController@index');
 Route::get('/login', 'View\MemberController@toLogin');
 Route::get('/register', 'View\MemberController@toRegister');
 
-Route::get('/userhome', 'View\MemberController@toMyhome');
+Route::get('/userhome', 'View\MemberController@toMyhome')->middleware(['check.login']);
 
 Route::get('/category', 'View\BookController@toCategory');
 Route::get('/product/category_id/{category_id}', 'View\BookController@toProduct');
@@ -32,6 +32,7 @@ Route::group(['prefix' => 'service'], function () {
 
   Route::post('register', 'Service\MemberController@register');
   Route::post('login', 'Service\MemberController@login');
+  Route::post('editaddress', 'Service\MemberController@editaddress');
 
   Route::get('category/parent_id/{parent_id}', 'Service\BookController@getCategoryByParentId');
   Route::get('cart/add/{product_id}', 'Service\CartController@addCart');
@@ -49,8 +50,8 @@ Route::group(['prefix' => 'service'], function () {
 
 
 Route::match(['get', 'post'], '/order_commit', 'View\OrderController@toOrderCommit')->middleware(['check.cart', 'check.weixin']);
-Route::match(['get', 'post'], '/order_confirm', 'View\OrderController@toOrderConfirm');
-Route::match(['get', 'post'], '/editaddress', 'View\OrderController@toeditaddress');
+Route::match(['get', 'post'], '/order_confirm', 'View\OrderController@toOrderConfirm')->middleware(['check.login']);
+Route::match(['get', 'post'], '/editaddress', 'View\OrderController@toeditaddress')->middleware(['check.login']);
 Route::get('/order_list', 'View\OrderController@toOrderList')->middleware(['check.login']);
 Route::get('/userinfo', 'View\MemberController@toUserInfo')->middleware(['check.login']);
 /***********************************后台相关***********************************/

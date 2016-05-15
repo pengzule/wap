@@ -22,36 +22,30 @@
                 <div class="white-bg_2 bb1">
 
                     <li id="default" class="active"><a
-                                title="默认排序"  href="javascript:void(0);">默认</a></li>
+                                title="默认排序"  href="javascript:void(0);">全部</a></li>
                     <li id="buys"  ><a title="点击按销量从高到低排序"
-                                       href="javascript:void(0);" >销量
-                            <i class='icon_sort'></i>
+                                       href="javascript:void(0);" >待付款
+                           
                         </a></li>
                     <li id="comments"  ><a title="点击按评论数从高到低排序"
-                                           href="javascript:void(0);" >评论数
-                            <i class='icon_sort'></i>
+                                           href="javascript:void(0);" >待发货
+                            
                         </a></li>
                     <li id="cash"  ><a title="点击按价格从高到低排序"
-                                       href="javascript:void(0);" >价格
-                            <i class='icon_sort'></i>
+                                       href="javascript:void(0);" >待收货
+                           
                         </a></li>
+                     <li id="comments"  ><a title="点击按价格从高到低排序"
+                                   href="javascript:void(0);" >已完成
+                       
+                    </a></li>
                 </div>
             </ul>
 
             <div class="item-list" id="container" rel="2" status="0">
             <input type="hidden" id="ListTotal" value="1">
-                @foreach($products as $product)
-                    <a href="/product/{{$product->id}}">
-                        <div class="hproduct clearfix" style="background:#fff;border-top:0px;">
-                            <div class="p-pic"><img style="max-height:100px;margin:auto;" class="img-responsive" src="{{$product->preview}}"></div>
-                            <div class="p-info">
-                                <p class="p-title">{{$product->name}}</p>
-                                <p class="p-origin"><em class="price">¥{{$product->price}}</em>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                @endforeach
+              
+                   
             </div>
             <div id="ajax_loading" style="display:none;width:300px;margin: 10px  auto 15px;text-align:center;">
                 <img src="images/loading.gif">

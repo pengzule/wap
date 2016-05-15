@@ -28,7 +28,7 @@
       </form>
     </div>
   </div>
-  <div class="footer">Copyright 凯恩书店有限公司</div>
+  <div class="footer">Copyright Laravel商城</div>
 @endsection
 
 @section('my-js')

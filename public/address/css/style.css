@@ -177,13 +177,16 @@ footer#footer-nav .menu-list:after {
 #cover { position:fixed;top:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:none; z-index:99999999 };
 #cover img { width:100%;}
 
-.page_topbar {height:45px; background:#f9f9f9; border-bottom:1px solid #e8e8e8; font-size:16px; line-height:45px; text-align:center; }
-.page_topbar .title {height:45px;;line-height:45px; color:#666; text-align: center;}
-.page_topbar a.back {position:absolute;left:15px;height:45px;line-height:45px;display:block;color:#999; font-size:24px;}
-.page_topbar a.btn { position: absolute;right:10px;height:45px;line-height:45px;display:block;color:#999; font-size:24px; }
+.page_topbar {height:44px; background:#000; margin:0 auto;font-size:16px; line-height:44px; text-align:center; }
+.page_topbar .title {color: #fff;/* font-size: 18px; */font-weight: normal;height: 100%; text-align: center;font-size:18px;}
+.page_topbar a.back {position:absolute;left:15px;height:44px;line-height:44px;display:block;color:#999; font-size:24px;}
+.page_topbar a.btn { position: absolute;right:10px;height:44px;line-height:44px;display:block;color:#999; font-size:24px; }
 
 
 /*   */
 .bk_toptips {display: none; position: absolute; bottom: 50px; text-align: center; width: 100%; }
 .bk_toptips span {background: #444444; color: #ffffff; padding: 5px 10px; border-radius: 5px; opacity: 0.9;}
 .bk_bottom_tips {display: block; padding: 20px 0; width: 100%; text-align: center;}
+
+
+.back-icon{background:url(../../images/back_icon.png) no-repeat center; background-size: 24px; -webkit-background-size: 24px;}

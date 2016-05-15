@@ -34,6 +34,8 @@ Route::group(['prefix' => 'service'], function () {
   Route::post('login', 'Service\MemberController@login');
   Route::post('editaddress', 'Service\MemberController@editaddress');
 
+  Route::post('isPhoneExist', 'Service\MemberController@isPhoneExist');
+
   Route::get('category/parent_id/{parent_id}', 'Service\BookController@getCategoryByParentId');
   Route::get('cart/add/{product_id}', 'Service\CartController@addCart');
   Route::get('cart/delete', 'Service\CartController@deleteCart');

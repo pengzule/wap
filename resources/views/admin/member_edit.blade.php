@@ -4,7 +4,7 @@
 <form action="" method="post" class="form form-horizontal" id="form-member-edit">
   {{ csrf_field() }}
   <div class="row cl">
-    <label class="form-label col-3"><span class="c-red">*</span>昵称：</label>
+    <label class="form-label col-3"><span class="c-red">*</span>用户名：</label>
     <div class="formControls col-5">
       <input type="text" class="input-text" value="{{$member->nickname}}" placeholder="" name="nickname" datatype="*" nullmsg="昵称不能为空">
     </div>

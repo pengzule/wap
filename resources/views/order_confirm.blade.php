@@ -14,18 +14,22 @@
     </header>
     <div class="container " id="container2">
         <div class="row">
+    @if ($address != '')      
     <div class="list-group mb10">
         <a href="/editaddress" class="list-group-item tip">
-
             <span style="float:left">收货人：{{$address->realname}}</span>
             <span style="float:right">{{$address->phone}}</span>
             <br/>
             <span style="font-size:80%; ">收货地址：{{$address->province}}{{$address->city}}{{$address->county}}{{$address->street}}</span>
-
-
         </a>
-
     </div>
+    @else
+    <div class="list-group mb10">
+        <a href="/editaddress" class="list-group-item tip">
+            选择收货地址
+        </a>
+    </div>
+    @endif
     <div class="item-list" id="container" rel="2" status="0">
         <input type="hidden" id="ListTotal" value="1">
         @foreach($cart_items as $cart_item)

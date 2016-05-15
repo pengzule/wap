@@ -1,11 +1,11 @@
 @extends('admin.master')
 
 @section('content')
-<header class="Hui-header cl"><a class="Hui-logo l" title="凯恩书店" href="/admin/index">凯恩书店</a><span class="Hui-subtitle l">后台</span>
+<header class="Hui-header cl"><a class="Hui-logo l" title="Laravel商城" href="/admin/index">Laravel商城</a><span class="Hui-subtitle l">后台</span>
 	<ul class="Hui-userbar">
 		<li>{{$admin->username}}</li>
 		<li><a href="/admin/exit">退出</a></li>
-		<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+		<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">0</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
 	</ul>
 	<a href="javascript:;" class="Hui-nav-toggle Hui-iconfont" aria-hidden="false">&#xe667;</a>
 </header>
@@ -44,7 +44,7 @@
 	<div id="Hui-tabNav" class="Hui-tabNav">
 		<div class="Hui-tabNav-wp">
 			<ul id="min_title_list" class="acrossTab cl">
-				<li class="active"><span title="我的桌面" data-href="/">我的桌面</span><em></em></li>
+				<li class="active"><span title="我的桌面" data-href="/home">我的商城</span><em></em></li>
 			</ul>
 		</div>
 		<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>

@@ -46,6 +46,7 @@
                             <div class="p-pic"><img style="max-height:100px;margin:auto;" class="img-responsive" src="{{$product->preview}}"></div>
                             <div class="p-info">
                                 <p class="p-title">{{$product->name}}</p>
+                                 <p ></p>
                                 <p class="p-origin"><em class="price">¥{{$product->price}}</em>
                                 </p>
                             </div>

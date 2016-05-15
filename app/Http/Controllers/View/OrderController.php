@@ -136,7 +136,8 @@ class OrderController extends Controller
       }
     }
 
-    return view('order_list')->with('orders', $orders);
+    //return view('order_list')->with('orders', $orders);
+    return view('userorder')->with('orders', $orders);
   }
   
    public function toeditaddress()

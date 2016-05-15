@@ -154,7 +154,7 @@ h1, h2, h3{font-family: "Microsoft Yahei",Arial, Helvetica, sans-serif;}
 .brand-areat li img{width:auto; margin:12% 0; max-width: 100px;width: 70%;}
 .mod-filter{/* position: fixed; */width: 100%;left: 0;z-index:80;height: 45px;position: relative;}
 .bb1{border-bottom:1px solid #eee;/* position: fixed; */}
-.mod-filter li{width:25%; text-align:center; float:left;}
+.mod-filter li{width:20%; text-align:center; float:left;}
 .mod-filter li a{display: block; height: 44px; line-height: 44px;}
 .mod-filter li.active {border-bottom:1px solid #f1382f;}
 .mod-filter li.active a{color:#f1382f;}

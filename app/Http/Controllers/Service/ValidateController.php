@@ -26,6 +26,8 @@ class ValidateController extends Controller
     $m3_result = new M3Result;
 
     $phone = $request->input('phone', '');
+
+    
     if($phone == '') {
       $m3_result->status = 1;
       $m3_result->message = '手机号不能为空';

@@ -16,6 +16,20 @@ use Mail;
 
 class MemberController extends Controller
 {
+     public function isPhoneExist(Request $request)
+  {
+    $m3_result = new M3Result;
+    $phone = $request->input('phone', '');
+    $member = Member::where('phone',$phone)->first();
+    if ($member !=''){   
+      $m3_result->status = 1;
+       $m3_result->message = '该手机号码已存在！';
+      return $m3_result->toJson();
+    }
+     $m3_result->status = 0;
+     return $m3_result->toJson();
+  }
+    
   public function register(Request $request)
   {
     $email = $request->input('email', '');

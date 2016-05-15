@@ -6,8 +6,9 @@
 
 @section('content')
 
-<div id="container"><div class="page_topbar">
-        <a  class="back" href="javascript:history.back();"><i class="fa fa-angle-left"></i></a>
+
+    <div class="page_topbar">
+        <a  class="back back-icon" href="javascript:history.back();"><i class="fa fa-angle-left"></i></a>
         <div class="title">填写收货信息</div>
     </div>
     
@@ -35,22 +36,9 @@
     </div>
 
     <a  href="#"><div class="address_sub1"  onclick="onaddressClick();" >确认</div></a>
-    <div class="address_sub2"      >取消</div></div><br>
-	<div id="toastId2" class="toasttj2" style="display: none; opacity: 0;"></div>
-<div id="BgDiv1"></div>
-<div class="U-login-con">
-            	<div class="DialogDiv"  style="display:none; ">
-                    <div class="U-guodu-box">
-                    <div>
-                    <table width="100%" cellpadding="0" cellspacing="0" border="0" >
-                        <tr><td  align="center"><img src="img/loading.gif"></td></tr>
-                        <tr><td  valign="middle" align="center" >提交中，请稍后！</td></tr>
-                    </table>
-                    </div>
-            	</div>
-     		</div>
-          <div class="cl"></div>
-</div>   
+   </div>
+
+
 
 @endsection
 

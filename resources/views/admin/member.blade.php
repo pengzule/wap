@@ -13,7 +13,8 @@
 		<thead>
 			<tr class="text-c">
 				<th width="80">ID</th>
-				<th width="100">昵称</th>
+				<th width="100">用户名</th>
+				<th width="40">真实姓名</th></th>
 				<th width="40">手机号</th>
 				<th width="90">邮箱</th>
 				<th width="50">邮箱是否激活</th>
@@ -25,6 +26,7 @@
 				<tr class="text-c">
 					<td>{{$member->id}}</td>
 					<td>{{$member->nickname}}</td>
+					<td>{{$member->realname}}</td>				
 					<td>{{$member->phone}}</td>
 					<td>{{$member->email}}</td>
 					<td class="td-status">

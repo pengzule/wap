@@ -137,6 +137,7 @@
   });
 
 
+
 </script>
 
 
@@ -146,7 +147,9 @@
     if(enable == false) {
       return;
     }
-
+    
+     checkPhone();
+    
     var phone = $('input[name=phone]').val();
     // 手机号不为空
     if(phone == '') {
@@ -162,6 +165,14 @@
       setTimeout(function() {$('.bk_toptips').hide();}, 2000);
       return;
     }
+    if(!isPhoneExist(phone)){
+      $('.bk_toptips').show();
+      $('.bk_toptips span').html('该手机号码已存在！');
+      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+      return ;
+    }
+    
+   
 
     $(this).removeClass('bk_important');
     $(this).addClass('bk_summary');
@@ -192,6 +203,7 @@
           return;
         }
         if(data.status != 0) {
+         
           $('.bk_toptips').show();
           $('.bk_toptips span').html(data.message);
           setTimeout(function() {$('.bk_toptips').hide();}, 2000);
@@ -211,6 +223,7 @@
   });
 </script>
 <script type="text/javascript">
+
 
   /**判断是否为空**/
   function isBlank(_value){
@@ -245,12 +258,13 @@
           return;
         }
         if(data.status != 0) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html(data.message);
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-          return;
+             document.getElementById('phone').value = ""
+             $('.bk_toptips').show();
+              $('.bk_toptips span').html(data.message);
+              setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+        return;
         }
-
+        
       },
       error: function(xhr, status, error) {
         console.log(xhr);

@@ -120,8 +120,8 @@
         $('.bk_toptips').show();
         $('.bk_toptips span').html('登录成功');
         setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-        location.href = "{!!$return_url!!}";
-        //location.href = "/home";
+        //location.href = "{!!$return_url!!}";
+        location.href = "/home";
 
       },
       error: function(xhr, status, error) {

@@ -29,4 +29,11 @@ class MemberController extends Controller
     $member = $request->session()->get('member', '');
     return view('userinfo')->with('member',$member);
   }
+
+  public function toMydev(Request $request)
+  {
+
+    return view('mydev');
+  }
+
 }

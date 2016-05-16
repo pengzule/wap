@@ -220,6 +220,12 @@ class MemberController extends Controller
     $m3_result->message = '成功';
     return $m3_result->toJson();
     }
+
+  public function logout(Request $request)
+  {
+    $request->session()->forget('member');
+    return redirect('/login');
+  }
   }
 
 

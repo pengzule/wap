@@ -112,7 +112,7 @@
   <footer class="footer">
     <div class="fixed-foot">
       <div class="fixed_inner">
-        <a class="btn-fav" href="javascript:void(0);" onclick="addInterest(this,'663');">
+        <a class="btn-fav" href="javascript:void(0);" onclick="">
           <i class="i-fav"></i><span>收藏</span>
         </a>
         <a class="cart-wrap" href="/cart">

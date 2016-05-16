@@ -11,53 +11,14 @@
         <div class="fix_nav">
             <div class="nav_inner">
                 <a class="nav-left back-icon" href="javascript:history.back();">返回</a>
-                <div class="tit">我的订单</div>
+                <div class="tit">我的设备</div>
             </div>
         </div>
     </header>
 
     <div class="container" id="container2">
         <div class="row">
-            <ul class="order-mod-filter clearfix">
-                <div class="white-bg_2 bb1">
 
-                    <li id="default" class="active"><a
-                                title="默认排序"  href="javascript:void(0);">全部</a></li>
-                    <li id="buys"  ><a title=""
-                                       href="javascript:void(0);" >待付款
-                           
-                        </a></li>
-                    <li id="comments"  ><a title=""
-                                           href="javascript:void(0);" >待发货
-                            
-                        </a></li>
-                    <li id="cash"  ><a title=""
-                                       href="javascript:void(0);" >待收货
-                           
-                        </a></li>
-                     <li id="comments"  ><a title=""
-                                   href="javascript:void(0);" >已完成
-                       
-                    </a></li>
-                </div>
-            </ul>
-
-            <div class="item-list" id="container" rel="2" status="0">
-            <input type="hidden" id="ListTotal" value="1">
-              
-                   
-            </div>
-            <div id="ajax_loading" style="display:none;width:300px;margin: 10px  auto 15px;text-align:center;">
-                <img src="images/loading.gif">
-            </div>
-            <!--  <form  action='/m_search/prodlist' method="post" id="list_form">
-                    <input type="hidden" id="curPageNO" name="curPageNO"  value=""/>
-                    <input type="hidden"  id="categoryId" name="categoryId" value="36" />
-                    <input type="hidden" id="orders" name="orders"  value=""/>
-                    <input type="hidden" id="hasProd" name="hasProd"  value="" />
-                    <input type="hidden" id="keyword" name="keyword"  value="" />
-                    <input type="hidden" id="prop" name="prop"  value="" />
-            </form> -->
 
         </div>
     </div>

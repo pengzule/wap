@@ -77,7 +77,7 @@
             </a>
             <a href="#" class="col-xs-3">
                 <img class="img-responsive" src="/img/theme.png">
-                <h4>专题列表</h4>
+                <h4>专题</h4>
             </a>
             <a href="#" class="col-xs-3">
                 <img class="img-responsive" src="/img/icon_pp.png">
@@ -90,16 +90,16 @@
             <!--产品块-->
             <div class="tb_box">
                 <h2 class="tab_tit">
-                    <a class="more" href="#">更多</a>
+                    <a class="more" href="/product/category_id/1">更多</a>
                     EOC设备</h2>
 
-                <div class="tb_type tb_type_even clearfix"><a class="tb_floor" href="#">
+                <div class="tb_type tb_type_even clearfix"><a class="tb_floor"  href="/product/1">
                         <img src="/img/plc.jpg" style="width:100%;">
                     </a>
-                    <a class="th_link" href="#">
+                    <a class="th_link"  href="/product/2">
                         <img class="tb_pic" src="/img/MT706W.jpg" style="width:100%;">
                     </a>
-                    <a class="th_link tb_last" href="#">
+                    <a class="th_link tb_last"  href="/product/3">
                         <img class="tb_pic" src="/img/MT706R.jpg" style="width:100%;">
                     </a>
                 </div>
@@ -107,16 +107,16 @@
             <!--产品块-->
             <div class="tb_box">
                 <h2 class="tab_tit">
-                    <a class="more" href="#">更多</a>
+                    <a class="more" href="/product/category_id/2">更多</a>
                     EPON设备</h2>
 
-                <div class="tb_type clearfix"><a class="tb_floor" href="#">
+                <div class="tb_type clearfix"><a class="tb_floor" href="/product/1">
                         <img src="/img/plc.jpg" style="width:100%;">
                     </a>
-                    <a class="th_link" href="#">
+                    <a class="th_link" href="/product/2">
                         <img class="tb_pic" src="/img/MT706W.jpg" style="width:100%;">
                     </a>
-                    <a class="th_link tb_last" href="#">
+                    <a class="th_link tb_last" href="/product/3">
                         <img class="tb_pic" src="/img/MT706R.jpg" style="width:100%;">
                     </a>
                 </div>
@@ -124,16 +124,16 @@
             <!--产品块-->
             <div class="tb_box">
                 <h2 class="tab_tit">
-                    <a class="more" href="#">更多</a>
+                    <a class="more" href="/product/category_id/3">更多</a>
                    入户光终端</h2>
 
-                <div class="tb_type tb_type_even clearfix"><a class="tb_floor" href="#">
+                <div class="tb_type tb_type_even clearfix"><a class="tb_floor"  href="/product/1">
                         <img src="/img/plc.jpg" style="width:100%;">
                     </a>
-                    <a class="th_link" href="#">
+                    <a class="th_link"  href="/product/2">
                         <img class="tb_pic" src="/img/MT706W.jpg" style="width:100%;">
                     </a>
-                    <a class="th_link tb_last" href="#">
+                    <a class="th_link tb_last" href="/product/3">
                         <img class="tb_pic" src="/img/MT706R.jpg" style="width:100%;">
                     </a>
                 </div>
@@ -143,8 +143,7 @@
     </div>
     <!--
     <div class="foot_index">
-        <div class="foot_index_tit">Aim Beauty Limited(HongKong)</div>
-        <div class="foot_index_rx">服务热线：020-87774389</div>
+
     </div>
     -->
     <footer class="footer">

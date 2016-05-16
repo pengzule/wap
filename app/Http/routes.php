@@ -15,8 +15,8 @@ Route::get('/home', 'View\HomeController@index');
 
 Route::get('/login', 'View\MemberController@toLogin');
 Route::get('/register', 'View\MemberController@toRegister');
+Route::get('/logout', 'Service\MemberController@logout');
 
-Route::get('/userhome', 'View\MemberController@toMyhome')->middleware(['check.login']);
 
 Route::get('/category', 'View\BookController@toCategory');
 Route::get('/product/category_id/{category_id}', 'View\BookController@toProduct');
@@ -56,6 +56,8 @@ Route::match(['get', 'post'], '/order_confirm', 'View\OrderController@toOrderCon
 Route::match(['get', 'post'], '/editaddress', 'View\OrderController@toeditaddress')->middleware(['check.login']);
 Route::get('/order_list', 'View\OrderController@toOrderList')->middleware(['check.login']);
 Route::get('/userinfo', 'View\MemberController@toUserInfo')->middleware(['check.login']);
+Route::get('/userhome', 'View\MemberController@toMyhome')->middleware(['check.login']);
+Route::get('/mydev', 'View\MemberController@toMydev')->middleware(['check.login']);
 /***********************************后台相关***********************************/
 
 Route::group(['prefix' => 'admin'], function () {

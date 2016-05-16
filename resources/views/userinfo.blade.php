@@ -37,8 +37,15 @@
         </div>
 
     </div>
-  
 
+      <footer class="footer">
+          <div class="fixed-foot2">
+             <a href="/logout"> <div class="fixed_exit tit">
+                  <div class="tit">退出登录</div>
+              </div>
+             </a>
+          </div>
+      </footer>
 
   <div class="clear"></div>
 </div>

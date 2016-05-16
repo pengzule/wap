@@ -148,7 +148,7 @@
       return;
     }
     
-     checkPhone();
+
     
     var phone = $('input[name=phone]').val();
     // 手机号不为空
@@ -165,12 +165,7 @@
       setTimeout(function() {$('.bk_toptips').hide();}, 2000);
       return;
     }
-    if(!isPhoneExist(phone)){
-      $('.bk_toptips').show();
-      $('.bk_toptips span').html('该手机号码已存在！');
-      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-      return ;
-    }
+
     
    
 

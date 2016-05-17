@@ -4,6 +4,7 @@ namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Entity\Addr;
 
 class MemberController extends Controller
 {
@@ -32,8 +33,21 @@ class MemberController extends Controller
 
   public function toMydev(Request $request)
   {
-
     return view('mydev');
+  }
+
+  public function toMyaddress(Request $request)
+  {
+    $member = $request->session()->get('member', '');
+    $addresses = Addr::where('member_id',$member->id)->get();
+    return view('myaddress')->with('addresses',$addresses);
+  }
+
+  public function toselectaddress(Request $request)
+  {
+    $member = $request->session()->get('member', '');
+    $addresses = Addr::where('member_id',$member->id)->get();
+    return view('selectaddress')->with('addresses',$addresses);
   }
 
 }

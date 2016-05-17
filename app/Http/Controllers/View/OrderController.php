@@ -33,9 +33,13 @@ class OrderController extends Controller
 
     $member = $request->session()->get('member', '');
     $cart_items = CartItem::where('member_id', $member->id)->whereIn('product_id', $product_ids_arr)->get();
+    $address = Addr::where('member_id',$member->id)->where('default',1)->first();
 
     $order = new Order;
     $order->member_id = $member->id;
+    $order->realname = $address->realname;
+    $order->address = $address->province.$address->city.$address->county.$address->street;
+    $order->phone = $address->phone;
     $order->save();
 
     $cart_items_arr = array();
@@ -84,7 +88,8 @@ class OrderController extends Controller
                                ->with('total_price', $total_price)
                                ->with('name', $name)
                                ->with('order_no', $order->order_no)
-                               ->with('bk_wx_js_config', $bk_wx_js_config);
+                               ->with('bk_wx_js_config', $bk_wx_js_config)
+                                ->with('address',$address);
   }
 
   public function toOrderConfirm(Request $request)
@@ -92,6 +97,7 @@ class OrderController extends Controller
       
 
     $product_ids = $request->input('product_ids', '');
+
 
     $product_ids_arr = ($product_ids!='' ? explode(',', $product_ids) : array());
 
@@ -148,6 +154,18 @@ class OrderController extends Controller
       $return_url = $_SERVER['HTTP_REFERER'];
     }
     return view('editaddress')->with('return_url',$return_url);
+
+  }
+
+  public function toselectaddress(Request $request)
+  {
+
+    $product_ids = $request->input('product_ids', '');
+    $member = $request->session()->get('member', '');
+    $addresses = Addr::where('member_id',$member->id)->get();
+    return view('selectaddress')->with('addresses',$addresses)
+                          ->with('product_ids', $product_ids );
+
 
   }
 

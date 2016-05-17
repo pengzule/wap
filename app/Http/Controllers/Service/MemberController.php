@@ -221,11 +221,36 @@ class MemberController extends Controller
     return $m3_result->toJson();
     }
 
+  public function selectaddress(Request $request)
+  {
+
+    $id = $request->input('id', '');
+
+    $addr =  Addr::where('default',1)->first();
+    $addr->default = 0;
+    $addr->save();
+
+    $addrs = Addr::where('id',$id)->first();
+    $addrs->default = 1;
+    $addrs->save();
+
+
+
+    $m3_result = new M3Result;
+    $m3_result->status = 0;
+    $m3_result->message = '成功';
+    return $m3_result->toJson();
+  }
+
   public function logout(Request $request)
   {
     $request->session()->forget('member');
     return redirect('/login');
   }
+
+
+
+
   }
 
 

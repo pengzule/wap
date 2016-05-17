@@ -117,7 +117,7 @@ function sendData(){
 }
 
 function appendData(){
-	$('#ajax_loading').show();
+	/*$('#ajax_loading').show();
 	$("#list_form").ajaxForm().ajaxSubmit({
 		  success:function(result) {
 			 $('#ajax_loading').hide();
@@ -129,7 +129,7 @@ function appendData(){
 			 floatNotify.simple("查找失败");
 			 return false;
 		  }	
-	});
+	});*/
 }
 
 /**判断是否为空**/

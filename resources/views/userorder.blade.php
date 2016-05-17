@@ -18,7 +18,7 @@
 
     <div class="container" id="container2">
         <div class="row">
-            <ul class="order-mod-filter clearfix">
+            <ul class="order-mod-filter clearfix mb10">
                 <div class="white-bg_2 bb1">
 
                     <li id="default" class="active"><a
@@ -44,7 +44,37 @@
 
             <div class="item-list" id="container" rel="2" status="0">
             <input type="hidden" id="ListTotal" value="1">
-              
+                @foreach($orders as $order)
+                <div class="list-group mb10">
+                    <a href="#" class="list-group-item tip">
+                    {{$order->order_no}}
+                        <span class="gary pull-right">
+                            @if($order->status == 1)
+                             未支付
+                            @else
+                             已支付
+                            @endif
+                        </span>
+                    </a>
+                    @foreach($order->order_items as $order_item)
+                    <div class="hproduct clearfix" style="background:#DDDDDD;border-top:0px;">
+                        <div class="p-pic"><img style="max-height:100px;margin:auto;" class="img-responsive" src="{{$order_item->product->preview}}"></div>
+                        <div class="p-info">
+                            <p class="p-title">{{$order_item->product->name}}</p>
+                            <p ></p>
+                            <p class="p-origin"><em class="price">¥{{$order_item->product->price}}<span style="float: right">x{{$order_item->count}}</span></em>
+                            </p>
+                        </div>
+                    </div>
+                    @endforeach
+                    <div class="list-group-item" style="color: #1b1b1b">
+                        共{{count($order->order_items)}}商品&nbsp;合计：￥{{$order->total_price}}
+
+
+
+                    </div>
+                </div>
+                    @endforeach
                    
             </div>
             <div id="ajax_loading" style="display:none;width:300px;margin: 10px  auto 15px;text-align:center;">

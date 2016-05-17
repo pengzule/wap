@@ -34,7 +34,7 @@
             <p class="p-attr">
               <span></span></p>
             <p class="p-origin">
-              <a class="close p-close" onclick="deleteShopCart('','艾吉贝2015新款多层收纳真皮单肩斜挎包女包头层牛皮斜跨小包包女','663','1358')" href="javascript:void(0);">×</a>
+              <a class="close p-close" onclick="deleteShopCart('','','663','1358')" href="javascript:void(0);">×</a>
               <em class="price">¥{{$cart_item->product->price}}</em>
             </p>
           </div>
@@ -109,14 +109,9 @@
       return;
     }
 
-    // 如果是微信浏览器
-    var is_wx = 0;
-    var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
-    if (ua.match(/MicroMessenger/i) == "micromessenger") {
-      is_wx = 1;
-    }
 
-    location.href = '/order_confirm?product_ids=' + product_ids_arr + '&is_wx=' + is_wx;
+
+    location.href = '/order_confirm?product_ids=' + product_ids_arr;
     // $('input[name=product_ids]').val(product_ids_arr+'');
     // $('input[name=is_wx]').val(is_wx+'');
     // $('#order_commit').submit();

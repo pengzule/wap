@@ -1,3 +1,22 @@
+jQuery(document).ready(function() {
+
+
+
+
+
+	//绑定 点击事件
+	$(".pzl_detail").bind("click",function() {
+		var id = $(this).attr("id");
+		$(".pzl_detail").each(function(i) {
+			if (id != $(this).attr("id")) {
+				$(this).removeClass("act");
+			}
+		});
+		$(this).addClass("act");
+
+	});
+});
+
 $(function(){
 	// 详情数量减少
 	$('.details_con .minus,.cart_count .minus').click(function(){
@@ -376,3 +395,8 @@ function next_comments(curPageNO,obj){
 		}
 	  });
 }
+
+
+
+
+

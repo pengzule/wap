@@ -55,7 +55,7 @@
                 @endforeach
             </div>
             <div id="ajax_loading" style="display:none;width:300px;margin: 10px  auto 15px;text-align:center;">
-                <img src="images/loading.gif">
+                <img src="/images/loading.gif">
             </div>
             <!--  <form  action='/m_search/prodlist' method="post" id="list_form">
                     <input type="hidden" id="curPageNO" name="curPageNO"  value=""/>

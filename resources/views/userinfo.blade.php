@@ -29,7 +29,7 @@
             会员名
             <span class="gary pull-right">{{$member->name}}</span>
           </a>
-          <a href="#" class="list-group-item tip">
+          <a href="/myaddress" class="list-group-item tip">
           
             我的收货地址
           </a>

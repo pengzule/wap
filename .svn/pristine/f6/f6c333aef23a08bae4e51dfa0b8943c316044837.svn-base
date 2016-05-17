@@ -1,0 +1,62 @@
+<?php $__env->startSection('title','个人资料'); ?>
+
+<?php $__env->startSection('content'); ?>
+
+  
+
+  <header class="header">
+    <div class="fix_nav">
+      <div style="max-width:768px;margin:0 auto;background:#000;position: relative;">
+        <a class="nav-left back-icon" href="javascript:history.back();">返回</a>
+        <div class="tit">个人资料</div>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="row">
+         <div class="list-group mb10">
+            <a href="#" class="list-user-item tip">
+           
+            我的头像
+            <span class="gary pull-right">   <div class="memberimg_m_pic ">
+              <img class="img-circle" src="images/noavatar.png">
+            </div></span>
+          </a>
+          <a href="#" class="list-group-item tip">
+           
+            会员名
+            <span class="gary pull-right"><?php echo e($member->name); ?></span>
+          </a>
+          <a href="#" class="list-group-item tip">
+          
+            我的收货地址
+          </a>
+          
+        </div>
+
+    </div>
+
+      <footer class="footer">
+          <div class="fixed-foot2">
+             <a href="/logout"> <div class="fixed_exit tit">
+                  <div class="tit">退出登录</div>
+              </div>
+             </a>
+          </div>
+      </footer>
+
+  <div class="clear"></div>
+</div>
+
+
+
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('my-js'); ?>
+
+
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

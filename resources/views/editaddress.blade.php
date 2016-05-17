@@ -1,4 +1,4 @@
-@extends('address')
+@extends('default')
 
 
 
@@ -7,37 +7,45 @@
 @section('content')
 
 
-    <div class="page_topbar">
-        <a  class="back back-icon" href="javascript:history.back();"><i class="fa fa-angle-left"></i></a>
-        <div class="title">填写收货信息</div>
-    </div>
-    
-<div id="container">
-    <div >
-    <div class="address_main">
-        <div class="line"><input type="text" placeholder="收件人" name="realname" value=""></div>
-        <div class="line"><input type="text" placeholder="联系电话" name="phone" value=""></div>
-        <div class="line">
-		<!-- sel-provance -->
-        <select id="s_province" name="s_province"></select><br>		
-		</div>
-         <div class="line">
-		  <select id="s_city" name="s_city" ></select><br><!-- sel -->
-		 </div>
-         <div class="line">
-		 <!-- sel-area -->
-		 <select id="s_county" name="s_county"></select><br>
-		 </div>
+    <header class="header">
+        <div class="fix_nav">
+            <div class="nav_inner">
+                <a class="nav-left back-icon" href="javascript:history.back();">返回</a>
+                <div class="tit">收货地址</div>
+            </div>
+        </div>
+    </header>
+    <div class="container" >
+        <div class="row">
+
+            <div class="list-group mb10">
+                <input type="text" class="list-group-address " placeholder="收件人" name="realname" value="">
+                <input type="text" class="list-group-address " placeholder="联系电话" name="phone" value="">
+                <select id="s_province" class="list-group-address " name="s_province"></select>
+                <select id="s_city" class="list-group-address " name="s_city" ></select>
+                <select id="s_county"   class="list-group-address " name="s_county"></select>
+
             <script type="text/javascript" src="/address/js/area.js"></script>
-            <script type="text/javascript">_init_area();</script>
-	 	 
-        <div class="line"><input type="text" placeholder="详细地址" name="street" value=""></div>
+                <script type="text/javascript">_init_area();</script>
+            <input type="text" placeholder="详细地址"  class="list-group-address " name="street" value="">
+            </div>
+
+
+
+        </div>
     </div>
 
-    <a  href="#"><div class="address_sub1"  onclick="onaddressClick();" >确认</div></a>
+    <footer class="footer">
+        <div class="fixed-foot2">
+            <a href="#"> <div class="fixed_exit tit">
+                    <div onclick="onaddressClick();"class="tit">新增收货地址</div>
+                </div>
+            </a>
+        </div>
+    </footer>
+    <div class="clear"></div>
 
 
-   </div>
 
 
 

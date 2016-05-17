@@ -33,6 +33,7 @@ Route::group(['prefix' => 'service'], function () {
   Route::post('register', 'Service\MemberController@register');
   Route::post('login', 'Service\MemberController@login');
   Route::post('editaddress', 'Service\MemberController@editaddress');
+  Route::post('selectaddress', 'Service\MemberController@selectaddress');
 
   Route::post('isPhoneExist', 'Service\MemberController@isPhoneExist');
 
@@ -54,10 +55,13 @@ Route::group(['prefix' => 'service'], function () {
 Route::match(['get', 'post'], '/order_commit', 'View\OrderController@toOrderCommit')->middleware(['check.cart', 'check.weixin']);
 Route::match(['get', 'post'], '/order_confirm', 'View\OrderController@toOrderConfirm')->middleware(['check.login']);
 Route::match(['get', 'post'], '/editaddress', 'View\OrderController@toeditaddress')->middleware(['check.login']);
+Route::match(['get', 'post'], '/selectaddress', 'View\OrderController@toselectaddress')->middleware(['check.login']);
 Route::get('/order_list', 'View\OrderController@toOrderList')->middleware(['check.login']);
 Route::get('/userinfo', 'View\MemberController@toUserInfo')->middleware(['check.login']);
 Route::get('/userhome', 'View\MemberController@toMyhome')->middleware(['check.login']);
 Route::get('/mydev', 'View\MemberController@toMydev')->middleware(['check.login']);
+Route::get('/myaddress', 'View\MemberController@toMyaddress')->middleware(['check.login']);
+
 /***********************************后台相关***********************************/
 
 Route::group(['prefix' => 'admin'], function () {

@@ -16,7 +16,7 @@
         <div class="row">
     @if ($address != '')      
     <div class="list-group mb10">
-        <a href="/editaddress" class="list-group-item tip">
+        <a href="#" onclick ="_toselectaddress();" class="list-group-item tip">
             <span style="float:left">收货人：{{$address->realname}}</span>
             <span style="float:right">{{$address->phone}}</span>
             <br/>
@@ -25,7 +25,7 @@
     </div>
     @else
     <div class="list-group mb10">
-        <a href="/editaddress" class="list-group-item tip">
+        <a href="/selectaddress" class="list-group-item tip">
             选择收货地址
         </a>
     </div>
@@ -40,7 +40,7 @@
                 <div class="p-info">
                     <p class="p-title">{{$cart_item->product->name}} </p>
                     <br/>
-                    <p class="p-origin"><em class="price">¥{{$cart_item->product->price}}<span style="float: right">x{{$cart_item->count}}</span></em>
+                    <p class="p-origin"><em class="price">¥{{$cart_item->product->price}}<span style="float: right">x{{$order_item->count}}</span></em>
                     </p>
                 </div>
             </div>
@@ -124,14 +124,16 @@
                 return;
             }
 
-            // 如果是微信浏览器
-            var is_wx = 0;
-            var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
-            if (ua.match(/MicroMessenger/i) == "micromessenger") {
-                is_wx = 1;
-            }
+            location.href = '/order_commit?product_ids=' + product_ids_arr;
+        }
 
-            location.href = '/order_commit?product_ids=' + product_ids_arr + '&is_wx=' + is_wx;
+        function _toselectaddress() {
+            var product_ids_arr = [];
+            $("input[type='hidden'][name='cart_item']").each(function () {
+                product_ids_arr.push($(this).attr('id'));
+            });
+
+            location.href = '/selectaddress?product_ids=' + product_ids_arr;
             // $('input[name=product_ids]').val(product_ids_arr+'');
             // $('input[name=is_wx]').val(is_wx+'');
             // $('#order_commit').submit();

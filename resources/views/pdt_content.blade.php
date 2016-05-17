@@ -24,7 +24,7 @@
           <ul>
             <ul>
               @foreach($pdt_images as $pdt_image)
-              <li class="on"></li>
+              <li class=""></li>
               @endforeach
             </ul>
         </div>
@@ -68,10 +68,10 @@
       <div id="goodsContent" class="goods-content white-bg">
 
         <div class="hd hd_fav">
-          <ul>
-            <li class="on">图文详情</li>
-            <li class="">规格参数</li>
-            <li class="">评价(0)</li>
+          <ul >
+            <li id="pzl_img"  class="act  pzl_detail">图文详情</li>
+            <li id="pzl_param" class="pzl_detail">规格参数</li>
+            <li id="pzl_comment" class="pzl_detail">评价(0)</li>
           </ul>
         </div>
 

@@ -190,7 +190,7 @@ h1, h2, h3{font-family: "Microsoft Yahei",Arial, Helvetica, sans-serif;}
 .goods-content{border-top:1px solid #e5e5e5; margin-top:20px;}
 .goods-content .hd{height:40px; line-height:40px; padding:0 10px; border-bottom:1px solid #e5e5e5; position:relative;}
 .goods-content .hd ul li{float:left; width:33.33%; color:#666; font-size:16px; text-align:center; cursor: pointer;}
-.goods-content .hd ul .on{border-bottom:2px solid #f63234; color:#f63234; height:40px;}
+.goods-content .hd ul .act{border-bottom:2px solid #f63234; color:#f63234; height:40px;}
 .prop-area{padding:10px;}
 .prop-area img{
 	max-width:100%;

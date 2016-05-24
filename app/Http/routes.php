@@ -21,7 +21,7 @@ Route::get('/logout', 'Service\MemberController@logout');
 Route::get('/category', 'View\BookController@toCategory');
 Route::get('/product/category_id/{category_id}', 'View\BookController@toProduct');
 Route::get('/product/{product_id}', 'View\BookController@toPdtContent');
-
+Route::get('/m_search/list', 'View\BookController@toSearch');
 
 Route::get('/cart', 'View\CartController@toCart');
 
@@ -41,6 +41,9 @@ Route::group(['prefix' => 'service'], function () {
   Route::get('cart/add/{product_id}', 'Service\CartController@addCart');
   Route::get('cart/delete', 'Service\CartController@deleteCart');
 
+
+
+
   Route::post('alipay', 'Service\PayController@aliPay');
   Route::post('wxpay', 'Service\PayController@wxPay');
 
@@ -54,6 +57,7 @@ Route::group(['prefix' => 'service'], function () {
 
 Route::match(['get', 'post'], '/order_commit', 'View\OrderController@toOrderCommit')->middleware(['check.cart', 'check.weixin']);
 Route::match(['get', 'post'], '/order_confirm', 'View\OrderController@toOrderConfirm')->middleware(['check.login']);
+Route::match(['get', 'post'], '/buynow_confirm', 'View\OrderController@toBuyNow')->middleware(['check.login']);
 Route::match(['get', 'post'], '/editaddress', 'View\OrderController@toeditaddress')->middleware(['check.login']);
 Route::match(['get', 'post'], '/selectaddress', 'View\OrderController@toselectaddress')->middleware(['check.login']);
 Route::get('/order_list', 'View\OrderController@toOrderList')->middleware(['check.login']);

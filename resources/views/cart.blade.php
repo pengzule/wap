@@ -15,45 +15,59 @@
     </div>
   </header>
 
-  <div class="container ">
-    <div class="row rowcar">
-      @foreach($cart_items as $cart_item)
-      <ul class="list-group">
-        <li class="list-group-item text-primary">
-          <div class="icheck pull-left mr5">
-            <input type="checkbox"  class="ids" name="cart_item" id="{{$cart_item->product->id}}"/>
-            <label class="checkLabel">
-              <span></span>
-            </label>
-          </div>
-          金钱猫科技</li>
-        <li class="list-group-item hproduct clearfix">
-          <div class="p-pic"><a href="/product/{{$cart_item->product->id}}"><img class="img-responsive" src="{{$cart_item->product->preview}}"></a></div>
-          <div class="p-info">
-            <a href="/product/{{$cart_item->product->id}}"><p class="p-title">{{$cart_item->product->name}}</p></a>
-            <p class="p-attr">
-              <span></span></p>
-            <p class="p-origin">
-              <a class="close p-close" onclick="deleteShopCart('','','663','1358')" href="javascript:void(0);">×</a>
-              <em class="price">¥{{$cart_item->product->price}}</em>
-            </p>
-          </div>
-        </li>
-        <li class="list-group-item clearfix">
-          <div class="pull-left mt5">
-            <span class="gary">小计：</span>
-            <em class="red productTotalPrice" class="price">¥{{$cart_item->product->price * $cart_item->count}}</em>
-          </div>
-          <div class="btn-group btn-group-sm control-num">
-            <a onclick="" href="javascript:void(0);" class="btn btn-default"><span class="glyphicon glyphicon-minus gary"></span></a>
-            <input type="tel" class="btn gary2 Amount" readonly="readonly" value="{{$cart_item->count}}" >
-            <a onclick="" href="javascript:void(0);" class="btn btn-default"><span class="glyphicon glyphicon-plus gary"></span></a>
-          </div>
-        </li>
-      </ul>
-      @endforeach
+  @if(count($cart_items) == 0)
+  <div class=" ">
+    <div class=" ">
+      <div class="empty" style="margin-top: 40px;">
+        <center style="width:120px;margin:0 auto;"><img style="width:100%;padding-bottom:20px;" src="/images/cartIcon.png"></center>
+        <center style="padding-top:10px;"><span>您的购物车还是空的，赶紧行动吧！</span></center>
+        <center style="width:100px;height:35px;margin: 60px auto 0;"><a href="/"><div style="width:100px;height:35px;background:#6a94e7;text-align:center;line-height:35px;border-radius: 3px;color:#fff;float:left;">返回购物</div></a></center>
+      </div>
     </div>
   </div>
+  @else
+  <div class="container ">
+    <div class="row rowcar">
+    @foreach($cart_items as $cart_item)
+    <ul class="list-group">
+      <li class="list-group-item text-primary" style="height: 42px;">
+        <div class="icheck pull-left mr5">
+          <input type="checkbox"  class="ids" name="cart_item" id="{{$cart_item->product->id}}"/>
+          <label class="checkLabel">
+            <span></span>
+          </label>
+        </div>
+
+
+      </li>
+      <li class="list-group-item hproduct clearfix">
+        <div class="p-pic"><a href="/product/{{$cart_item->product->id}}"><img class="img-responsive" src="{{$cart_item->product->preview}}"></a></div>
+        <div class="p-info">
+          <a href="/product/{{$cart_item->product->id}}"><p class="p-title">{{$cart_item->product->name}}</p></a>
+          <p class="p-attr">
+            <span></span></p>
+          <p class="p-origin">
+            <a class="close p-close" onclick="_deleteShopCart('{{$cart_item->product->name}}','{{$cart_item->product->id}}')" href="javascript:void(0);">×</a>
+            <em class="price">¥{{$cart_item->product->price}}</em>
+          </p>
+        </div>
+      </li>
+      <li class="list-group-item clearfix">
+        <div class="pull-left mt5">
+          <span class="gary">小计：</span>
+          <em class="red productTotalPrice" class="price">¥{{$cart_item->product->price * $cart_item->count}}</em>
+        </div>
+        <div class="btn-group btn-group-sm control-num">
+          <a onclick="disDe(this)" href="javascript:void(0);" class="btn btn-default "><span class="glyphicon glyphicon-minus gary"></span></a>
+          <input type="tel" class="btn gary2 Amount" readonly="readonly" value="{{$cart_item->count}}" >
+          <a onclick="increase(this)" href="javascript:void(0);" class="btn btn-default "><span class="glyphicon glyphicon-plus gary"></span></a>
+        </div>
+      </li>
+    </ul>
+    @endforeach
+    </div>
+  </div>
+  @endif
   <footer class="footer">
       <div class="fixed-foot">
     <div class="fixed_inner">
@@ -81,19 +95,6 @@
 <script type="text/javascript">
   var contextPath = '';
 
-  $('input:checkbox[name=cart_item]').click(function(event) {
-    var checked = $(this).attr('checked');
-    if(checked == 'checked') {
-      $(this).attr('checked', false);
-      $(this).next().removeClass('weui_icon_checked');
-      $(this).next().addClass('weui_icon_unchecked');
-    } else {
-      $(this).attr('checked', 'checked');
-      $(this).next().removeClass('weui_icon_unchecked');
-      $(this).next().addClass('weui_icon_checked');
-    }
-  });
-
   function _toCharge() {
     var product_ids_arr = [];
     $('input:checkbox[name=cart_item]').each(function(index, el) {
@@ -117,6 +118,38 @@
     // $('#order_commit').submit();
   }
 
+  function _deleteShopCart(_basketName,_prodId){
+    if(confirm("删除后不可恢复, 确定要删除'"+_basketName+"'吗？")){
+      $.ajax({
+        type: "GET",
+        url: '/service/cart/delete',
+        dataType: 'json',
+        cache: false,
+        data: {product_ids: _prodId+''},
+        success: function(data) {
+          if(data == null) {
+            $('.bk_toptips').show();
+            $('.bk_toptips span').html('服务端错误');
+            setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+            return;
+          }
+          if(data.status != 0) {
+            $('.bk_toptips').show();
+            $('.bk_toptips span').html(data.message);
+            setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+            return;
+          }
+
+          location.reload();
+        },
+        error: function(xhr, status, error) {
+          console.log(xhr);
+          console.log(status);
+          console.log(error);
+        }
+      });
+    }
+  }
 
   function _onDelete() {
     var product_ids_arr = [];

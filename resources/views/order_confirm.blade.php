@@ -40,7 +40,7 @@
                 <div class="p-info">
                     <p class="p-title">{{$cart_item->product->name}} </p>
                     <br/>
-                    <p class="p-origin"><em class="price">¥{{$cart_item->product->price}}<span style="float: right">x{{$order_item->count}}</span></em>
+                    <p class="p-origin"><em class="price">¥{{$cart_item->product->price}}<span style="float: right">x{{$cart_item->count}}</span></em>
                     </p>
                 </div>
             </div>

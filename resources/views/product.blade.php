@@ -37,23 +37,29 @@
                         </a></li>
                 </div>
             </ul>
-
+            @if($products !='[]')
             <div class="item-list" id="container" rel="2" status="0">
             <input type="hidden" id="ListTotal" value="1">
-                @foreach($products as $product)
-                    <a href="/product/{{$product->id}}">
-                        <div class="hproduct clearfix" style="background:#fff;border-top:0px;">
-                            <div class="p-pic"><img style="max-height:100px;margin:auto;" class="img-responsive" src="{{$product->preview}}"></div>
-                            <div class="p-info">
-                                <p class="p-title">{{$product->name}}</p>
-                                 <p ></p>
-                                <p class="p-origin"><em class="price">¥{{$product->price}}</em>
-                                </p>
+
+                    @foreach($products as $product)
+                        <a href="/product/{{$product->id}}">
+                            <div class="hproduct clearfix" style="background:#fff;border-top:0px;">
+                                <div class="p-pic"><img style="max-height:100px;margin:auto;" class="img-responsive" src="{{$product->preview}}"></div>
+                                <div class="p-info">
+                                    <p class="p-title">{{$product->name}}</p>
+                                     <p ></p>
+                                    <p class="p-origin"><em class="price">¥{{$product->price}}</em>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                @endforeach
+                        </a>
+                    @endforeach
+
             </div>
+            @else
+
+                没有找到符合条件的商品
+            @endif
             <div id="ajax_loading" style="display:none;width:300px;margin: 10px  auto 15px;text-align:center;">
                 <img src="/images/loading.gif">
             </div>
@@ -80,7 +86,7 @@
                     <i class="navIcon home"></i>
                     <span class="text">首页</span>
                 </a>
-                <a class="active" href="/categroy">
+                <a class="active" href="/category">
                     <i class="navIcon sort"></i>
                     <span class="text">分类</span>
                 </a>

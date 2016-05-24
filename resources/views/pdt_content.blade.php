@@ -122,7 +122,7 @@
         </a>
         <div class="buy-btn-fix">
           <a class="btn  btn-cart"  onclick="_addCart();" href="javascript:void(0);">加入购物车</a>
-          <a class="btn  btn-buy" onclick="buyNow();" href="javascript:void(0);">立即购买</a>
+          <a class="btn  btn-buy" onclick="_buyNow();" href="javascript:void(0);">立即购买</a>
         </div>
       </div>
     </div>
@@ -224,6 +224,15 @@
       }
     });
   }
+
+  function _buyNow() {
+    var product_id = "{{$product->id}}";
+    var pro_count =  $("#pro_count").val();
+
+    location.href = '/buynow_confirm?product_id=' + product_id + '&count=' + pro_count;
+  }
+
+
 
   function _toCart() {
     location.href = '/cart';

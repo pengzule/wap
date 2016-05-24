@@ -63,4 +63,14 @@ class BookController extends Controller
                               ->with('pdt_images', $pdt_images)
                               ->with('count', $count);
   }
+
+  public function toSearch(Request $request)
+  {
+
+    $keyword =  $request->input('keyword', '');
+    $products = Product::where('name', 'like','%'.$keyword.'%')->get();
+
+    return view('product')->with('products', $products);
+  }
+
 }

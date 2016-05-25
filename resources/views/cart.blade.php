@@ -58,9 +58,9 @@
           <em class="red productTotalPrice" class="price">¥{{$cart_item->product->price * $cart_item->count}}</em>
         </div>
         <div class="btn-group btn-group-sm control-num">
-          <a onclick="disDe(this)" href="javascript:void(0);" class="btn btn-default "><span class="glyphicon glyphicon-minus gary"></span></a>
+          <a onclick="" href="javascript:void(0);" class="btn btn-default "><span class="glyphicon glyphicon-minus gary"></span></a>
           <input type="tel" class="btn gary2 Amount" readonly="readonly" value="{{$cart_item->count}}" >
-          <a onclick="increase(this)" href="javascript:void(0);" class="btn btn-default "><span class="glyphicon glyphicon-plus gary"></span></a>
+          <a onclick="" href="javascript:void(0);" class="btn btn-default "><span class="glyphicon glyphicon-plus gary"></span></a>
         </div>
       </li>
     </ul>

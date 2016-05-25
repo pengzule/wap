@@ -13,9 +13,11 @@ use Log;
 
 class BookController extends Controller
 {
-  public function toCategory($value='')
+  public function toCategory(Request $request)
   {
-    Log::info("进入书籍类别");
+
+    Log::info('进入分类',['url'=>$request->url()]);
+
     $categorys = Category::whereNull('parent_id')->get();
     return view('category')->with('categorys', $categorys);
   }

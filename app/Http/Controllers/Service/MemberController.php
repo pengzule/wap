@@ -13,6 +13,8 @@ use App\Entity\TempEmail;
 use App\Models\M3Email;
 use App\Tool\UUID;
 use Mail;
+use Log;
+use Carbon\Carbon;
 
 class MemberController extends Controller
 {
@@ -180,6 +182,11 @@ class MemberController extends Controller
 
     $request->session()->put('member', $member);
 
+    $member->last_login = Carbon::now();
+    $member->login_count += 1;
+    $member->save();
+
+    Log::info("用户登录成功",['user_id'=>$member->id]);
     $m3_result->status = 0;
     $m3_result->message = '登录成功';
     return $m3_result->toJson();
@@ -190,7 +197,7 @@ class MemberController extends Controller
 
     $member = $request->session()->get('member', '');
     $member_id = $member->id;
-
+    Log::info("用户编辑地址",['user_id'=>$member->id]);
     $addrs = Addr::where('member_id',$member_id)->get();
     foreach($addrs as $addr)
     {
@@ -244,7 +251,9 @@ class MemberController extends Controller
 
   public function logout(Request $request)
   {
+    $member = $request->session()->get('member', '');
     $request->session()->forget('member');
+    Log::info("用户退出登录",['user_id'=>$member->id]);
     return redirect('/login');
   }
 

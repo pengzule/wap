@@ -27,7 +27,7 @@ class MemberController extends Controller
   {
     $member = Member::find($request->input('id', ''));
 
-    $member->nickname = $request->input('nickname', '');
+    $member->name = $request->input('name', '');
     $member->phone = $request->input('phone', '');
     $member->email = $request->input('email', '');
     $member->save();

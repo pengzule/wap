@@ -6,7 +6,7 @@
   <div class="row cl">
     <label class="form-label col-3"><span class="c-red">*</span>用户名：</label>
     <div class="formControls col-5">
-      <input type="text" class="input-text" value="{{$member->nickname}}" placeholder="" name="nickname" datatype="*" nullmsg="昵称不能为空">
+      <input type="text" class="input-text" value="{{$member->name}}" placeholder="" name="name" datatype="*" nullmsg="昵称不能为空">
     </div>
     <div class="col-4"> </div>
   </div>
@@ -43,7 +43,7 @@
           dataType: 'json',
           data: {
             id: "{{$member->id}}",
-            nickname: $('input[name=nickname]').val(),
+            name: $('input[name=name]').val(),
             phone: $('input[name=phone]').val(),
             email: $('input[name=email]').val(),
             _token: "{{csrf_token()}}"

@@ -143,6 +143,7 @@
 
 <script type="text/javascript">
   var enable = true;
+  var exist = true;
   $('.bk_phone_code_send').click(function(event) {
     if(enable == false) {
       return;
@@ -162,6 +163,12 @@
     if(phone.length != 11 || phone[0] != '1') {
       $('.bk_toptips').show();
       $('.bk_toptips span').html('手机格式不正确');
+      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+      return;
+    }
+    if(exist == true) {
+      $('.bk_toptips').show();
+      $('.bk_toptips span').html('该手机号码已存在');
       setTimeout(function() {$('.bk_toptips').hide();}, 2000);
       return;
     }

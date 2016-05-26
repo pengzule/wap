@@ -138,7 +138,8 @@ class OrderController extends Controller
     }
 
     //return view('order_list')->with('orders', $orders);
-    return view('userorder')->with('orders', $orders);
+    return view('userorder')->with('orders', $orders)
+        ->with('member_id',$member->id);
   }
   
    public function toeditaddress()
@@ -152,6 +153,10 @@ class OrderController extends Controller
 
   }
 
+  /**
+   * @param Request $request
+   * @return mixed
+     */
   public function toselectaddress(Request $request)
   {
 
@@ -199,6 +204,48 @@ class OrderController extends Controller
     return view('order_confirm')->with('cart_items', $cart_items_arr)
         ->with('total_price', $total_price)
         ->with('address',$address);
+
+  }
+
+  /**
+   * @param Request $request
+   */
+  public function toMyOrder(Request $request)
+  {
+    $m3_result = new M3Result;
+    $name = $request->input('name','');
+    $member_id = $request->input('member_id','');
+    if($name == 'allorder'){
+      $orders =Order::where('member_id',$member_id)->get();
+    }
+    if($name == 'topay'){
+      $orders =Order::where('member_id',$member_id)->where('status',1)->get();
+    }
+    if($name == 'tosend'){
+      $orders =Order::where('member_id',$member_id)->where('status',3)->get();
+    }
+    if($name == 'torecv'){
+      $orders =Order::where('member_id',$member_id)->where('status',4)->get();
+    }
+    if($name == 'todone'){
+      $orders =Order::where('member_id',$member_id)->where('status',5)->get();
+    }
+
+    foreach ($orders as $order) {
+      $order_items = OrderItem::where('order_id', $order->id)->get();
+      $order->order_items = $order_items;
+      foreach ($order_items as $order_item) {
+        $order_item->product = json_decode($order_item->pdt_snapshot);
+      }
+    }
+    $m3_result->status = 0;
+    $m3_result->message = '返回成功';
+    $m3_result->orders =  $orders;
+
+
+    Log::info('我的订单');
+    return $m3_result->toJson();
+
 
   }
 

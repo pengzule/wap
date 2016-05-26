@@ -69,9 +69,10 @@
 
         <div class="hd hd_fav">
           <ul >
+            <input type="hidden" value="{{$product->id}}" class="pzl_proddetail">
             <li id="pzl_img"  class="act  pzl_detail">图文详情</li>
             <li id="pzl_param" class="pzl_detail">规格参数</li>
-            <li id="pzl_comment" class="pzl_detail">评价(0)</li>
+            <li id="pzl_comment" class="pzl_detail">评价({{$product->comment_count}})</li>
           </ul>
         </div>
 
@@ -89,18 +90,13 @@
               @endif
               </div>
             </ul>
-            <ul class="txt-imgs" style="display: table-cell; vertical-align: top; max-width: 768px;width: 100%;">
+            <ul class="txt-imgs" style="display: table-cell; max-width: 768px;width: 100%;">
               <div class="desc-area" style="padding: 0px 10px 0 10px;">
-                <li style="height:30px;">
-                  <div id="ajax_loading" style="margin: 10px  auto 15px;text-align:center;"> </div>
-                </li>
+
               </div>
             </ul>
-            <ul style="display: table-cell; vertical-align: top; max-width: 768px;width: 100%;" class="appraise" rel="1" status="1">
-              <div style="height:30px;">
-                <div id="ajax_loading" style="margin: 10px  auto 15px;text-align:center;">sdfsdfdssf</div>
-              </div>
-              <div class="wap_page" style="display: none;" onclick="next_comments(this)"><span>下一页</span></div>
+            <ul style="display: table-cell; vertical-align: top; width: 281px;" class="appraise ">
+
             </ul>
             </div>
         </div>
@@ -153,7 +149,7 @@
         if(i==1){//规格参数
           var th = jQuery("#goodsContent .bd ul").eq(i);
           if(!th.hasClass('hadGoodsContent')){
-            queryParameter(th,prodId);
+
           }
 
           if($(window).scrollTop() > scrollTop){
@@ -164,7 +160,7 @@
           var th = jQuery("#goodsContent .bd ul").eq(i);
 
           if(!th.hasClass('hadConments')){
-            queryProdComment(th,prodId);
+
           }
 
           if($(window).scrollTop() > scrollTop){

@@ -109,6 +109,14 @@ class MemberController extends Controller
         return $m3_result->toJson();
       }
 
+      $exist = Member::where('email',$email)->first();
+      if($exist !=''){
+        $m3_result->status = 9;
+        $m3_result->message = '该邮箱已存在！';
+        return $m3_result->toJson();
+      }
+
+
       $member = new Member;
       $member->email = $email;
       $member->password = md5('bk' . $password);
@@ -120,7 +128,7 @@ class MemberController extends Controller
       $m3_email->to = $email;
       $m3_email->cc = 'magina@speakez.cn';
       $m3_email->subject = '凯恩书店验证';
-      $m3_email->content = '请于24小时点击该链接完成验证. http://book.magina.com/service/validate_email'
+      $m3_email->content = '请于24小时点击该链接完成验证. http://lacalhost/service/validate_email'
                         . '?member_id=' . $member->id
                         . '&code=' . $uuid;
 

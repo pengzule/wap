@@ -22,6 +22,9 @@ Route::get('/category', 'View\BookController@toCategory');
 Route::get('/product/category_id/{category_id}', 'View\BookController@toProduct');
 Route::get('/product/{product_id}', 'View\BookController@toPdtContent');
 Route::get('/m_search/list', 'View\BookController@toSearch');
+Route::get('/prodsort', 'View\BookController@toProdSort');
+Route::get('/proddetail', 'View\BookController@toProdDetail');
+Route::get('/myorder', 'View\OrderController@toMyOrder');
 
 Route::get('/cart', 'View\CartController@toCart');
 
@@ -34,6 +37,7 @@ Route::group(['prefix' => 'service'], function () {
   Route::post('login', 'Service\MemberController@login');
   Route::post('editaddress', 'Service\MemberController@editaddress');
   Route::post('selectaddress', 'Service\MemberController@selectaddress');
+
 
   Route::post('isPhoneExist', 'Service\MemberController@isPhoneExist');
 

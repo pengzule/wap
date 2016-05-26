@@ -8,8 +8,11 @@ use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\PdtContent;
 use App\Entity\PdtImages;
+use App\Entity\PdtComments;
 use App\Entity\CartItem;
+use App\Models\M3Result;
 use Log;
+
 
 class BookController extends Controller
 {
@@ -26,7 +29,8 @@ class BookController extends Controller
   {
 
     $products = Product::where('category_id', $category_id)->get();
-    return view('product')->with('products', $products);
+    return view('product')->with('products', $products)
+                          ->with('category_id', $category_id);
   }
 
   public function toPdtContent(Request $request, $product_id)
@@ -68,11 +72,67 @@ class BookController extends Controller
 
   public function toSearch(Request $request)
   {
-
+    $category = '';
     $keyword =  $request->input('keyword', '');
     $products = Product::where('name', 'like','%'.$keyword.'%')->get();
 
-    return view('product')->with('products', $products);
+    return view('product')->with('products', $products)
+        ->with('category_id', $category)
+        ->with('keyword', $keyword);
   }
+  public function toProdSort(Request $request)
+  {
+    $orderDir = $request->input('orderDir','');
+    $name = $request->input('name','');
+    $category_id = $request->input('category_id','');
+    $keyword = $request->input('keyword','');
+
+
+
+    if($category_id != ''){
+      $products = Product::where('category_id',$category_id)->orderby($name,$orderDir)->get();
+    }else{
+      $products = Product::where('name', 'like','%'.$keyword.'%')->orderby($name,$orderDir)->get();
+    }
+
+
+    $m3_result = new M3Result;
+    $m3_result->status = 0;
+    $m3_result->message = '返回成功';
+    $m3_result->products =  $products;
+    Log::info('产品sort');
+    return $m3_result->toJson();
+
+
+  }
+
+  public function toProdDetail(Request $request)
+  {
+    $m3_result = new M3Result;
+    $name = $request->input('name','');
+    $product_id = $request->input('product_id','');
+
+    if($name == 'comment'){
+      $results =PdtComments::where('product_id',$product_id)->get();
+
+    }else{
+      $product = Product::where('id', $product_id)->first();
+      $results = $product->summary;
+      $m3_result->status = 1;
+      $m3_result->message = '返回成功';
+      $m3_result->results =  $results;
+      Log::info('产品详情');
+      return $m3_result->toJson();
+    }
+
+    $m3_result->status = 2;
+    $m3_result->message = '返回成功';
+    $m3_result->results =  $results;
+    Log::info('产品详情');
+    return $m3_result->toJson();
+
+
+  }
+
 
 }

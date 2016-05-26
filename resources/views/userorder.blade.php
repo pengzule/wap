@@ -21,21 +21,21 @@
             <ul class="order-mod-filter clearfix mb10">
                 <div class="white-bg_2 bb1">
 
-                    <li id="default" class="active"><a
+                    <li id="allorder " class="active pzl_orderclick"><a
                                 title="默认排序"  href="javascript:void(0);">全部</a></li>
-                    <li id="buys"  ><a title=""
+                    <li id="topay"   class=" pzl_orderclick"><a title=""
                                        href="javascript:void(0);" >待付款
                            
                         </a></li>
-                    <li id="comments"  ><a title=""
+                    <li id="tosend"  class=" pzl_orderclick"><a title=""
                                            href="javascript:void(0);" >待发货
                             
                         </a></li>
-                    <li id="cash"  ><a title=""
+                    <li id="torecv" class=" pzl_orderclick" ><a title=""
                                        href="javascript:void(0);" >待收货
                            
                         </a></li>
-                     <li id="comments"  ><a title=""
+                     <li id="todone"  class=" pzl_orderclick"><a title=""
                                    href="javascript:void(0);" >已完成
                        
                     </a></li>
@@ -43,7 +43,7 @@
             </ul>
 
             <div class="item-list" id="container" rel="2" status="0">
-            <input type="hidden" id="ListTotal" value="1">
+            <input type="hidden" value="{{$member_id}}" class="myorder_memberid">
                 @foreach($orders as $order)
                 <div class="list-group mb10">
                     <a href="#" class="list-group-item tip">
@@ -69,9 +69,6 @@
                     @endforeach
                     <div class="list-group-item" style="color: #1b1b1b">
                         共{{count($order->order_items)}}商品&nbsp;合计：￥{{$order->total_price}}
-
-
-
                     </div>
                 </div>
                     @endforeach
@@ -80,21 +77,12 @@
             <div id="ajax_loading" style="display:none;width:300px;margin: 10px  auto 15px;text-align:center;">
                 <img src="images/loading.gif">
             </div>
-            <!--  <form  action='/m_search/prodlist' method="post" id="list_form">
-                    <input type="hidden" id="curPageNO" name="curPageNO"  value=""/>
-                    <input type="hidden"  id="categoryId" name="categoryId" value="36" />
-                    <input type="hidden" id="orders" name="orders"  value=""/>
-                    <input type="hidden" id="hasProd" name="hasProd"  value="" />
-                    <input type="hidden" id="keyword" name="keyword"  value="" />
-                    <input type="hidden" id="prop" name="prop"  value="" />
-            </form> -->
+
 
         </div>
     </div>
 
-
     <div class="clear"></div>
-
 
     <footer class="footer">
         <div class="foot-con">
@@ -124,55 +112,84 @@
 
 @section('my-js')
     <script type="text/javascript">
-
-        _getCategory();
-
-        $('.weui_select').change(function(event) {
-            _getCategory()
-        });
-
-        function _getCategory() {
-            var parent_id = $('.weui_select option:selected').val();
-            console.log('parent_id: ' + parent_id);
-            $.ajax({
-                type: "GET",
-                url: '/service/category/parent_id/' + parent_id,
-                dataType: 'json',
-                cache: false,
-                success: function(data) {
-                    console.log("获取类别数据:");
-                    console.log(data);
-                    if(data == null) {
-                        $('.bk_toptips').show();
-                        $('.bk_toptips span').html('服务端错误');
-                        setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-                        return;
+        jQuery(document).ready(function() {
+            //绑定 点击事件
+            $(".pzl_orderclick").bind("click",function() {
+                var id = $(this).attr("id");
+                var name = '';
+                var member_id =$('.myorder_memberid').val() ;
+                $(".pzl_orderclick").each(function(i) {
+                    if (id != $(this).attr("id")) {
+                        $(this).removeClass("active");
                     }
-                    if(data.status != 0) {
-                        $('.bk_toptips').show();
-                        $('.bk_toptips span').html(data.message);
-                        setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-                        return;
-                    }
-                    $('.weui_cells_access').html('');
-                    for(var i=0; i<data.categorys.length; i++) {
-                        var next = '/product/category_id/' + data.categorys[i].id;
-                        var node = '<a class="weui_cell" href="' + next + '">' +
-                                '<div class="weui_cell_bd weui_cell_primary">' +
-                                '<p>'+ data.categorys[i].name +'</p>' +
-                                '</div>' +
-                                '<div class="weui_cell_ft"></div>' +
-                                '</a>';
-                        $('.weui_cells_access').append(node);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr);
-                    console.log(status);
-                    console.log(error);
+                });
+                $(this).addClass("active");
+                if (id == 'topay') {
+                    name = 'topay';
+                } else if (id == 'tosend') {
+                    name = 'tosend';
+                } else if (id == 'torecv') {
+                    name = 'torecv';
+                } else if (id == 'todone') {
+                    name = 'todone';
+                }else if (id == 'allorder') {
+                    name = 'allorder';
                 }
+                $.ajax({
+                    type: "GET",
+                    url: '/myorder',
+                    dataType: 'json',
+                    cache: false,
+                    data: {member_id:member_id,name:name, _token: "{{csrf_token()}}"},
+                    success: function(data) {
+                        console.log("获取:");
+                        console.log(data);
+                        if(data == null) {
+                            $('.bk_toptips').show();
+                            $('.bk_toptips span').html('服务端错误');
+                            setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+                            return;
+                        }
+                        if(data.status != 0) {
+                            $('.bk_toptips').show();
+                            $('.bk_toptips span').html(data.message);
+                            setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+                            return;
+                        }
+
+                        $('#container').html('');
+                        for(var i=0; i<data.orders.length; i++) {
+
+                            var node =
+                        '<div class="list-group mb10">'+
+                                    '<a href="#" class="list-group-item tip">'+
+                                   data.orders[i].order_no+
+                                        '<span class="gary pull-right">'+
+                                   '@if($order->status == 1)'+
+                                     '未支付'+
+                            '@else'+
+                             '已支付'+
+                            '@endif'+
+                        '</span>'+
+                            '</a>'+
+
+                                    '<div class="list-group-item" style="color: #1b1b1b">'+
+                                    '共10商品&nbsp;合计：￥'+data.orders[i].total_price+
+                    '</div>'+
+                            '</div>';
+
+
+                                    $('#container').append(node);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status);
+                        console.log(error);
+                    }
+                });
             });
-        }
+        });
 
 
     </script>

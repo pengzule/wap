@@ -5,17 +5,17 @@ jQuery(document).ready(function() {
 	$(window).scroll(function(){
 		if($(this).scrollTop()>300){
 			$(".fanhui_cou").fadeIn(1500);
-			
+
 		}else{
 			$(".fanhui_cou").fadeOut(1500);
-			
+
 		}
 	});
 	$(".fanhui_cou").click(function(){
 		$("body,html").animate({scrollTop:0},200);
 		return false;
 	});
-	
+
 	$(window).scroll(function(){
         if ($(document).height() - $(this).scrollTop() - $(this).height()<50){
 
@@ -23,7 +23,7 @@ jQuery(document).ready(function() {
         	if(isBlank(curPageNo) || curPageNo == 0){
         		curPageNo = 1;
         	}
-        	
+
         	curPageNo=parseInt(curPageNo)+1;
 			var totalPage=parseInt($("#ListTotal").val());
 			if(curPageNo<=totalPage){
@@ -32,13 +32,16 @@ jQuery(document).ready(function() {
 			}
         }
     });
-	
-	
+
+
 	//绑定 点击事件
-	$(".row ul li").bind("click",function() {
+	$(".pzl_product").bind("click",function() {
 		var id = $(this).attr("id");
-		var orderDir = "";
-		$(".row ul li").each(function(i) {
+		var category_id = $('.pzl_category').val();
+		var keyword = $('.pzl_keyword').val();
+		var orderDir = '';
+		var name = '';
+		$(".pzl_product").each(function(i) {
 			if (id != $(this).attr("id")) {
 				$(this).removeClass("active");
 			}
@@ -46,57 +49,100 @@ jQuery(document).ready(function() {
 		$(this).addClass("active");
 		var iElement=$(this).find("i");
 		if (id == 'cash') {
+			name = 'price';
 			if ($(iElement).hasClass("icon_sort_up")) {
-				orderDir = "cash,asc";
+
+				orderDir = "asc";
 				$(iElement).attr("class","icon_sort_down");
-				
+
 			} else if($(iElement).hasClass("icon_sort_down")){
-				orderDir = "cash,desc";
+				orderDir = "desc";
 				$(iElement).attr("class","icon_sort_up");
-				
+
 			}else{
-				orderDir = "cash,desc";
+				orderDir = "desc";
 				$(iElement).attr("class","icon_sort_up");
 			}
 		} else if (id == 'buys') {
+			name = 'sale_count';
 			if ($(iElement).hasClass("icon_sort_down")) {
-				orderDir = "buys,desc";
+				orderDir = "desc";
 				$(iElement).attr("class","icon_sort_up");
-				
+
 			} else if($(iElement).hasClass("icon_sort_up")){
-				orderDir = "buys,asc";
+				orderDir = "asc";
 				$(iElement).attr("class","icon_sort_down");
-				
+
 			}else{
-				orderDir = "buys,desc";
+				orderDir = "desc";
 				$(iElement).attr("class","icon_sort_up");
 			}
 		} else if (id == 'comments') {
+			name = 'comment_count';
 			if ($(iElement).hasClass("icon_sort_down")) {
-				orderDir = "comments,desc";
+				orderDir = "desc";
 				$(iElement).attr("class","icon_sort_up");
-				
+
 			} else if($(iElement).hasClass("icon_sort_up")){
-				orderDir = "comments,asc";
+				orderDir = "asc";
 				$(iElement).attr("class","icon_sort_down");
-				
+
 			}else{
-				orderDir = "comments,desc";
+				orderDir = "desc";
 				$(iElement).attr("class","icon_sort_up");
 			}
-		} else if (id == 'default') {
-			orderDir = "recDate,desc";
+		}else if (id == 'default'){
+			name = 'id';
+			orderDir = 'asc';
 		}
-		
-		$(this).siblings().find("i").attr("class","icon_sort");
-		
-		$("#orders").val(orderDir);
-		var no_results=$.trim($("#no_results").html());
-		if(no_results!="" && no_results!=null && no_results!=undefined){
-			return false;
-		}
-		$("#curPageNO").val(0);
-		sendData();
+		$.ajax({
+			type: "GET",
+			url: '/prodsort',
+			dataType: 'json',
+			cache: false,
+			data: {category_id:category_id,keyword:keyword,name:name,orderDir:orderDir, _token: "{{csrf_token()}}"},
+			success: function(data) {
+				console.log("获取:");
+				console.log(data);
+				if(data == null) {
+					$('.bk_toptips').show();
+					$('.bk_toptips span').html('服务端错误');
+					setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+					return;
+				}
+				if(data.status != 0) {
+					$('.bk_toptips').show();
+					$('.bk_toptips span').html(data.message);
+					setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+					return;
+				}
+
+				$('#container').html('');
+				for(var i=0; i<data.products.length; i++) {
+
+
+					var next = '/product/' + data.products[i].id;
+					var node = '<a href="' + next + '">'+
+							'<div class="hproduct clearfix" style="background:#fff;border-top:0px;">'+
+							'<div class="p-pic"><img style="max-height:100px;margin:auto;" class="img-responsive" src="'+data.products[i].preview+'">'+'</div>'+
+							'<div class="p-info">'+
+							'<p class="p-title">'+data.products[i].name+'</p>'+
+					'<p>'+'</p>'+
+					'<p class="p-origin">'+'<em class="price">'+'¥'+data.products[i].price+'</em>'+
+					'</p>'+
+					'</div>'+
+					'</div>'+
+					'</a>';
+
+					$('#container').append(node);
+				}
+			},
+			error: function(xhr, status, error) {
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+			}
+		});
 	});
 });
 
@@ -105,14 +151,14 @@ function sendData(){
 	$("#list_form").ajaxForm().ajaxSubmit({
 		  success:function(result) {
 			 $('#ajax_loading').hide();
-			 $("#container").html(result); 
+			 $("#container").html(result);
 		   },
 		   error:function(XMLHttpRequest, textStatus,errorThrown) {
-			 $("#container").html(""); 
+			 $("#container").html("");
 			 $('#ajax_loading').hide();
 			 floatNotify.simple("查找失败");
 			 return false;
-		  }	
+		  }
 	})*/
 }
 
@@ -121,14 +167,14 @@ function appendData(){
 	$("#list_form").ajaxForm().ajaxSubmit({
 		  success:function(result) {
 			 $('#ajax_loading').hide();
-			 $("#container").append(result); 
+			 $("#container").append(result);
 		   },
 		   error:function(XMLHttpRequest, textStatus,errorThrown) {
-			 $("#container").html(""); 
+			 $("#container").html("");
 			 $('#ajax_loading').hide();
 			 floatNotify.simple("查找失败");
 			 return false;
-		  }	
+		  }
 	});*/
 }
 

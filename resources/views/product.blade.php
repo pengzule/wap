@@ -18,20 +18,25 @@
 
     <div class="container" id="container2">
         <div class="row">
-            <ul class="mod-filter clearfix">
+            @if($category_id != '')
+                <input type="hidden" class="pzl_category" value="{{$category_id}}">
+            @elseif($keyword != '')
+                <input type="hidden" class="pzl_keyword" value="{{$keyword}}">
+            @endif
+            <ul  class="mod-filter clearfix">
                 <div class="white-bg_2 bb1">
 
-                    <li id="default" class="active"><a
+                    <li id="default" class="active pzl_product"><a
                                 title="默认排序"  href="javascript:void(0);">默认</a></li>
-                    <li id="buys"  ><a title="点击按销量从高到低排序"
+                    <li id="buys"   class=" pzl_product"><a title="点击按销量从高到低排序"
                                        href="javascript:void(0);" >销量
                             <i class='icon_sort'></i>
                         </a></li>
-                    <li id="comments"  ><a title="点击按评论数从高到低排序"
+                    <li id="comments" class=" pzl_product"  ><a title="点击按评论数从高到低排序"
                                            href="javascript:void(0);" >评论数
                             <i class='icon_sort'></i>
                         </a></li>
-                    <li id="cash"  ><a title="点击按价格从高到低排序"
+                    <li id="cash"  class=" pzl_product"><a title="点击按价格从高到低排序"
                                        href="javascript:void(0);" >价格
                             <i class='icon_sort'></i>
                         </a></li>

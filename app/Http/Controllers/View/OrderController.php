@@ -12,6 +12,7 @@ use App\Entity\Order;
 use App\Entity\OrderItem;
 use App\Models\BKWXJsConfig;
 use App\Tool\WXpay\WXTool;
+use App\Models\M3Result;
 use Log;
 
 class OrderController extends Controller
@@ -209,6 +210,39 @@ class OrderController extends Controller
 
   /**
    * @param Request $request
+   
+   public function toMyOrder(Request $request)
+  {
+    $m3_result = new M3Result;
+    $name = $request->input('name','');
+    $member_id = $request->input('member_id','');
+    if($name == 'allorder'){
+      $orders =Order::where('member_id',$member_id)->get();
+    }
+    if($name == 'topay'){
+      $orders =Order::where('member_id',$member_id)->where('status',1)->get();
+    }
+    if($name == 'tosend'){
+      $orders =Order::where('member_id',$member_id)->where('status',3)->get();
+    }
+    if($name == 'torecv'){
+      $orders =Order::where('member_id',$member_id)->where('status',4)->get();
+    }
+    if($name == 'todone'){
+      $orders =Order::where('member_id',$member_id)->where('status',5)->get();
+    }
+
+   
+    $m3_result->status = 0;
+    $m3_result->message = '返回成功';
+    $m3_result->orders =  $orders;
+
+
+    Log::info('我的订单');
+    return $m3_result->toJson();
+
+
+  }
    */
   public function toMyOrder(Request $request)
   {

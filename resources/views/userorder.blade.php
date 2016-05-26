@@ -41,20 +41,21 @@
                     </a></li>
                 </div>
             </ul>
-
-            <div class="item-list" id="container" rel="2" status="0">
             <input type="hidden" value="{{$member_id}}" class="myorder_memberid">
+            <div class="item-list" id="container" rel="2" status="0">
+            
                 @foreach($orders as $order)
                 <div class="list-group mb10">
                     <a href="#" class="list-group-item tip">
                     {{$order->order_no}}
-                        <span class="gary pull-right">
+                    <div  class="gary pull-right ">
                             @if($order->status == 1)
                              未支付
                             @else
                              已支付
                             @endif
-                        </span>
+                        </div>
+                       
                     </a>
                     @foreach($order->order_items as $order_item)
                     <div class="hproduct clearfix" style="background:#DDDDDD;border-top:0px;">
@@ -158,29 +159,50 @@
                         }
 
                         $('#container').html('');
+                        $('#pzl_status').html('');
                         for(var i=0; i<data.orders.length; i++) {
-
+                             if(data.orders[i].status == 1){
                             var node =
                         '<div class="list-group mb10">'+
                                     '<a href="#" class="list-group-item tip">'+
                                    data.orders[i].order_no+
-                                        '<span class="gary pull-right">'+
-                                   '@if($order->status == 1)'+
-                                     '未支付'+
-                            '@else'+
-                             '已支付'+
-                            '@endif'+
-                        '</span>'+
+                                       
+                         '<div  class="gary pull-right ">'+
+                           
+                             '未支付'+
+                           
+                        '</div>'+
                             '</a>'+
 
                                     '<div class="list-group-item" style="color: #1b1b1b">'+
                                     '共10商品&nbsp;合计：￥'+data.orders[i].total_price+
                     '</div>'+
-                            '</div>';
+                        '</div>';
+                        }else if(data.orders[i].status == 3){
+                             var node =
+                        '<div class="list-group mb10">'+
+                                    '<a href="#" class="list-group-item tip">'+
+                                   data.orders[i].order_no+
+                                       
+                         '<div  class="gary pull-right ">'+
+                           
+                             '已支付'+
+                           
+                        '</div>'+
+                            '</a>'+
+
+                                    '<div class="list-group-item" style="color: #1b1b1b">'+
+                                    '共10商品&nbsp;合计：￥'+data.orders[i].total_price+
+                    '</div>'+
+                        '</div>';
+                            }
 
 
                                     $('#container').append(node);
+                                   
                         }
+                        
+                       
                     },
                     error: function(xhr, status, error) {
                         console.log(xhr);

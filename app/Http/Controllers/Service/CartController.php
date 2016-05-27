@@ -42,7 +42,8 @@ class CartController extends Controller
         $cart_item->member_id = $member->id;
         $cart_item->save();
       }
-
+      $m3_result->status = 0;
+      $m3_result->message = $count;
       return $m3_result->toJson();
     }
     $m3_result->status = 1;

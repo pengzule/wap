@@ -211,10 +211,10 @@
           setTimeout(function() {$('.bk_toptips').hide();}, 2000);
           return;
         }
-
+        var count = data.message;
         var num = $('#totalNum').html();
         if(num == '') num = 0;
-        $('#totalNum').html(Number(num) + 1);
+        $('#totalNum').html(Number(num) + Number(count));
 
       },
       error: function(xhr, status, error) {

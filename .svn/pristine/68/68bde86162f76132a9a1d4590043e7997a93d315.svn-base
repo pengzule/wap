@@ -1,0 +1,73 @@
+jQuery(document).ready(function() {
+
+
+
+
+
+	//绑定 点击事件
+	$(".pzl_detail").bind("click",function() {
+		var id = $(this).attr("id");
+		var name = '';
+		var product_id =$('.pzl_proddetail').val() ;
+		$(".pzl_detail").each(function(i) {
+			if (id != $(this).attr("id")) {
+				$(this).removeClass("act");
+			}
+		});
+		$(this).addClass("act");
+		if (id == 'pzl_param') {
+			name = 'summary';
+		} else if (id == 'pzl_comment') {
+			name = 'comment';
+		}
+		$.ajax({
+			type: "GET",
+			url: '/proddetail',
+			dataType: 'json',
+			cache: false,
+			data: {name:name,product_id:product_id, _token: "{{csrf_token()}}"},
+			success: function(data) {
+				console.log("获取:");
+				console.log(data);
+				if(data == null) {
+					$('.bk_toptips').show();
+					$('.bk_toptips span').html('服务端错误');
+					setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+					return;
+				}
+				if(data.status == 1) {
+					$('.desc-area').html('');
+
+					var node =  '<div style="height:30px;">'+
+							'<div id="" style="margin: 10px  auto 15px;text-align:left;">'+data.results +'</div>'+
+							'</div>';
+						$('.desc-area').append(node);
+
+				}
+				if(data.status == 2){
+					$('.appraise').html('');
+					for(var i=0; i<data.results.length; i++) {
+						var node = '<li>'+
+								'<div class="app-user">'+
+								'<span class="user">'+data.results[i].name+'</span>'+
+								'<span class="date">'+data.results[i].created_at+'</span>'+
+								'</div>'+
+								'<div class="app-cnt">'+data.results[i].comment+'</div>'+
+								'<div class="app-sku">'+'</div>'+
+								'</li>';
+						$('.appraise').append(node);
+					}
+				}
+
+			},
+			error: function(xhr, status, error) {
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+			}
+		});
+	});
+});
+
+
+

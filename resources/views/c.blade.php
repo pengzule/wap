@@ -29,7 +29,7 @@
   <div class="container ">
     <div class="row rowcar">
     @foreach($cart_items as $cart_item)
-    <ul class="list-group" id="{{$cart_item->product->id}}">
+    <ul class="list-group">
       <li class="list-group-item text-primary" style="height: 42px;">
         <div class="icheck pull-left mr5">
           <input type="checkbox"  class="ids" name="cart_item" id="{{$cart_item->product->id}}"/>
@@ -43,24 +43,24 @@
       <li class="list-group-item hproduct clearfix">
         <div class="p-pic"><a href="/product/{{$cart_item->product->id}}"><img class="img-responsive" src="{{$cart_item->product->preview}}"></a></div>
         <div class="p-info">
-          <a href="/product/{{$cart_item->product->id}}"><p class="p-title ">{{$cart_item->product->name}}</p></a>
+          <a href="/product/{{$cart_item->product->id}}"><p class="p-title">{{$cart_item->product->name}}</p></a>
           <p class="p-attr">
             <span></span></p>
           <p class="p-origin">
             <a class="close p-close" onclick="_deleteShopCart('{{$cart_item->product->name}}','{{$cart_item->product->id}}')" href="javascript:void(0);">×</a>
-            <em class="price">￥{{$cart_item->product->price}}</em>
+            <em class="price">¥{{$cart_item->product->price}}</em>
           </p>
         </div>
       </li>
       <li class="list-group-item clearfix">
         <div class="pull-left mt5">
           <span class="gary">小计：</span>
-          <em class="red productTotalPrice" class=" price ">￥<span class="pzl_total" id="{{$cart_item->product->price}}">{{$cart_item->product->price * $cart_item->count}}</span></em>
+          <em class="red productTotalPrice" class="price">¥{{$cart_item->product->price * $cart_item->count}}</em>
         </div>
         <div class="btn-group btn-group-sm control-num">
-          <a onclick="_reduce();" href="javascript:void(0);" class="btn btn-default "><span class="glyphicon glyphicon-minus gary"></span></a>
-          <input type="tel" class="btn gary2 Amount" readonly="readonly" id="totalNum" value="{{$cart_item->count}}" >
-          <a onclick="_add();" href="javascript:void(0);" class="btn btn-default "><span class="glyphicon glyphicon-plus gary"></span></a>
+          <a onclick="" href="javascript:void(0);" class="btn btn-default "><span class="glyphicon glyphicon-minus gary"></span></a>
+          <input type="tel" class="btn gary2 Amount" readonly="readonly" value="{{$cart_item->count}}" >
+          <a onclick="" href="javascript:void(0);" class="btn btn-default "><span class="glyphicon glyphicon-plus gary"></span></a>
         </div>
       </li>
     </ul>
@@ -116,86 +116,6 @@
     // $('input[name=product_ids]').val(product_ids_arr+'');
     // $('input[name=is_wx]').val(is_wx+'');
     // $('#order_commit').submit();
-  }
-
-  function _add() {
-    var product_id = $('.list-group').attr('id');
-    var price = $('.pzl_total').attr('id');
-    $.ajax({
-      type: "GET",
-      url: '/service/cart/add/',
-      dataType: 'json',
-      cache: false,
-      data: { product_id:product_id,price:price,_token: "{{csrf_token()}}"},
-      success: function(data) {
-        console.log(data);
-        if(data == null) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html('服务端错误');
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-          return;
-        }
-        if(data.status != 0) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html(data.message);
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-          return;
-        }
-        $('.pzl_total').html(data.message);
-
-        var num = $('#totalNum').val();
-        $('#totalNum').val(Number(num) + 1);
-
-      },
-      error: function(xhr, status, error) {
-        console.log(xhr);
-        console.log(status);
-        console.log(error);
-      }
-    });
-  }
-
-  function _reduce() {
-    var product_id = $('.list-group').attr('id');
-    var price = $('.pzl_total').attr('id');
-    if(  $('#totalNum').val() == 1){
-      $('.bk_toptips').show();
-      $('.bk_toptips span').html('最少保留一件产品');
-      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-      return;
-    }
-    $.ajax({
-      type: "GET",
-      url: '/service/cart/reduce/',
-      dataType: 'json',
-      cache: false,
-      data: { product_id:product_id,price:price,_token: "{{csrf_token()}}"},
-      success: function(data) {
-        console.log(data);
-        if(data == null) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html('服务端错误');
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-          return;
-        }
-        if(data.status != 0) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html(data.message);
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-          return;
-        }
-        $('.pzl_total').html(data.message);
-
-        var num = $('#totalNum').val();
-        $('#totalNum').val(Number(num) - 1);
-
-      },
-      error: function(xhr, status, error) {
-        console.log(xhr);
-        console.log(status);
-        console.log(error);
-      }
-    });
   }
 
   function _deleteShopCart(_basketName,_prodId){

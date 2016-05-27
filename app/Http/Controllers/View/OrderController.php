@@ -129,7 +129,18 @@ class OrderController extends Controller
   public function toOrderList(Request $request)
   {
     $member = $request->session()->get('member', '');
-    $orders = Order::where('member_id', $member->id)->get();
+    $name = $request->input('name','');
+    if($name == 'topay'){
+      $orders = Order::where('member_id', $member->id)->where('status',1)->orderby('created_at','desc')->get();
+    }else if($name == 'tosend'){
+      $orders = Order::where('member_id', $member->id)->where('status',3)->orderby('created_at','desc')->get();
+    }else if($name == 'torecv'){
+      $orders = Order::where('member_id', $member->id)->where('status',4)->orderby('created_at','desc')->get();
+    }else if($name == 'todone'){
+      $orders = Order::where('member_id', $member->id)->where('status',5)->orderby('created_at','desc')->get();
+    } else{
+      $orders = Order::where('member_id', $member->id)->orderby('created_at','desc')->get();
+    }
     foreach ($orders as $order) {
       $order_items = OrderItem::where('order_id', $order->id)->get();
       $order->order_items = $order_items;
@@ -140,7 +151,8 @@ class OrderController extends Controller
 
     //return view('order_list')->with('orders', $orders);
     return view('userorder')->with('orders', $orders)
-        ->with('member_id',$member->id);
+        ->with('member_id',$member->id)
+        ->with('name',$name);
   }
   
    public function toeditaddress()
@@ -178,11 +190,32 @@ class OrderController extends Controller
 
     $member = $request->session()->get('member', '');
 
-    $cart_item = new CartItem;
-    $cart_item->product_id = $product_id;
-    $cart_item->count = $count;
-    $cart_item->member_id = $member->id;
-    $cart_item->save();
+
+    if($member != '') {
+      $cart_items = CartItem::where('member_id', $member->id)->get();
+
+      $exist = false;
+      foreach ($cart_items as $cart_item) {
+        if($cart_item->product_id == $product_id) {
+          $cart_item->count += $count;
+          $cart_item->save();
+          $exist = true;
+          break;
+        }
+      }
+
+      if($exist == false) {
+        $cart_item = new CartItem;
+        $cart_item->product_id = $product_id;
+        $cart_item->count = $count;
+        $cart_item->member_id = $member->id;
+        $cart_item->save();
+      }
+
+
+    }
+
+
 
     $cart_items = CartItem::where('member_id', $member->id)->where('product_id', $product_id)->get();
     $address = Addr::where('member_id',$member->id)->where('default',1)->first();
@@ -201,7 +234,7 @@ class OrderController extends Controller
         array_push($cart_items_ids_arr, $cart_item->id);
       }
     }
-    CartItem::whereIn('id', $cart_items_ids_arr)->delete();
+
     return view('order_confirm')->with('cart_items', $cart_items_arr)
         ->with('total_price', $total_price)
         ->with('address',$address);
@@ -249,20 +282,20 @@ class OrderController extends Controller
     $m3_result = new M3Result;
     $name = $request->input('name','');
     $member_id = $request->input('member_id','');
-    if($name == 'allorder'){
-      $orders =Order::where('member_id',$member_id)->get();
-    }
+
+      $orders =Order::where('member_id',$member_id)->orderby('created_at','desc')->get();
+
     if($name == 'topay'){
-      $orders =Order::where('member_id',$member_id)->where('status',1)->get();
+      $orders =Order::where('member_id',$member_id)->where('status',1)->orderby('created_at','desc')->get();
     }
     if($name == 'tosend'){
-      $orders =Order::where('member_id',$member_id)->where('status',3)->get();
+      $orders =Order::where('member_id',$member_id)->where('status',3)->orderby('created_at','desc')->get();
     }
     if($name == 'torecv'){
-      $orders =Order::where('member_id',$member_id)->where('status',4)->get();
+      $orders =Order::where('member_id',$member_id)->where('status',4)->orderby('created_at','desc')->get();
     }
     if($name == 'todone'){
-      $orders =Order::where('member_id',$member_id)->where('status',5)->get();
+      $orders =Order::where('member_id',$member_id)->where('status',5)->orderby('created_at','desc')->get();
     }
 
     foreach ($orders as $order) {

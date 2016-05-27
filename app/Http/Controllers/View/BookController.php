@@ -11,6 +11,7 @@ use App\Entity\PdtImages;
 use App\Entity\PdtComments;
 use App\Entity\CartItem;
 use App\Models\M3Result;
+use App\Entity\PdtCollect;
 use Log;
 
 
@@ -40,11 +41,11 @@ class BookController extends Controller
     $pdt_images = PdtImages::where('product_id', $product_id)->get();
 
     $count = 0;
-
+    $wish = '';
     $member = $request->session()->get('member', '');
     if($member != '') {
       $cart_items = CartItem::where('member_id', $member->id)->get();
-
+      $wish = PdtCollect::where('member_id', $member->id)->where('product_id',$product_id)->first();
       foreach ($cart_items as $cart_item) {
         if($cart_item->product_id == $product_id) {
           $count = $cart_item->count;
@@ -67,7 +68,8 @@ class BookController extends Controller
     return view('pdt_content')->with('product', $product)
                               ->with('pdt_content', $pdt_content)
                               ->with('pdt_images', $pdt_images)
-                              ->with('count', $count);
+                              ->with('count', $count)
+                              ->with('wish',$wish);
   }
 
   public function toSearch(Request $request)

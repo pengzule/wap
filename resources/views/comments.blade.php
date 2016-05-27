@@ -1,6 +1,6 @@
 @extends('default')
 
-@section('title', '我的订单')
+@section('title', '我的评价')
 
 @section('content')
     <div class="fanhui_cou">
@@ -11,15 +11,37 @@
         <div class="fix_nav">
             <div class="nav_inner">
                 <a class="nav-left back-icon" href="javascript:history.back();">返回</a>
-                <div class="tit">我的设备</div>
+                <div class="tit">我的评价</div>
             </div>
         </div>
     </header>
 
     <div class="container" id="container2">
         <div class="row">
+            @if($comments !='[]')
+            <div class="item-list" id="container" rel="2" status="0">
+                @foreach($comments as $comment)
+                        <a href="/product/{{$comment->product->id}}">
+                            <div class="hproduct clearfix" style="background:#fff;border-top:0px;">
+                                <div class="p-pic"><img style="max-height:100px;margin:auto;" class="img-responsive" src="{{$comment->product->preview}}"></div>
+                                <div class="p-info">
+                                    <p class="p-title">{{$comment->product->name}}</p>
 
-
+                                    <p class="p-origin"><em class="">{{$comment->comment}}</em>
+                                    <p >{{$comment->updated_at}}</p>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+            </div>
+            @else
+                <div class="empty" style="margin-top: 40px;">
+                    <center style="width:120px;margin:0 auto;"><img style="width:100%;padding-bottom:20px;" src="/images/wish.jpg"></center>
+                    <center style="padding-top:10px;"><span>您的收藏还是空的，赶紧行动吧！</span></center>
+                    <center style="width:100px;height:35px;margin: 60px auto 0;"><a href="/"><div style="width:100px;height:35px;background:#6a94e7;text-align:center;line-height:35px;border-radius: 3px;color:#fff;float:left;">随便逛逛</div></a></center>
+                </div>
+            @endif
         </div>
     </div>
 

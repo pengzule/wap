@@ -20,30 +20,100 @@
         <div class="row">
             <ul class="order-mod-filter clearfix mb10">
                 <div class="white-bg_2 bb1">
+                    @if($name =='')
+                        <li id="allorder " class="active pzl_orderclick">
+                            <a title=""  href="javascript:void(0);">全部</a>
+                        </li>
+                        <li id="topay"   class=" pzl_orderclick">
+                            <a title=""href="javascript:void(0);" >待付款</a>
+                        </li>
+                        <li id="tosend"  class=" pzl_orderclick">
+                            <a title=""href="javascript:void(0);" >待发货</a>
+                        </li>
+                        <li id="torecv" class=" pzl_orderclick" >
+                            <a title=""href="javascript:void(0);" >待收货</a>
+                        </li>
+                        <li id="todone"  class=" pzl_orderclick">
+                            <a title="" href="javascript:void(0);" >已完成</a>
+                        </li>
+                    @elseif($name == 'topay')
+                        <li id="allorder " class=" pzl_orderclick"><a
+                                    title=""  href="javascript:void(0);">全部</a>
+                        </li>
+                        <li id="topay"   class="active pzl_orderclick">
+                            <a title="" href="javascript:void(0);" >待付款</a>
+                        </li>
+                        <li id="tosend"  class=" pzl_orderclick">
+                            <a title=""href="javascript:void(0);" >待发货</a>
+                        </li>
+                        <li id="torecv" class=" pzl_orderclick" >
+                            <a title=""href="javascript:void(0);" >待收货</a>
+                        </li>
+                        <li id="todone"  class=" pzl_orderclick">
+                            <a title="" href="javascript:void(0);" >已完成</a>
+                        </li>
+                    @elseif($name == 'tosend')
+                        <li id="allorder " class=" pzl_orderclick"><a
+                                    title=""  href="javascript:void(0);">全部</a>
+                        </li>
+                        <li id="topay"   class=" pzl_orderclick">
+                            <a title="" href="javascript:void(0);" >待付款</a>
+                        </li>
+                        <li id="tosend"  class="active pzl_orderclick">
+                            <a title=""href="javascript:void(0);" >待发货</a>
+                        </li>
+                        <li id="torecv" class=" pzl_orderclick" >
+                            <a title=""href="javascript:void(0);" >待收货</a>
+                        </li>
+                        <li id="todone"  class=" pzl_orderclick">
+                            <a title="" href="javascript:void(0);" >已完成</a>
+                        </li>
+                    @elseif($name == 'torecv')
+                        <li id="allorder " class=" pzl_orderclick"><a
+                                    title=""  href="javascript:void(0);">全部</a>
+                        </li>
+                        <li id="topay"   class=" pzl_orderclick">
+                            <a title="" href="javascript:void(0);" >待付款</a>
+                        </li>
+                        <li id="tosend"  class=" pzl_orderclick">
+                            <a title=""href="javascript:void(0);" >待发货</a>
+                        </li>
+                        <li id="torecv" class="active pzl_orderclick" >
+                            <a title=""href="javascript:void(0);" >待收货</a>
+                        </li>
+                        <li id="todone"  class=" pzl_orderclick">
+                            <a title="" href="javascript:void(0);" >已完成</a>
+                        </li>
+                    @elseif($name == 'todone')
+                        <li id="allorder " class=" pzl_orderclick"><a
+                                    title=""  href="javascript:void(0);">全部</a>
+                        </li>
+                        <li id="topay"   class=" pzl_orderclick">
+                            <a title="" href="javascript:void(0);" >待付款</a>
+                        </li>
+                        <li id="tosend"  class=" pzl_orderclick">
+                            <a title=""href="javascript:void(0);" >待发货</a>
+                        </li>
+                        <li id="torecv" class=" pzl_orderclick" >
+                            <a title=""href="javascript:void(0);" >待收货</a>
+                        </li>
+                        <li id="todone"  class="active pzl_orderclick">
+                            <a title="" href="javascript:void(0);" >已完成</a>
+                        </li>
+                    @endif
 
-                    <li id="allorder " class="active pzl_orderclick"><a
-                                title="默认排序"  href="javascript:void(0);">全部</a></li>
-                    <li id="topay"   class=" pzl_orderclick"><a title=""
-                                       href="javascript:void(0);" >待付款
-                           
-                        </a></li>
-                    <li id="tosend"  class=" pzl_orderclick"><a title=""
-                                           href="javascript:void(0);" >待发货
-                            
-                        </a></li>
-                    <li id="torecv" class=" pzl_orderclick" ><a title=""
-                                       href="javascript:void(0);" >待收货
-                           
-                        </a></li>
-                     <li id="todone"  class=" pzl_orderclick"><a title=""
-                                   href="javascript:void(0);" >已完成
-                       
-                    </a></li>
                 </div>
             </ul>
             <input type="hidden" value="{{$member_id}}" class="myorder_memberid">
             <div class="item-list" id="container" rel="2" status="0">
-            
+                @if ($orders == '[]')
+
+                    <div class="empty" style="margin-top: 40px;">
+                        <center style="width:120px;margin:0 auto;"><img style="width:100%;padding-bottom:20px;" src="/images/order.png"></center>
+                        <center style="padding-top:10px;"><span>您还没有相关订单，赶紧行动吧！</span></center>
+                        <center style="width:100px;height:35px;margin: 60px auto 0;"><a href="/"><div style="width:100px;height:35px;background:#6a94e7;text-align:center;line-height:35px;border-radius: 3px;color:#fff;float:left;">随便逛逛</div></a></center>
+                    </div>
+                @else
                 @foreach($orders as $order)
                 <div class="list-group mb10">
                     <a href="#" class="list-group-item tip">
@@ -51,14 +121,18 @@
                     <div  class="gary pull-right ">
                             @if($order->status == 1)
                              未支付
-                            @else
+                            @elseif($order->status == 3)
                              已支付
+                            @elseif($order->status == 4)
+                            已发货
+                            @elseif($order->status == 5)
+                            交易成功
                             @endif
                         </div>
                        
                     </a>
                     @foreach($order->order_items as $order_item)
-                    <div class="hproduct clearfix" style="background:#DDDDDD;border-top:0px;">
+                    <div id="pzl_detail" class="hproduct clearfix" style="background:#DDDDDD;border-top:0px;">
                         <div class="p-pic"><img style="max-height:100px;margin:auto;" class="img-responsive" src="{{$order_item->product->preview}}"></div>
                         <div class="p-info">
                             <p class="p-title">{{$order_item->product->name}}</p>
@@ -73,7 +147,7 @@
                     </div>
                 </div>
                     @endforeach
-                   
+                   @endif
             </div>
             <div id="ajax_loading" style="display:none;width:300px;margin: 10px  auto 15px;text-align:center;">
                 <img src="images/loading.gif">
@@ -85,28 +159,7 @@
 
     <div class="clear"></div>
 
-    <footer class="footer">
-        <div class="foot-con">
-            <div class="foot-con_2">
-                <a href="/home">
-                    <i class="navIcon home"></i>
-                    <span class="text">首页</span>
-                </a>
-                <a  href="/category">
-                    <i class="navIcon sort"></i>
-                    <span class="text">分类</span>
-                </a>
-                <a href="/cart">
-                    <i class="navIcon shop"></i>
-                    <span class="text">购物车</span>
-                </a>
-                <a class="active" href="/userhome">
-                    <i class="navIcon member"></i>
-                    <span class="text">我的</span>
-                </a>
-            </div>
-        </div>
-    </footer>
+
 
 
 @endsection
@@ -134,7 +187,7 @@
                 } else if (id == 'todone') {
                     name = 'todone';
                 }else if (id == 'allorder') {
-                    name = 'allorder';
+                    name = 'all';
                 }
                 $.ajax({
                     type: "GET",
@@ -159,47 +212,63 @@
                         }
 
                         $('#container').html('');
-                        $('#pzl_status').html('');
+                        $('#pzl_detail').html('');
+                        if (data.orders == '')
+                        {
+                        var empty = '<div class="empty" style="margin-top: 40px;">'+
+                                '<center style="width:120px;margin:0 auto;">'+'<img style="width:100%;padding-bottom:20px;" src="/images/order.png">'+'</center>'+
+                                '<center style="padding-top:10px;">'+'<span>'+'您还没有相关订单，赶紧行动吧！'+'</span>'+'</center>'+
+                        '<center style="width:100px;height:35px;margin: 60px auto 0;">'+'<a href="/">'+'<div style="width:100px;height:35px;background:#6a94e7;text-align:center;line-height:35px;border-radius: 3px;color:#fff;float:left;">'+'随便逛逛'+'</div>'+'</a>'+'</center>'+
+                                '</div>';
+                            $('#container').append(empty);
+                        }
                         for(var i=0; i<data.orders.length; i++) {
+
                              if(data.orders[i].status == 1){
+                                 var status = '未支付';
+                             }else if (data.orders[i].status == 3){
+                                 var status = '已支付';
+                             }else if (data.orders[i].status == 4){
+                                 var status = '已发货';
+                             }else if (data.orders[i].status == 5){
+                                 var status = '交易成功';
+                             }
+
                             var node =
-                        '<div class="list-group mb10">'+
+                                    '<div class="list-group mb0">'+
                                     '<a href="#" class="list-group-item tip">'+
-                                   data.orders[i].order_no+
-                                       
-                         '<div  class="gary pull-right ">'+
-                           
-                             '未支付'+
-                           
-                        '</div>'+
-                            '</a>'+
+                                    data.orders[i].order_no+
 
-                                    '<div class="list-group-item" style="color: #1b1b1b">'+
-                                    '共10商品&nbsp;合计：￥'+data.orders[i].total_price+
-                    '</div>'+
-                        '</div>';
-                        }else if(data.orders[i].status == 3){
-                             var node =
-                        '<div class="list-group mb10">'+
-                                    '<a href="#" class="list-group-item tip">'+
-                                   data.orders[i].order_no+
-                                       
-                         '<div  class="gary pull-right ">'+
-                           
-                             '已支付'+
-                           
-                        '</div>'+
-                            '</a>'+
+                                    '<div  class="gary pull-right ">'+
 
-                                    '<div class="list-group-item" style="color: #1b1b1b">'+
-                                    '共10商品&nbsp;合计：￥'+data.orders[i].total_price+
-                    '</div>'+
-                        '</div>';
+                                    status+
+
+                                    '</div>'+
+                                    '</a>'+
+
+
+
+                                    '</div>';
+
+                            $('#container').append(node);
+
+                            for (var j = 0; j<data.orders[i].order_items.length; j++){
+                                var detail = '<div id="pzl_detail" class="hproduct clearfix" style="background:#DDDDDD;border-top:0px;">'+
+                                        '<div class="p-pic">'+'<img style="max-height:100px;margin:auto;" class="img-responsive" src="'+data.orders[i].order_items[j].product.preview+'">'+'</div>'+
+                                        '<div class="p-info">'+
+                                        '<p class="p-title">'+data.orders[i].order_items[j].product.name+'</p>'+
+                                        '<p >'+'</p>'+
+                                        '<p class="p-origin">'+'<em class="price">'+'¥'+data.orders[i].order_items[j].product.price+'<span style="float: right">'+'x'+data.orders[i].order_items[j].count+'</span>'+'</em>'+
+                                        '</p>'+
+                                        '</div>'+
+                                        '</div>';
+                                $('#container').append(detail);
+
                             }
-
-
-                                    $('#container').append(node);
-                                   
+                            var foot =   '<div class="list-group-item mb10" style="color: #1b1b1b">'+
+                                    '共'+data.orders[i].order_items.length+'商品&nbsp;合计：￥'+data.orders[i].total_price+
+                                    '</div>';
+                            $('#container').append(foot);
                         }
                         
                        

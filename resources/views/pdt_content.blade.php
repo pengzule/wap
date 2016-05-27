@@ -108,8 +108,12 @@
   <footer class="footer">
     <div class="fixed-foot">
       <div class="fixed_inner">
-        <a class="btn-fav" href="javascript:void(0);" onclick="">
-          <i class="i-fav"></i><span>收藏</span>
+        <a class="btn-fav " href="javascript:void(0);" onclick="_collect();">
+          @if($wish == '')
+          <i class="collect i-fav "></i><span>收藏</span>
+          @else
+          <i class="collect i-fav i-fav-active"></i><span>收藏</span>
+          @endif
         </a>
         <a class="cart-wrap" href="/cart">
           <i class="i-cart"></i>
@@ -212,6 +216,37 @@
         if(num == '') num = 0;
         $('#totalNum').html(Number(num) + 1);
 
+      },
+      error: function(xhr, status, error) {
+        console.log(xhr);
+        console.log(status);
+        console.log(error);
+      }
+    });
+  }
+
+  function _collect() {
+    var product_id = "{{$product->id}}";
+    $.ajax({
+      type: "GET",
+      url: '/service/wish/collect/' + product_id,
+      dataType: 'json',
+      cache: false,
+      data: { _token: "{{csrf_token()}}"},
+      success: function(data) {
+        if(data == null) {
+          $('.bk_toptips').show();
+          $('.bk_toptips span').html('服务端错误');
+          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          return;
+        }
+        if(data.status != 0) {
+          $('.bk_toptips').show();
+          $('.bk_toptips span').html(data.message);
+          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          return;
+        }
+        $('.collect').addClass("i-fav-active");
       },
       error: function(xhr, status, error) {
         console.log(xhr);

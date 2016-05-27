@@ -29,26 +29,26 @@
           </a>
           <div class="list-group-item p0 clearfix">
             <div class="col-xs-3 p0">
-              <a class="order_tab_link" href="#">
+              <a class="order_tab_link" href="#" id="forpay">
                 <em class="order_img">
                   <img src="images/order_bg_3.png"></em>待付款
 
               </a>
             </div>
             <div class="col-xs-3 p0">
-              <a class="order_tab_link" href="#">
+              <a class="order_tab_link" href="#"id="forsend">
                 <em class="order_img">
                   <img src="images/order_bg_2.png"></em>待发货
               </a>
             </div>
             <div class="col-xs-3 p0">
-              <a class="order_tab_link" href="#">
+              <a class="order_tab_link" href="#"id="forrecv">
                 <em class="order_img">
                   <img src="images/order_bg_1.png"></em>待收货
               </a>
             </div>
             <div class="col-xs-3 p0">
-              <a class="order_tab_link" href="#">
+              <a class="order_tab_link" href="#"id="fordone">
                 <em class="order_img">
                   <img src="images/order_bg.png"></em>已完成
               </a>
@@ -56,15 +56,15 @@
           </div>
         </div>
         <div class="list-group mb10 member_list_group clearfix">
-          <a href="#" class="list-group-item col-xs-4">
+          <a href="/mywish" class="list-group-item col-xs-4">
             <div class="m_img"><img src="images/order_bg_5.png"></div>
             <p class="m_name">我的收藏</p>
-            <span class="red">0</span>
+            <span class="red">{{count($wishes)}}</span>
           </a>
-          <a href="#" class="list-group-item col-xs-4">
+          <a href="/mycomment" class="list-group-item col-xs-4">
             <div class="m_img"><img src="images/order_bg_8.png"></div>
             <p class="m_name">我的评论</p>
-            <span class="red">0</span>
+            <span class="red">{{count($comments)}}</span>
           </a>
           <a href="#" class="list-group-item col-xs-4">
             <div class="m_img"><img src="images/order_bg_4.png"></div>
@@ -203,6 +203,29 @@
       }
 
     }
+
+    jQuery(document).ready(function() {
+      //绑定 点击事件
+      $(".order_tab_link").bind("click",function() {
+        var id = $(this).attr("id");
+        var name = '';
+
+        if (id == 'forpay') {
+          name = 'topay';
+        }else if(id == 'forsend'){
+          name = 'tosend';
+        }
+        else if(id == 'forrecv'){
+          name = 'torecv';
+        }
+        else if(id == 'fordone'){
+          name = 'todone';
+        }
+
+        location.href = '/order_list?name=' + name;
+
+      });
+    });
   </script>
 
 @endsection

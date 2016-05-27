@@ -43,7 +43,11 @@ Route::group(['prefix' => 'service'], function () {
 
   Route::get('category/parent_id/{parent_id}', 'Service\BookController@getCategoryByParentId');
   Route::get('cart/add/{product_id}', 'Service\CartController@addCart');
+  Route::get('cart/add/', 'Service\CartController@add');
+  Route::get('cart/reduce/', 'Service\CartController@reduce');
   Route::get('cart/delete', 'Service\CartController@deleteCart');
+  Route::get('wish/collect/{product_id}', 'Service\CartController@addWish');
+
 
 
 
@@ -69,6 +73,8 @@ Route::get('/userinfo', 'View\MemberController@toUserInfo')->middleware(['check.
 Route::get('/userhome', 'View\MemberController@toMyhome')->middleware(['check.login']);
 Route::get('/mydev', 'View\MemberController@toMydev')->middleware(['check.login']);
 Route::get('/myaddress', 'View\MemberController@toMyaddress')->middleware(['check.login']);
+Route::get('/mywish', 'View\MemberController@toMywish')->middleware(['check.login']);
+Route::get('/mycomment', 'View\MemberController@toMycomment')->middleware(['check.login']);
 
 /***********************************后台相关***********************************/
 

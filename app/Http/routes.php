@@ -45,6 +45,7 @@ Route::group(['prefix' => 'service'], function () {
   Route::get('cart/add/{product_id}', 'Service\CartController@addCart');
   Route::get('cart/add/', 'Service\CartController@add');
   Route::get('cart/reduce/', 'Service\CartController@reduce');
+  Route::get('cart/change', 'Service\CartController@cartChange');
   Route::get('cart/delete', 'Service\CartController@deleteCart');
   Route::get('wish/collect/{product_id}', 'Service\CartController@addWish');
 
@@ -68,6 +69,7 @@ Route::match(['get', 'post'], '/order_confirm', 'View\OrderController@toOrderCon
 Route::match(['get', 'post'], '/buynow_confirm', 'View\OrderController@toBuyNow')->middleware(['check.login']);
 Route::match(['get', 'post'], '/editaddress', 'View\OrderController@toeditaddress')->middleware(['check.login']);
 Route::match(['get', 'post'], '/selectaddress', 'View\OrderController@toselectaddress')->middleware(['check.login']);
+Route::match(['get', 'post'], '/order_comment', 'View\OrderController@toOrderComment')->middleware(['check.login']);
 Route::get('/order_list', 'View\OrderController@toOrderList')->middleware(['check.login']);
 Route::get('/userinfo', 'View\MemberController@toUserInfo')->middleware(['check.login']);
 Route::get('/userhome', 'View\MemberController@toMyhome')->middleware(['check.login']);

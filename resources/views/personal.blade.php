@@ -50,7 +50,7 @@
             <div class="col-xs-3 p0">
               <a class="order_tab_link" href="#"id="fordone">
                 <em class="order_img">
-                  <img src="images/order_bg.png"></em>已完成
+                  <img src="images/order_bg.png"></em>待评价
               </a>
             </div>
           </div>

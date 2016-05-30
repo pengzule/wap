@@ -34,7 +34,7 @@
                             <a title=""href="javascript:void(0);" >待收货</a>
                         </li>
                         <li id="todone"  class=" pzl_orderclick">
-                            <a title="" href="javascript:void(0);" >已完成</a>
+                            <a title="" href="javascript:void(0);" >待评价</a>
                         </li>
                     @elseif($name == 'topay')
                         <li id="allorder " class=" pzl_orderclick"><a
@@ -50,7 +50,7 @@
                             <a title=""href="javascript:void(0);" >待收货</a>
                         </li>
                         <li id="todone"  class=" pzl_orderclick">
-                            <a title="" href="javascript:void(0);" >已完成</a>
+                            <a title="" href="javascript:void(0);" >待评价</a>
                         </li>
                     @elseif($name == 'tosend')
                         <li id="allorder " class=" pzl_orderclick"><a
@@ -66,7 +66,7 @@
                             <a title=""href="javascript:void(0);" >待收货</a>
                         </li>
                         <li id="todone"  class=" pzl_orderclick">
-                            <a title="" href="javascript:void(0);" >已完成</a>
+                            <a title="" href="javascript:void(0);" >待评价</a>
                         </li>
                     @elseif($name == 'torecv')
                         <li id="allorder " class=" pzl_orderclick"><a
@@ -82,7 +82,7 @@
                             <a title=""href="javascript:void(0);" >待收货</a>
                         </li>
                         <li id="todone"  class=" pzl_orderclick">
-                            <a title="" href="javascript:void(0);" >已完成</a>
+                            <a title="" href="javascript:void(0);" >待评价</a>
                         </li>
                     @elseif($name == 'todone')
                         <li id="allorder " class=" pzl_orderclick"><a
@@ -98,7 +98,7 @@
                             <a title=""href="javascript:void(0);" >待收货</a>
                         </li>
                         <li id="todone"  class="active pzl_orderclick">
-                            <a title="" href="javascript:void(0);" >已完成</a>
+                            <a title="" href="javascript:void(0);" >待评价</a>
                         </li>
                     @endif
 
@@ -118,6 +118,7 @@
                 <div class="list-group mb10">
                     <a href="#" class="list-group-item tip">
                     {{$order->order_no}}
+                        <input type="hidden" class="order_item" id="{{$order->order_no}}" >
                     <div  class="gary pull-right ">
                             @if($order->status == 1)
                              未支付
@@ -132,6 +133,7 @@
                        
                     </a>
                     @foreach($order->order_items as $order_item)
+
                     <div id="pzl_detail" class="hproduct clearfix" style="background:#DDDDDD;border-top:0px;">
                         <div class="p-pic"><img style="max-height:100px;margin:auto;" class="img-responsive" src="{{$order_item->product->preview}}"></div>
                         <div class="p-info">
@@ -144,7 +146,25 @@
                     @endforeach
                     <div class="list-group-item" style="color: #1b1b1b">
                         共{{count($order->order_items)}}商品&nbsp;合计：￥{{$order->total_price}}
+                        <br/>
+                        @if($order->status == 1)
+                            <button class="btn  mt5 mr5">取消订单</button>
+                            <button class="btn btn-danger btn-buy mt5 mr5">付款</button>
+                        @elseif($order->status == 3)
+                            <button class="btn  mt5 mr5">删除订单</button>
+                            <button class="btn btn-danger btn-buy mt5 mr5">评价</button>
+                        @elseif($order->status == 4)
+                            <button class="btn  mt5 mr5">查看物流</button>
+                            <button class="btn btn-danger btn-buy mt5 mr5">确认收货</button>
+                        @elseif($order->status == 5)
+                            <button class="btn  mt5 mr5">删除订单</button>
+                            <button onclick="_toComment()" class="btn btn-danger btn-buy mt5 mr5">评价</button>
+                        @endif
+
                     </div>
+
+
+
                 </div>
                     @endforeach
                    @endif
@@ -226,19 +246,27 @@
 
                              if(data.orders[i].status == 1){
                                  var status = '未支付';
+                                 var option =  '<button class="btn  mt5 mr5">'+'取消订单'+'</button>'+
+                                         '<button class="btn btn-danger btn-buy mt5 mr5">'+'付款'+'</button>';
                              }else if (data.orders[i].status == 3){
                                  var status = '已支付';
+                                 var option =  '<button class="btn  mt5 mr5">'+'删除订单'+'</button>'+
+                                         '<button class="btn btn-danger btn-buy mt5 mr5">'+'评价'+'</button>';
                              }else if (data.orders[i].status == 4){
                                  var status = '已发货';
+                                 var option =  '<button class="btn  mt5 mr5">'+'查看物流'+'</button>'+
+                                         '<button class="btn btn-danger btn-buy mt5 mr5">'+'确认收货'+'</button>';
                              }else if (data.orders[i].status == 5){
                                  var status = '交易成功';
+                                 var option =  '<button class="btn  mt5 mr5">'+'删除订单'+'</button>'+
+                                         '<button onclick="_toComment()" class="btn btn-danger btn-buy mt5 mr5">'+'评价'+'</button>';
                              }
 
                             var node =
                                     '<div class="list-group mb0">'+
                                     '<a href="#" class="list-group-item tip">'+
                                     data.orders[i].order_no+
-
+                                    '<input type="hidden" class="order_item" id=" '+data.orders[i].order_no+'" >'+
                                     '<div  class="gary pull-right ">'+
 
                                     status+
@@ -267,6 +295,8 @@
                             }
                             var foot =   '<div class="list-group-item mb10" style="color: #1b1b1b">'+
                                     '共'+data.orders[i].order_items.length+'商品&nbsp;合计：￥'+data.orders[i].total_price+
+                                            '<br/>'+
+                                    option+
                                     '</div>';
                             $('#container').append(foot);
                         }
@@ -282,7 +312,11 @@
             });
         });
 
+        function _toComment() {
+            var order_id = $('.order_item').attr('id');
 
+            location.href = '/order_comment?order_id=' + order_id;
+        }
     </script>
 
 @endsection

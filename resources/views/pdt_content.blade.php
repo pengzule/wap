@@ -244,9 +244,13 @@
           $('.bk_toptips').show();
           $('.bk_toptips span').html(data.message);
           setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          $('.collect').removeClass("i-fav-active");
           return;
         }
         $('.collect').addClass("i-fav-active");
+        $('.bk_toptips').show();
+        $('.bk_toptips span').html(data.message);
+        setTimeout(function() {$('.bk_toptips').hide();}, 2000);
       },
       error: function(xhr, status, error) {
         console.log(xhr);

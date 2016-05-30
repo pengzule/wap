@@ -68,15 +68,6 @@
             <div id="ajax_loading" style="display:none;width:300px;margin: 10px  auto 15px;text-align:center;">
                 <img src="/images/loading.gif">
             </div>
-            <!--  <form  action='/m_search/prodlist' method="post" id="list_form">
-                    <input type="hidden" id="curPageNO" name="curPageNO"  value=""/>
-                    <input type="hidden"  id="categoryId" name="categoryId" value="36" />
-                    <input type="hidden" id="orders" name="orders"  value=""/>
-                    <input type="hidden" id="hasProd" name="hasProd"  value="" />
-                    <input type="hidden" id="keyword" name="keyword"  value="" />
-                    <input type="hidden" id="prop" name="prop"  value="" />
-            </form> -->
-
         </div>
     </div>
 

@@ -73,7 +73,7 @@ class CartController extends Controller
   {
 
     $product_id = $request->input('product_id', '');
-    $price = $request->input('price', '');
+
     $m3_result = new M3Result;
 
 
@@ -87,14 +87,13 @@ class CartController extends Controller
       foreach ($cart_items as $cart_item) {
         if($cart_item->product_id == $product_id) {
           $cart_item->count += 1;
-          $totalprice = $cart_item->count * $price ;
           $cart_item->save();
           $exist = true;
           break;
         }
       }
       $m3_result->status = 0;
-      $m3_result->message = $totalprice;
+      $m3_result->message ='返回成功';
       return $m3_result->toJson();
     }
     $m3_result->status = 1;
@@ -124,7 +123,8 @@ class CartController extends Controller
   {
 
     $product_id = $request->input('product_id', '');
-    $price = $request->input('price', '');
+    $count = $request->input('count','');
+
 
     $m3_result = new M3Result;
 
@@ -139,14 +139,78 @@ class CartController extends Controller
       foreach ($cart_items as $cart_item) {
         if($cart_item->product_id == $product_id) {
           $cart_item->count -= 1;
-          $totalprice = $cart_item->count * $price ;
           $cart_item->save();
           $exist = true;
           break;
         }
       }
       $m3_result->status = 0;
-      $m3_result->message = $totalprice;
+      $m3_result->message = '返回成功';
+
+      return $m3_result->toJson();
+    }
+    $m3_result->status = 1;
+    $m3_result->message = '请先登录';
+    return $m3_result->toJson();
+    /*$bk_cart = $request->cookie('bk_cart');
+    $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
+
+
+    foreach ($bk_cart_arr as &$value) {   // 一定要传引用
+      $index = strpos($value, ':');
+      if(substr($value, 0, $index) == $product_id) {
+        $count = ((int) substr($value, $index+1)) + 1;
+        $value = $product_id . ':' . $count;
+        break;
+      }
+    }
+
+    if($count == 1) {
+      array_push($bk_cart_arr, $product_id . ':' . $count);
+    }
+
+    return response($m3_result->toJson())->withCookie('bk_cart', implode(',', $bk_cart_arr));*/
+  }
+
+  public function cartChange(Request $request)
+  {
+
+    $product_id = $request->input('product_id', '');
+    $type = $request->input('type', '');
+    $count = $request->input('count','');
+    $m3_result = new M3Result;
+    $m3_result->status = 0;
+    $m3_result->message = $count;
+
+    if ($count == 1){
+      $m3_result->status = 1;
+      $m3_result->message = '数量不可为负';
+      return $m3_result->toJson();
+    }
+
+
+    // 如果当前已经登录
+    $member = $request->session()->get('member', '');
+    if($member != '') {
+      $cart_items = CartItem::where('member_id', $member->id)->get();
+
+      if ($type == 'add'){
+        foreach ($cart_items as $cart_item) {
+          if($cart_item->product_id == $product_id) {
+            $cart_item->count += 1;
+            $cart_item->save();
+            break;
+          }
+        }
+      }else{
+        foreach ($cart_items as $cart_item) {
+          if($cart_item->product_id == $product_id) {
+            $cart_item->count -= 1;
+            $cart_item->save();
+            break;
+          }
+        }
+      }
 
       return $m3_result->toJson();
     }
@@ -224,7 +288,7 @@ class CartController extends Controller
 
     $m3_result = new M3Result;
     $m3_result->status = 0;
-    $m3_result->message = '添加成功';
+    $m3_result->message = '收藏成功';
 
 
     // 如果当前已经登录
@@ -236,9 +300,12 @@ class CartController extends Controller
       $exist = false;
       foreach ($wishes as $wish) {
         if($wish->product_id == $product_id) {
-          $exist = true;
-          break;
+          PdtCollect::where('product_id',$product_id)->where('member_id', $member->id)->delete();
+          $m3_result->status = 1;
+          $m3_result->message = '取消收藏';
+          return $m3_result->toJson();
         }
+
       }
 
       if($exist == false) {

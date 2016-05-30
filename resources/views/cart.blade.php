@@ -45,22 +45,24 @@
         <div class="p-info">
           <a href="/product/{{$cart_item->product->id}}"><p class="p-title ">{{$cart_item->product->name}}</p></a>
           <p class="p-attr">
-            <span></span></p>
+            <span class="pzl_total" id="{{$cart_item->product->price}}"></span></p>
           <p class="p-origin">
             <a class="close p-close" onclick="_deleteShopCart('{{$cart_item->product->name}}','{{$cart_item->product->id}}')" href="javascript:void(0);">×</a>
-            <em class="price">￥{{$cart_item->product->price}}</em>
+            <em class="price">¥{{$cart_item->product->price}}</em>
           </p>
         </div>
       </li>
       <li class="list-group-item clearfix">
         <div class="pull-left mt5">
           <span class="gary">小计：</span>
-          <em class="red productTotalPrice" class=" price ">￥<span class="pzl_total" id="{{$cart_item->product->price}}">{{$cart_item->product->price * $cart_item->count}}</span></em>
+          <em class="red productTotalPrice" >¥{{$cart_item->product->price * $cart_item->count}}.00</em>
         </div>
         <div class="btn-group btn-group-sm control-num">
-          <a onclick="_reduce();" href="javascript:void(0);" class="btn btn-default "><span class="glyphicon glyphicon-minus gary"></span></a>
-          <input type="tel" class="btn gary2 Amount" readonly="readonly" id="totalNum" value="{{$cart_item->count}}" >
-          <a onclick="_add();" href="javascript:void(0);" class="btn btn-default "><span class="glyphicon glyphicon-plus gary"></span></a>
+          <a onclick="disDe(this);" href="javascript:void(0);" class="btn btn-default"><span class="glyphicon glyphicon-minus gary"></span></a>
+          <input type="tel" class="btn gary2 Amount" readonly="readonly" id="itemcount" value="{{$cart_item->count}}" maxlength="4" itemkey="{{$cart_item->product->id}}" >
+          <a onclick="increase(this);" href="javascript:void(0);" class="btn btn-default"><span class="glyphicon glyphicon-plus gary"></span></a>
+
+
         </div>
       </li>
     </ul>
@@ -118,15 +120,16 @@
     // $('#order_commit').submit();
   }
 
-  function _add() {
-    var product_id = $('.list-group').attr('id');
-    var price = $('.pzl_total').attr('id');
+  function _add(obj) {
+    var _this = $(obj);
+    var _count_obj=_this.prev();
+    var product_id=$(_count_obj).attr('itemkey');
     $.ajax({
       type: "GET",
       url: '/service/cart/add/',
       dataType: 'json',
       cache: false,
-      data: { product_id:product_id,price:price,_token: "{{csrf_token()}}"},
+      data: { product_id:product_id,_token: "{{csrf_token()}}"},
       success: function(data) {
         console.log(data);
         if(data == null) {
@@ -141,10 +144,7 @@
           setTimeout(function() {$('.bk_toptips').hide();}, 2000);
           return;
         }
-        $('.pzl_total').html(data.message);
 
-        var num = $('#totalNum').val();
-        $('#totalNum').val(Number(num) + 1);
 
       },
       error: function(xhr, status, error) {
@@ -155,21 +155,18 @@
     });
   }
 
-  function _reduce() {
-    var product_id = $('.list-group').attr('id');
-    var price = $('.pzl_total').attr('id');
-    if(  $('#totalNum').val() == 1){
-      $('.bk_toptips').show();
-      $('.bk_toptips span').html('最少保留一件产品');
-      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-      return;
-    }
+  function _reduce(obj) {
+    var _this = $(obj);
+    var _count_obj=_this.next();
+    var product_id=$(_count_obj).attr('itemkey');
+    var count =Number($(_count_obj).val());
+
     $.ajax({
       type: "GET",
       url: '/service/cart/reduce/',
       dataType: 'json',
       cache: false,
-      data: { product_id:product_id,price:price,_token: "{{csrf_token()}}"},
+      data: { product_id:product_id,count:count,_token: "{{csrf_token()}}"},
       success: function(data) {
         console.log(data);
         if(data == null) {
@@ -184,10 +181,6 @@
           setTimeout(function() {$('.bk_toptips').hide();}, 2000);
           return;
         }
-        $('.pzl_total').html(data.message);
-
-        var num = $('#totalNum').val();
-        $('#totalNum').val(Number(num) - 1);
 
       },
       error: function(xhr, status, error) {
@@ -198,82 +191,6 @@
     });
   }
 
-  function _deleteShopCart(_basketName,_prodId){
-    if(confirm("删除后不可恢复, 确定要删除'"+_basketName+"'吗？")){
-      $.ajax({
-        type: "GET",
-        url: '/service/cart/delete',
-        dataType: 'json',
-        cache: false,
-        data: {product_ids: _prodId+''},
-        success: function(data) {
-          if(data == null) {
-            $('.bk_toptips').show();
-            $('.bk_toptips span').html('服务端错误');
-            setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-            return;
-          }
-          if(data.status != 0) {
-            $('.bk_toptips').show();
-            $('.bk_toptips span').html(data.message);
-            setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-            return;
-          }
 
-          location.reload();
-        },
-        error: function(xhr, status, error) {
-          console.log(xhr);
-          console.log(status);
-          console.log(error);
-        }
-      });
-    }
-  }
-
-  function _onDelete() {
-    var product_ids_arr = [];
-    $('input:checkbox[name=cart_item]').each(function(index, el) {
-      if($(this).attr('checked') == 'checked') {
-        product_ids_arr.push($(this).attr('id'));
-      }
-    });
-
-    if(product_ids_arr.length == 0) {
-      $('.bk_toptips').show();
-      $('.bk_toptips span').html('请选择删除项');
-      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-      return;
-    }
-
-    $.ajax({
-      type: "GET",
-      url: '/service/cart/delete',
-      dataType: 'json',
-      cache: false,
-      data: {product_ids: product_ids_arr+''},
-      success: function(data) {
-        if(data == null) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html('服务端错误');
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-          return;
-        }
-        if(data.status != 0) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html(data.message);
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-          return;
-        }
-
-        location.reload();
-      },
-      error: function(xhr, status, error) {
-        console.log(xhr);
-        console.log(status);
-        console.log(error);
-      }
-    });
-  }
 </script>
 @endsection

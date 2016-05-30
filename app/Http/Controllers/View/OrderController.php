@@ -316,4 +316,24 @@ class OrderController extends Controller
 
   }
 
+  public function toOrderComment(Request $request)
+  {
+    $order_id = $request->input('order_id', '');
+
+
+
+    $orders =Order::where('order_no',$order_id)->get();
+
+
+
+    foreach ($orders as $order) {
+      $order_items = OrderItem::where('order_id', $order->id)->get();
+      $order->order_items = $order_items;
+      foreach ($order_items as $order_item) {
+        $order_item->product = json_decode($order_item->pdt_snapshot);
+      }
+    }
+    return view('pdt_comment')->with('orders',$orders );
+  }
+
 }

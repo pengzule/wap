@@ -28,6 +28,13 @@
                                     <p class="p-title">{{$comment->product->name}}</p>
 
                                     <p class="p-origin"><em class="">{{$comment->comment}}</em>
+
+                                    <div class="mt5">
+                                        @foreach($comment->comment_images as $image)
+                                        <img  src="{{$image->image_path}}" class="img_upload"  />
+                                        @endforeach
+                                    </div>
+
                                     <p >{{$comment->updated_at}}</p>
                                     </p>
                                 </div>

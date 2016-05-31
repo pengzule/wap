@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Entity\Addr;
 use App\Entity\PdtComments;
 use App\Entity\PdtCollect;
+use App\Entity\CommentImages;
 
 class MemberController extends Controller
 {
@@ -74,7 +75,9 @@ class MemberController extends Controller
     $comments = PdtComments::where('member_id',$member->id)->get();
     foreach ($comments as $comment) {
       $product = Product::where('id', $comment->product_id)->first();
+      $comment_images = CommentImages::where('member_id',$member->id)->where('product_id',$comment->product_id)->get();
       $comment->product = $product;
+      $comment->comment_images = $comment_images;
     }
     return view('comments')->with('comments',$comments);
   }

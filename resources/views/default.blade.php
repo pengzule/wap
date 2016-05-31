@@ -17,7 +17,7 @@
   <meta content="yes" name="apple-touch-fullscreen">
   <meta content="telephone=no" name="format-detection">
   <meta content="black" name="apple-mobile-web-app-status-bar-style">
-
+  <script type="text/javascript" src="/js/uploadFile.js"></script>
   <!-- view  -->
   <link rel="stylesheet" href="/css/productDetail.css?v=01291">
   <script charset="utf-8" src="/js/TouchSlide.js?v=01291"></script>

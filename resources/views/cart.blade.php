@@ -113,7 +113,6 @@
     }
 
 
-
     location.href = '/order_confirm?product_ids=' + product_ids_arr;
     // $('input[name=product_ids]').val(product_ids_arr+'');
     // $('input[name=is_wx]').val(is_wx+'');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\View;
 
+use App\Entity\PdtComments;
 use App\Http\Controllers\Controller;
 use Faker\Provider\cs_CZ\Address;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use App\Entity\OrderItem;
 use App\Models\BKWXJsConfig;
 use App\Tool\WXpay\WXTool;
 use App\Models\M3Result;
+use App\Entity\CommentImages;
 use Log;
 
 class OrderController extends Controller
@@ -319,21 +321,65 @@ class OrderController extends Controller
   public function toOrderComment(Request $request)
   {
     $order_id = $request->input('order_id', '');
+    $name = $request->input('name','');
+    $order_items = OrderItem::where('order_id', $order_id)->get();
+    foreach ($order_items as $order_item) {
+      $order_item->product = json_decode($order_item->pdt_snapshot);
+    }
+    return view('pdt_comment')->with('order_items',$order_items )
+                               ->with('name',$name)
+                             ->with('order_id',$order_id);
+  }
+
+  public function commentAdd(Request $request)
+  {
+    $order_id = $request->input('order_id','');
+    $member = $request->session()->get('member', '');
+    $product_ids = $request->input('product_ids', '');
+    $comments = $request->input('comments', '');
+    $i = 0 ;
+    foreach ($product_ids as $product_id){
+        $pdt_comment = new PdtComments;
+        $pdt_comment->name = $member->name;
+        $pdt_comment->member_id = $member->id;
+        $pdt_comment->product_id = $product_id;
+        $pdt_comment->comment = $comments[$i];
+        $pdt_comment->save();
+        $i++;
+      }
 
 
+    $preview1 = $request->input('preview1', '');
 
-    $orders =Order::where('order_no',$order_id)->get();
-
-
-
-    foreach ($orders as $order) {
-      $order_items = OrderItem::where('order_id', $order->id)->get();
-      $order->order_items = $order_items;
-      foreach ($order_items as $order_item) {
-        $order_item->product = json_decode($order_item->pdt_snapshot);
+    $j = 0;
+    if($preview1 != '[]'){
+      foreach ($product_ids as $product_id){
+        $pdt_images = new CommentImages;
+        $pdt_images->image_path = $preview1[$j];
+        $pdt_images->image_no = 1;
+        $pdt_images->product_id = $product_id;
+        $pdt_images->member_id = $member->id;
+        $pdt_images->save();
+        $j++;
       }
     }
-    return view('pdt_comment')->with('orders',$orders );
+
+
+
+
+
+
+
+
+    $order = Order::where('id',$order_id)->first();
+    $order->status = 6;
+    $order->save();
+
+    $m3_result = new M3Result;
+    $m3_result->status = 0;
+    $m3_result->message = '评价成功';
+
+    return $m3_result->toJson();
   }
 
 }

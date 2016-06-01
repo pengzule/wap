@@ -72,16 +72,24 @@ jQuery(document).ready(function() {
 				if(data.status == 2){
 					$('.appraise').html('');
 					for(var i=0; i<data.results.length; i++) {
-						var node = '<li>'+
-								'<div class="app-user">'+
+						var node =
+								'<div class="app-user mt5" >'+
 								'<span class="user">'+data.results[i].name+'</span>'+
 								'<span class="date">'+data.results[i].created_at+'</span>'+
 								'</div>'+
-								'<div class="app-cnt">'+data.results[i].comment+'</div>'+
-								'<div class="app-sku">'+'</div>'+
-								'</li>';
+								'<div class="app-cnt">'+data.results[i].comment+'</div>';
+
 						$('.appraise').append(node);
+
+						for (var j=0;j<data.results[i].images.length;j++){
+							var img ='<img  src="'+data.results[i].images[j].image_path+'" class="img_upload"  />';
+							$('.appraise').append(img);
+						}
+						var foot =
+								'<li>';
+						$('.appraise').append(foot);
 					}
+
 				}
 
 			},

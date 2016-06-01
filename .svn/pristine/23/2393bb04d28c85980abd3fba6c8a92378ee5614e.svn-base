@@ -1,0 +1,314 @@
+[2016-05-30 10:58:14] local.INFO: 用户登录成功 {"user_id":2} 
+[2016-05-30 10:58:25] local.INFO: 产品详情  
+[2016-05-30 10:58:27] local.INFO: 产品详情  
+[2016-05-30 10:58:28] local.INFO: 产品详情  
+[2016-05-30 10:58:28] local.INFO: 产品详情  
+[2016-05-30 11:08:58] local.INFO: 进入分类 {"url":"http://192.168.226.137/category"} 
+[2016-05-30 11:38:33] local.ERROR: exception 'Illuminate\Session\TokenMismatchException' in /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php:53
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle(Object(Illuminate\Http\Request), Object(Closure))
+#1 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#2 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#3 [internal function]: Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#4 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#5 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#6 [internal function]: Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#7 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#8 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#9 [internal function]: Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#10 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#11 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#12 [internal function]: Illuminate\Cookie\Middleware\EncryptCookies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#13 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#14 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#15 [internal function]: Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#16 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#17 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#18 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#19 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#20 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#21 /mnt/hgfs/linux_code/wap/public/index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#22 {main}  
+[2016-05-30 11:38:35] local.ERROR: exception 'Illuminate\Session\TokenMismatchException' in /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php:53
+Stack trace:
+#0 [internal function]: Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle(Object(Illuminate\Http\Request), Object(Closure))
+#1 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#2 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#3 [internal function]: Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#4 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#5 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#6 [internal function]: Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#7 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#8 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#9 [internal function]: Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#10 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#11 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#12 [internal function]: Illuminate\Cookie\Middleware\EncryptCookies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#13 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#14 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#15 [internal function]: Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#16 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#17 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#18 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#19 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#20 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#21 /mnt/hgfs/linux_code/wap/public/index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#22 {main}  
+[2016-05-30 14:15:42] local.INFO: 确认订单  
+[2016-05-30 14:15:48] local.INFO: 确认订单  
+[2016-05-30 16:25:23] local.INFO: 进入分类 {"url":"http://192.168.226.137/category"} 
+[2016-05-30 16:25:28] local.INFO: 进入分类 {"url":"http://192.168.226.137/category"} 
+[2016-05-30 16:25:31] local.INFO: 产品sort  
+[2016-05-30 16:25:33] local.INFO: 产品sort  
+[2016-05-30 16:25:36] local.INFO: 产品sort  
+[2016-05-30 16:25:39] local.INFO: 产品sort  
+[2016-05-30 16:27:08] local.INFO: 产品sort  
+[2016-05-30 16:27:09] local.INFO: 产品sort  
+[2016-05-30 16:27:10] local.INFO: 产品sort  
+[2016-05-30 16:27:12] local.INFO: 产品sort  
+[2016-05-30 16:27:12] local.INFO: 产品sort  
+[2016-05-30 16:27:13] local.INFO: 产品sort  
+[2016-05-30 16:27:14] local.INFO: 产品sort  
+[2016-05-30 16:27:18] local.INFO: 产品sort  
+[2016-05-30 16:27:20] local.INFO: 产品sort  
+[2016-05-30 16:27:21] local.INFO: 产品sort  
+[2016-05-30 16:27:23] local.INFO: 产品sort  
+[2016-05-30 16:27:30] local.INFO: 产品sort  
+[2016-05-30 16:27:34] local.INFO: 产品sort  
+[2016-05-30 16:27:50] local.INFO: 产品sort  
+[2016-05-30 16:27:50] local.INFO: 产品sort  
+[2016-05-30 16:27:52] local.INFO: 产品sort  
+[2016-05-30 16:27:53] local.INFO: 产品sort  
+[2016-05-30 16:28:56] local.INFO: 产品sort  
+[2016-05-30 16:28:56] local.INFO: 产品sort  
+[2016-05-30 16:28:57] local.INFO: 产品sort  
+[2016-05-30 16:28:58] local.INFO: 产品sort  
+[2016-05-30 16:28:58] local.INFO: 产品sort  
+[2016-05-30 16:28:59] local.INFO: 产品sort  
+[2016-05-30 16:28:59] local.INFO: 产品sort  
+[2016-05-30 16:28:59] local.INFO: 产品sort  
+[2016-05-30 16:28:59] local.INFO: 产品sort  
+[2016-05-30 16:29:00] local.INFO: 产品sort  
+[2016-05-30 16:29:07] local.INFO: 我的订单  
+[2016-05-30 16:29:08] local.INFO: 我的订单  
+[2016-05-30 16:29:09] local.INFO: 我的订单  
+[2016-05-30 16:29:10] local.INFO: 我的订单  
+[2016-05-30 16:29:11] local.INFO: 我的订单  
+[2016-05-30 16:29:16] local.INFO: 我的订单  
+[2016-05-30 16:29:17] local.INFO: 我的订单  
+[2016-05-30 16:29:18] local.INFO: 我的订单  
+[2016-05-30 16:29:19] local.INFO: 我的订单  
+[2016-05-30 16:30:32] local.INFO: 进入分类 {"url":"http://192.168.226.137/category"} 
+[2016-05-30 16:30:44] local.INFO: 产品详情  
+[2016-05-30 16:30:45] local.INFO: 产品详情  
+[2016-05-30 16:30:52] local.INFO: 产品详情  
+[2016-05-30 16:30:53] local.INFO: 产品详情  
+[2016-05-30 16:43:15] local.INFO: 我的订单  
+[2016-05-30 16:43:16] local.INFO: 我的订单  
+[2016-05-30 16:43:17] local.INFO: 我的订单  
+[2016-05-30 16:43:17] local.INFO: 我的订单  
+[2016-05-30 16:43:18] local.INFO: 我的订单  
+[2016-05-30 16:48:25] local.INFO: 我的订单  
+[2016-05-30 16:48:35] local.INFO: 我的订单  
+[2016-05-30 16:48:36] local.INFO: 我的订单  
+[2016-05-30 16:48:39] local.INFO: 我的订单  
+[2016-05-30 16:48:40] local.INFO: 我的订单  
+[2016-05-30 16:48:41] local.INFO: 我的订单  
+[2016-05-30 16:48:41] local.INFO: 我的订单  
+[2016-05-30 16:48:51] local.INFO: 我的订单  
+[2016-05-30 16:48:52] local.INFO: 我的订单  
+[2016-05-30 17:09:23] local.INFO: 我的订单  
+[2016-05-30 17:09:27] local.INFO: 我的订单  
+[2016-05-30 17:09:37] local.INFO: 我的订单  
+[2016-05-30 17:09:38] local.INFO: 我的订单  
+[2016-05-30 17:09:39] local.INFO: 我的订单  
+[2016-05-30 17:09:40] local.INFO: 我的订单  
+[2016-05-30 17:09:41] local.INFO: 我的订单  
+[2016-05-30 17:09:43] local.INFO: 我的订单  
+[2016-05-30 17:10:03] local.INFO: 我的订单  
+[2016-05-30 17:11:08] local.INFO: 我的订单  
+[2016-05-30 17:11:13] local.INFO: 我的订单  
+[2016-05-30 17:11:15] local.INFO: 我的订单  
+[2016-05-30 17:11:15] local.INFO: 我的订单  
+[2016-05-30 17:11:16] local.INFO: 我的订单  
+[2016-05-30 17:11:17] local.INFO: 我的订单  
+[2016-05-30 17:11:19] local.INFO: 我的订单  
+[2016-05-30 17:11:19] local.INFO: 我的订单  
+[2016-05-30 17:12:29] local.INFO: 我的订单  
+[2016-05-30 17:12:30] local.INFO: 我的订单  
+[2016-05-30 17:12:31] local.INFO: 我的订单  
+[2016-05-30 17:12:31] local.INFO: 我的订单  
+[2016-05-30 17:12:33] local.INFO: 我的订单  
+[2016-05-30 17:14:12] local.INFO: 我的订单  
+[2016-05-30 17:14:13] local.INFO: 我的订单  
+[2016-05-30 17:14:16] local.INFO: 我的订单  
+[2016-05-30 17:19:29] local.INFO: 进入分类 {"url":"http://192.168.226.137/category"} 
+[2016-05-30 17:37:44] local.INFO: 我的订单  
+[2016-05-30 17:38:13] local.INFO: 我的订单  
+[2016-05-30 17:38:40] local.INFO: 我的订单  
+[2016-05-30 17:52:46] local.INFO: 我的订单  
+[2016-05-30 17:52:48] local.ERROR: exception 'ErrorException' with message 'Undefined variable: cart_items' in /mnt/hgfs/linux_code/wap/app/Http/Controllers/View/OrderController.php:336
+Stack trace:
+#0 /mnt/hgfs/linux_code/wap/app/Http/Controllers/View/OrderController.php(336): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(8, 'Undefined varia...', '/mnt/hgfs/linux...', 336, Array)
+#1 [internal function]: App\Http\Controllers\View\OrderController->toOrderComment(Object(Illuminate\Http\Request))
+#2 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#3 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\Routing\Controller->callAction('toOrderComment', Array)
+#4 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\Routing\ControllerDispatcher->call(Object(App\Http\Controllers\View\OrderController), Object(Illuminate\Routing\Route), 'toOrderComment')
+#5 [internal function]: Illuminate\Routing\ControllerDispatcher->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#6 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#7 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#8 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#9 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#10 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(69): Illuminate\Routing\ControllerDispatcher->callWithinStack(Object(App\Http\Controllers\View\OrderController), Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'toOrderComment')
+#11 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'App\\Http\\Contro...', 'toOrderComment')
+#12 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\Routing\Route->runWithCustomDispatcher(Object(Illuminate\Http\Request))
+#13 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#14 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#15 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#16 /mnt/hgfs/linux_code/wap/app/Http/Middleware/CheckLogin.php(24): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#17 [internal function]: App\Http\Middleware\CheckLogin->handle(Object(Illuminate\Http\Request), Object(Closure))
+#18 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#19 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#20 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#21 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#22 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Router.php(675): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#23 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#24 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#25 [internal function]: Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}(Object(Illuminate\Http\Request))
+#26 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#27 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(50): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#28 [internal function]: Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle(Object(Illuminate\Http\Request), Object(Closure))
+#29 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#30 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#31 [internal function]: Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#32 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#33 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#34 [internal function]: Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#35 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#36 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#37 [internal function]: Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#39 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#40 [internal function]: Illuminate\Cookie\Middleware\EncryptCookies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#41 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#42 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#43 [internal function]: Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#44 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#45 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#46 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#47 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#48 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#49 /mnt/hgfs/linux_code/wap/public/index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#50 {main}  
+[2016-05-30 17:54:02] local.INFO: 用户登录成功 {"user_id":2} 
+[2016-05-30 17:54:08] local.INFO: 我的订单  
+[2016-05-30 17:54:09] local.ERROR: exception 'ErrorException' with message 'Undefined variable: cart_items' in /mnt/hgfs/linux_code/wap/app/Http/Controllers/View/OrderController.php:336
+Stack trace:
+#0 /mnt/hgfs/linux_code/wap/app/Http/Controllers/View/OrderController.php(336): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(8, 'Undefined varia...', '/mnt/hgfs/linux...', 336, Array)
+#1 [internal function]: App\Http\Controllers\View\OrderController->toOrderComment(Object(Illuminate\Http\Request))
+#2 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#3 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\Routing\Controller->callAction('toOrderComment', Array)
+#4 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\Routing\ControllerDispatcher->call(Object(App\Http\Controllers\View\OrderController), Object(Illuminate\Routing\Route), 'toOrderComment')
+#5 [internal function]: Illuminate\Routing\ControllerDispatcher->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#6 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#7 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#8 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#9 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#10 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(69): Illuminate\Routing\ControllerDispatcher->callWithinStack(Object(App\Http\Controllers\View\OrderController), Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'toOrderComment')
+#11 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'App\\Http\\Contro...', 'toOrderComment')
+#12 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\Routing\Route->runWithCustomDispatcher(Object(Illuminate\Http\Request))
+#13 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#14 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#15 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#16 /mnt/hgfs/linux_code/wap/app/Http/Middleware/CheckLogin.php(24): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#17 [internal function]: App\Http\Middleware\CheckLogin->handle(Object(Illuminate\Http\Request), Object(Closure))
+#18 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#19 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#20 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#21 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#22 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Router.php(675): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#23 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#24 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#25 [internal function]: Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}(Object(Illuminate\Http\Request))
+#26 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#27 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(50): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#28 [internal function]: Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle(Object(Illuminate\Http\Request), Object(Closure))
+#29 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#30 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#31 [internal function]: Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#32 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#33 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#34 [internal function]: Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#35 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#36 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#37 [internal function]: Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#39 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#40 [internal function]: Illuminate\Cookie\Middleware\EncryptCookies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#41 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#42 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#43 [internal function]: Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#44 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#45 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#46 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#47 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#48 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#49 /mnt/hgfs/linux_code/wap/public/index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#50 {main}  
+[2016-05-30 17:54:48] local.ERROR: exception 'ErrorException' with message 'Undefined variable: order' in /mnt/hgfs/linux_code/wap/app/Http/Controllers/View/OrderController.php:336
+Stack trace:
+#0 /mnt/hgfs/linux_code/wap/app/Http/Controllers/View/OrderController.php(336): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(8, 'Undefined varia...', '/mnt/hgfs/linux...', 336, Array)
+#1 [internal function]: App\Http\Controllers\View\OrderController->toOrderComment(Object(Illuminate\Http\Request))
+#2 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#3 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\Routing\Controller->callAction('toOrderComment', Array)
+#4 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\Routing\ControllerDispatcher->call(Object(App\Http\Controllers\View\OrderController), Object(Illuminate\Routing\Route), 'toOrderComment')
+#5 [internal function]: Illuminate\Routing\ControllerDispatcher->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#6 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#7 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#8 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#9 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#10 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(69): Illuminate\Routing\ControllerDispatcher->callWithinStack(Object(App\Http\Controllers\View\OrderController), Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'toOrderComment')
+#11 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'App\\Http\\Contro...', 'toOrderComment')
+#12 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\Routing\Route->runWithCustomDispatcher(Object(Illuminate\Http\Request))
+#13 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#14 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#15 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#16 /mnt/hgfs/linux_code/wap/app/Http/Middleware/CheckLogin.php(24): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#17 [internal function]: App\Http\Middleware\CheckLogin->handle(Object(Illuminate\Http\Request), Object(Closure))
+#18 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#19 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#20 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#21 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#22 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Router.php(675): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#23 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#24 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#25 [internal function]: Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}(Object(Illuminate\Http\Request))
+#26 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#27 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(50): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#28 [internal function]: Illuminate\Foundation\Http\Middleware\VerifyCsrfToken->handle(Object(Illuminate\Http\Request), Object(Closure))
+#29 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#30 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#31 [internal function]: Illuminate\View\Middleware\ShareErrorsFromSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#32 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#33 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#34 [internal function]: Illuminate\Session\Middleware\StartSession->handle(Object(Illuminate\Http\Request), Object(Closure))
+#35 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#36 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#37 [internal function]: Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse->handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#39 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#40 [internal function]: Illuminate\Cookie\Middleware\EncryptCookies->handle(Object(Illuminate\Http\Request), Object(Closure))
+#41 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#42 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#43 [internal function]: Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#44 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#45 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#46 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#47 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#48 /mnt/hgfs/linux_code/wap/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#49 /mnt/hgfs/linux_code/wap/public/index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#50 {main}  
+[2016-05-30 17:56:32] local.INFO: 我的订单  
+[2016-05-30 17:56:33] local.INFO: 我的订单  
+[2016-05-30 17:56:37] local.INFO: 我的订单  
+[2016-05-30 17:59:01] local.INFO: 我的订单  

@@ -116,7 +116,7 @@
                 @else
                 @foreach($orders as $order)
                 <div class="list-group mb10">
-                    <a href="#" class="list-group-item tip">
+                    <a href="/order_content/{{$order->id}}"class="list-group-item tip">
                     {{$order->order_no}}
 
                     <div  class="gary pull-right ">

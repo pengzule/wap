@@ -81,7 +81,7 @@ h1, h2, h3{font-family: "Microsoft Yahei",Arial, Helvetica, sans-serif;}
 .nav-left{left:5px;}
 .nav-right{right:5px;text-align: center;}
 .tit{color: #fff;/* font-size: 18px; */font-weight: normal;height: 100%; text-align: center;font-size:18px;}
-.fixed-foot{height: 45px; z-index: 999; position: fixed; bottom: 0;left: 0; right: 0;width:100%; }
+.fixed-foot{background:#fff;height: 45px; z-index: 999; position: fixed; bottom: 0;left: 0; right: 0;width:100%; }
 .fixed_inner{margin:0 auto;position: relative;background:#fff;border-top:1px solid #ccc; max-width: 768px;}
 .fixed-foot2{height: 45px;line-height: 45px; z-index: 999; position: fixed; bottom: 0;left: 0; right: 0;width:100%; }
 .fixed_exit{margin:0 auto;position: relative;background:#ee1e2d;border-top:1px solid #ccc; max-width: 768px;}
@@ -105,6 +105,7 @@ h1, h2, h3{font-family: "Microsoft Yahei",Arial, Helvetica, sans-serif;}
 .foot-con .active .member{background-position: -99px -34px;}
 
 .btn-fav,.cart-wrap,.i-fav-active{width:40px; height: 40px; display:inline-block; text-align:center; position:relative;}
+.order-num{background-color:#f63234; display:block; position:absolute;top:5px; width:15px; height:15px; line-height:15px; font-size:12px; border-radius:50%; color:#fff;left:59%}
 .add-num{background-color:#f63234; display:block; position:absolute; right:0; top:5px; width:15px; height:15px; line-height:15px; font-size:12px; border-radius:50%; color:#fff;}
 .i-fav,.i-cart{display: block; width: 28px; height: 28px; margin:0 auto; background:url(../images/icon.png) no-repeat; background-size: 310px 100px;}
 .i-fav{background-position:-150px -1px;}
@@ -201,7 +202,7 @@ h1, h2, h3{font-family: "Microsoft Yahei",Arial, Helvetica, sans-serif;}
 .prop-list > li > span {display: block; -webkit-box-flex: 1;flex: 1; text-overflow: ellipsis;white-space: nowrap;overflow: hidden; color: #666; }
 .appraise li{padding: 10px;border-bottom: 1px solid #ddd;}
 .appraise .user{display: inline-block; max-width: 8.2em; vertical-align: middle;  white-space: nowrap;overflow: hidden; text-overflow: ellipsis; color:#8a6d3b;}
-.appraise .date{float: right;color: #999;margin-left: -60px;}
+.appraise .date{float: right;color: #999;}
 .appraise .app-cnt{line-height: 1.3; padding: 5px 0;word-break: break-all; color:#333;}
 .appraise .app-sku{color: #999; font-size: 12px;}
 .right-icon{font-size:16px; color:#739ae8; margin: 2px -3px 0 0; float:right;}

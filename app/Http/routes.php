@@ -71,6 +71,7 @@ Route::match(['get', 'post'], '/editaddress', 'View\OrderController@toeditaddres
 Route::match(['get', 'post'], '/selectaddress', 'View\OrderController@toselectaddress')->middleware(['check.login']);
 Route::match(['get', 'post'], '/order_comment', 'View\OrderController@toOrderComment')->middleware(['check.login']);
 Route::match(['get', 'post'], '/sumbit_comment', 'View\OrderController@commentAdd')->middleware(['check.login']);
+Route::match(['get', 'post'], '/order_content/{order_id}', 'View\OrderController@toOrderContent')->middleware(['check.login']);
 Route::get('/order_list', 'View\OrderController@toOrderList')->middleware(['check.login']);
 Route::get('/userinfo', 'View\MemberController@toUserInfo')->middleware(['check.login']);
 Route::get('/userhome', 'View\MemberController@toMyhome')->middleware(['check.login']);

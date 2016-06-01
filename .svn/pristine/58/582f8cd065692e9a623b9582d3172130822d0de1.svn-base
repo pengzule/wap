@@ -1,0 +1,100 @@
+<?php $__env->startSection('title', '我的订单'); ?>
+
+<?php $__env->startSection('content'); ?>
+    <div class="fanhui_cou">
+        <div class="fanhui_1"></div>
+        <div class="fanhui_ding">顶部</div>
+    </div>
+    <header class="header">
+        <div class="fix_nav">
+            <div class="nav_inner">
+                <a class="nav-left back-icon" href="javascript:history.back();">返回</a>
+                <div class="tit">选择收货地址</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" >
+        <div class="row">
+            <?php if($addresses != ''): ?>
+
+                <div class="list-group mb10">
+                    <?php foreach($addresses as $address): ?>
+                    <a href="#"  id="<?php echo e($address->id); ?>" class="list-group-item tip selectaddr">
+                        <span style="float:left">收货人：<?php echo e($address->realname); ?></span>
+                        <span style="float:right"><?php echo e($address->phone); ?></span>
+                        <br/>
+                        <span style="font-size:80%; ">收货地址：<?php echo e($address->province); ?><?php echo e($address->city); ?><?php echo e($address->county); ?><?php echo e($address->street); ?></span>
+                    </a>
+                    <?php endforeach; ?>
+                </div>
+
+            <?php else: ?>
+                <div class="list-group mb10">
+                    <a href="/editaddress" class="list-group-item tip">
+                        选择收货地址
+                    </a>
+                </div>
+            <?php endif; ?>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="fixed-foot2">
+            <a href="/editaddress"> <div class="fixed_exit tit">
+                    <div class="tit">管理收货地址</div>
+                </div>
+            </a>
+        </div>
+    </footer>
+    <div class="clear"></div>
+
+
+
+
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('my-js'); ?>
+    <script type="text/javascript">
+        $(".selectaddr").bind("click",function(){
+            var id = $(this).attr("id");
+            var product_ids_arr = "<?php echo e($product_ids); ?>";
+            $.ajax({
+                type: "POST",
+                url: '/service/selectaddress',
+                dataType: 'json',
+                cache: false,
+                data: {id:id, _token: "<?php echo e(csrf_token()); ?>"},
+                success: function(data) {
+                    if(data == null) {
+                        $('.bk_toptips').show();
+                        $('.bk_toptips span').html('服务端错误');
+                        setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+                        return;
+                    }
+                    if(data.status != 0) {
+                        $('.bk_toptips').show();
+                        $('.bk_toptips span').html(data.message);
+                        setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+                        return;
+                    }
+                    location.href = '/order_confirm?product_ids=' + product_ids_arr;
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                }
+            });
+
+        });
+
+
+
+    </script>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

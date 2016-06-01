@@ -72,7 +72,7 @@
             <input type="hidden" value="{{$product->id}}" class="pzl_proddetail">
             <li id="pzl_img"  class="act  pzl_detail">图文详情</li>
             <li id="pzl_param" class="pzl_detail">规格参数</li>
-            <li id="pzl_comment" class="pzl_detail">评价({{$product->comment_count}})</li>
+            <li id="pzl_comment" class="pzl_detail">评价({{$counts}})</li>
           </ul>
         </div>
 

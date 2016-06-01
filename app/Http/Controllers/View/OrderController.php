@@ -325,6 +325,11 @@ class OrderController extends Controller
     $order_items = OrderItem::where('order_id', $order_id)->get();
     foreach ($order_items as $order_item) {
       $order_item->product = json_decode($order_item->pdt_snapshot);
+      $order_item->img1 = $order_item->product->id.'E1';
+      $order_item->img2 = $order_item->product->id.'E2';
+      $order_item->img3 = $order_item->product->id.'E3';
+      $order_item->img4 = $order_item->product->id.'E4';
+      $order_item->img5 = $order_item->product->id.'E5';
     }
     return view('pdt_comment')->with('order_items',$order_items )
                                ->with('name',$name)
@@ -338,7 +343,7 @@ class OrderController extends Controller
     $product_ids = $request->input('product_ids', '');
     $comments = $request->input('comments', '');
     $i = 0 ;
-    foreach ($product_ids as $product_id){
+    foreach ((array)$product_ids as $product_id){
         $pdt_comment = new PdtComments;
         $pdt_comment->name = $member->name;
         $pdt_comment->member_id = $member->id;
@@ -350,26 +355,59 @@ class OrderController extends Controller
 
 
     $preview1 = $request->input('preview1', '');
+    $preview2 = $request->input('preview2', '');
+    $preview3 = $request->input('preview3', '');
+    $preview4 = $request->input('preview4', '');
+    $preview5 = $request->input('preview5', '');
 
-    $j = 0;
-    if($preview1 != '[]'){
-      foreach ($product_ids as $product_id){
+
+
+
+    foreach ($product_ids as $product_id){
+      static $j = 0;
+
+      if($preview1[$j] != ''){
         $pdt_images = new CommentImages;
         $pdt_images->image_path = $preview1[$j];
         $pdt_images->image_no = 1;
         $pdt_images->product_id = $product_id;
         $pdt_images->member_id = $member->id;
         $pdt_images->save();
-        $j++;
       }
+      if($preview2[$j] != ''){
+        $pdt_images = new CommentImages;
+        $pdt_images->image_path = $preview2[$j];
+        $pdt_images->image_no = 2;
+        $pdt_images->product_id = $product_id;
+        $pdt_images->member_id = $member->id;
+        $pdt_images->save();
+      }
+      if($preview3[$j] != ''){
+        $pdt_images = new CommentImages;
+        $pdt_images->image_path = $preview3[$j];
+        $pdt_images->image_no = 3;
+        $pdt_images->product_id = $product_id;
+        $pdt_images->member_id = $member->id;
+        $pdt_images->save();
+      }
+      if($preview4[$j] != ''){
+        $pdt_images = new CommentImages;
+        $pdt_images->image_path = $preview4[$j];
+        $pdt_images->image_no = 4;
+        $pdt_images->product_id = $product_id;
+        $pdt_images->member_id = $member->id;
+        $pdt_images->save();
+      }
+      if($preview5[$j] != ''){
+        $pdt_images = new CommentImages;
+        $pdt_images->image_path = $preview5[$j];
+        $pdt_images->image_no = 5;
+        $pdt_images->product_id = $product_id;
+        $pdt_images->member_id = $member->id;
+        $pdt_images->save();
+      }
+      $j++;
     }
-
-
-
-
-
-
-
 
     $order = Order::where('id',$order_id)->first();
     $order->status = 6;
@@ -380,6 +418,18 @@ class OrderController extends Controller
     $m3_result->message = '评价成功';
 
     return $m3_result->toJson();
+  }
+
+  public function toOrderContent(Request $request,$order_id)
+  {
+    $order =Order::where('id',$order_id)->first();
+    $order_items = OrderItem::where('order_id', $order_id)->get();
+    foreach ($order_items as $order_item) {
+      $order_item->product = json_decode($order_item->pdt_snapshot);
+    }
+    return view('order_content')->with('order',$order )
+        ->with('order_items',$order_items)
+     ;
   }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\View;
 
+use App\Entity\Order;
 use App\Entity\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -28,7 +29,17 @@ class MemberController extends Controller
     $member = $request->session()->get('member', '');
     $comments = PdtComments::where('member_id',$member->id)->get();
     $wishes = PdtCollect::where('member_id',$member->id)->get();
+
+    $order1 = Order::where('member_id',$member->id)->where('status',1)->get();
+    $order2 = Order::where('member_id',$member->id)->where('status',3)->get();
+    $order3 = Order::where('member_id',$member->id)->where('status',4)->get();
+    $order4 = Order::where('member_id',$member->id)->where('status',5)->get();
+
     return view('personal')->with('member',$member)
+        ->with('order1',$order1)
+        ->with('order2',$order2)
+        ->with('order3',$order3)
+        ->with('order4',$order4)
         ->with('comments',$comments)
         ->with('wishes',$wishes);
   }

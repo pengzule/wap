@@ -32,25 +32,38 @@
               <a class="order_tab_link" href="#" id="forpay">
                 <em class="order_img">
                   <img src="images/order_bg_3.png"></em>待付款
+                @if (count($order1 ))
 
+                <span class="order-num">{{count($order1 )}}</span>
+
+                @endif
               </a>
             </div>
             <div class="col-xs-3 p0">
               <a class="order_tab_link" href="#"id="forsend">
                 <em class="order_img">
                   <img src="images/order_bg_2.png"></em>待发货
+                @if (count($order2 ))
+                  <span class="order-num">{{count($order2 )}}</span>
+                @endif
               </a>
             </div>
             <div class="col-xs-3 p0">
               <a class="order_tab_link" href="#"id="forrecv">
                 <em class="order_img">
                   <img src="images/order_bg_1.png"></em>待收货
+                @if (count($order3 ))
+                  <span class="order-num">{{count($order3 )}}</span>
+                @endif
               </a>
             </div>
             <div class="col-xs-3 p0">
               <a class="order_tab_link" href="#"id="fordone">
                 <em class="order_img">
                   <img src="images/order_bg.png"></em>待评价
+                @if (count($order4 ))
+                  <span class="order-num">{{count($order4 )}}</span>
+                @endif
               </a>
             </div>
           </div>

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\View;
 
+use App\Entity\CommentImages;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\PdtContent;
 use App\Entity\PdtImages;
+use App\Entity\CommentImagesImages;
 use App\Entity\PdtComments;
 use App\Entity\CartItem;
 use App\Models\M3Result;
@@ -39,6 +41,8 @@ class BookController extends Controller
     $product = Product::find($product_id);
     $pdt_content = PdtContent::where('product_id', $product_id)->first();
     $pdt_images = PdtImages::where('product_id', $product_id)->get();
+    $pdt_comments = PdtComments::where('product_id',$product_id)->get();
+    $counts = count($pdt_comments);
 
     $count = 0;
     $wish = '';
@@ -69,7 +73,8 @@ class BookController extends Controller
                               ->with('pdt_content', $pdt_content)
                               ->with('pdt_images', $pdt_images)
                               ->with('count', $count)
-                              ->with('wish',$wish);
+                              ->with('wish',$wish)
+        ->with('counts',$counts);
   }
 
   public function toSearch(Request $request)
@@ -113,10 +118,11 @@ class BookController extends Controller
     $m3_result = new M3Result;
     $name = $request->input('name','');
     $product_id = $request->input('product_id','');
-
     if($name == 'comment'){
       $results =PdtComments::where('product_id',$product_id)->get();
-
+      foreach($results as $result){
+        $result->images = CommentImages::where('member_id',$result->member_id)->where('product_id',$result->product_id)->get();
+      }
     }else{
       $product = Product::where('id', $product_id)->first();
       $results = $product->summary;

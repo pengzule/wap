@@ -11,6 +11,14 @@ use Log;
 
 class CartController extends Controller
 {
+
+  public function toCart(Request $request)
+  {
+    $member_id = $request->input('data','');
+
+    echo json_encode($member_id);
+  }
+
   public function toCart(Request $request)
   {
     $cart_items = array();

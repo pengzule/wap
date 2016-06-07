@@ -11,9 +11,9 @@ use App\Entity\Product;
 use App\Entity\Addr;
 use App\Entity\Order;
 use App\Entity\OrderItem;
-use App\Models\BKWXJsConfig;
+use App\Models\WXJsConfig;
 use App\Tool\WXpay\WXTool;
-use App\Models\M3Result;
+use App\Models\AppResult;
 use App\Entity\CommentImages;
 use Log;
 
@@ -81,29 +81,25 @@ class OrderController extends Controller
     // 签名
     $signature = WXTool::signature($jsapi_ticket, $noncestr, $timestamp, $url);
     // 返回微信参数
-    $bk_wx_js_config = new BKWXJsConfig;
-    $bk_wx_js_config->appId = config('wx_config.APPID');
-    $bk_wx_js_config->timestamp = $timestamp;
-    $bk_wx_js_config->nonceStr = $noncestr;
-    $bk_wx_js_config->signature = $signature;
+    $wx_js_config = new WXJsConfig;
+    $wx_js_config->appId = config('wx_config.APPID');
+    $wx_js_config->timestamp = $timestamp;
+    $wx_js_config->nonceStr = $noncestr;
+    $wx_js_config->signature = $signature;
 
     return view('order_commit')->with('cart_items', $cart_items_arr)
                                ->with('total_price', $total_price)
                                ->with('name', $name)
                                ->with('order_no', $order->order_no)
-                               ->with('bk_wx_js_config', $bk_wx_js_config)
+                               ->with('wx_js_config', $wx_js_config)
                                 ->with('address',$address);
   }
 
   public function toOrderConfirm(Request $request)
   {
     Log::info("确认订单");
-
     $product_ids = $request->input('product_ids', '');
-
-
     $product_ids_arr = ($product_ids!='' ? explode(',', $product_ids) : array());
-
     $member = $request->session()->get('member', '');
     $cart_items = CartItem::where('member_id', $member->id)->whereIn('product_id', $product_ids_arr)->get();
     $address = Addr::where('member_id',$member->id)->where('default',1)->first();
@@ -153,8 +149,8 @@ class OrderController extends Controller
 
     //return view('order_list')->with('orders', $orders);
     return view('userorder')->with('orders', $orders)
-        ->with('member_id',$member->id)
-        ->with('name',$name);
+                            ->with('member_id',$member->id)
+                            ->with('name',$name);
   }
   
    public function toeditaddress()
@@ -179,7 +175,7 @@ class OrderController extends Controller
     $member = $request->session()->get('member', '');
     $addresses = Addr::where('member_id',$member->id)->get();
     return view('selectaddress')->with('addresses',$addresses)
-                          ->with('product_ids', $product_ids );
+                                ->with('product_ids', $product_ids );
 
 
   }
@@ -214,14 +210,9 @@ class OrderController extends Controller
         $cart_item->save();
       }
 
-
     }
-
-
-
     $cart_items = CartItem::where('member_id', $member->id)->where('product_id', $product_id)->get();
     $address = Addr::where('member_id',$member->id)->where('default',1)->first();
-
 
     $cart_items_arr = array();
     $cart_items_ids_arr = array();
@@ -243,45 +234,9 @@ class OrderController extends Controller
 
   }
 
-  /**
-   * @param Request $request
-   
-   public function toMyOrder(Request $request)
-  {
-    $m3_result = new M3Result;
-    $name = $request->input('name','');
-    $member_id = $request->input('member_id','');
-    if($name == 'allorder'){
-      $orders =Order::where('member_id',$member_id)->get();
-    }
-    if($name == 'topay'){
-      $orders =Order::where('member_id',$member_id)->where('status',1)->get();
-    }
-    if($name == 'tosend'){
-      $orders =Order::where('member_id',$member_id)->where('status',3)->get();
-    }
-    if($name == 'torecv'){
-      $orders =Order::where('member_id',$member_id)->where('status',4)->get();
-    }
-    if($name == 'todone'){
-      $orders =Order::where('member_id',$member_id)->where('status',5)->get();
-    }
-
-   
-    $m3_result->status = 0;
-    $m3_result->message = '返回成功';
-    $m3_result->orders =  $orders;
-
-
-    Log::info('我的订单');
-    return $m3_result->toJson();
-
-
-  }
-   */
   public function toMyOrder(Request $request)
   {
-    $m3_result = new M3Result;
+    $app_result = new AppResult;
     $name = $request->input('name','');
     $member_id = $request->input('member_id','');
 
@@ -307,14 +262,12 @@ class OrderController extends Controller
         $order_item->product = json_decode($order_item->pdt_snapshot);
       }
     }
-    $m3_result->status = 0;
-    $m3_result->message = '返回成功';
-    $m3_result->orders =  $orders;
-
+    $app_result->status = 0;
+    $app_result->message = '返回成功';
+    $app_result->orders =  $orders;
 
     Log::info('我的订单');
-    return $m3_result->toJson();
-
+    return $app_result->toJson();
 
   }
 
@@ -413,11 +366,11 @@ class OrderController extends Controller
     $order->status = 6;
     $order->save();
 
-    $m3_result = new M3Result;
-    $m3_result->status = 0;
-    $m3_result->message = '评价成功';
+    $app_result = new AppResult;
+    $app_result->status = 0;
+    $app_result->message = '评价成功';
 
-    return $m3_result->toJson();
+    return $app_result->toJson();
   }
 
   public function toOrderContent(Request $request,$order_id)
@@ -428,8 +381,8 @@ class OrderController extends Controller
       $order_item->product = json_decode($order_item->pdt_snapshot);
     }
     return view('order_content')->with('order',$order )
-        ->with('order_items',$order_items)
-     ;
+                                ->with('order_items',$order_items);
+
   }
 
 }

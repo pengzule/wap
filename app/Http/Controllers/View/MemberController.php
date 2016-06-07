@@ -19,7 +19,7 @@ class MemberController extends Controller
     return view('login')->with('return_url', urldecode($return_url));
   }
 
-  public function toRegister($value='')
+  public function toRegister()
   {
     return view('register');
   }
@@ -44,7 +44,7 @@ class MemberController extends Controller
         ->with('wishes',$wishes);
   }
   
-    public function toUserInfo(Request $request)
+  public function toUserInfo(Request $request)
   {
     $member = $request->session()->get('member', '');
     return view('userinfo')->with('member',$member);

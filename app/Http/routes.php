@@ -18,12 +18,12 @@ Route::get('/register', 'View\MemberController@toRegister');
 Route::get('/logout', 'Service\MemberController@logout');
 
 
-Route::get('/category', 'View\BookController@toCategory');
-Route::get('/product/category_id/{category_id}', 'View\BookController@toProduct');
-Route::get('/product/{product_id}', 'View\BookController@toPdtContent');
-Route::get('/m_search/list', 'View\BookController@toSearch');
-Route::get('/prodsort', 'View\BookController@toProdSort');
-Route::get('/proddetail', 'View\BookController@toProdDetail');
+Route::get('/category', 'View\GoodsController@toCategory');
+Route::get('/product/category_id/{category_id}', 'View\GoodsController@toProduct');
+Route::get('/product/{product_id}', 'View\GoodsController@toPdtContent');
+Route::get('/m_search/list', 'View\GoodsController@toSearch');
+Route::get('/prodsort', 'View\GoodsController@toProdSort');
+Route::get('/proddetail', 'View\GoodsController@toProdDetail');
 Route::get('/myorder', 'View\OrderController@toMyOrder');
 
 Route::get('/cart', 'View\CartController@toCart');
@@ -41,7 +41,7 @@ Route::group(['prefix' => 'service'], function () {
 
   Route::post('isPhoneExist', 'Service\MemberController@isPhoneExist');
 
-  Route::get('category/parent_id/{parent_id}', 'Service\BookController@getCategoryByParentId');
+  Route::get('category/parent_id/{parent_id}', 'Service\GoodsController@getCategoryByParentId');
   Route::get('cart/add/{product_id}', 'Service\CartController@addCart');
   Route::get('cart/add/', 'Service\CartController@add');
   Route::get('cart/reduce/', 'Service\CartController@reduce');
@@ -63,22 +63,27 @@ Route::group(['prefix' => 'service'], function () {
   Route::post('pay/wx_notify', 'Service\PayController@wxNotify');
 });
 
+Route::group(['middleware' => 'check.login'], function ()  {
 
-Route::match(['get', 'post'], '/order_commit', 'View\OrderController@toOrderCommit')->middleware(['check.cart', 'check.weixin']);
-Route::match(['get', 'post'], '/order_confirm', 'View\OrderController@toOrderConfirm')->middleware(['check.login']);
-Route::match(['get', 'post'], '/buynow_confirm', 'View\OrderController@toBuyNow')->middleware(['check.login']);
-Route::match(['get', 'post'], '/editaddress', 'View\OrderController@toeditaddress')->middleware(['check.login']);
-Route::match(['get', 'post'], '/selectaddress', 'View\OrderController@toselectaddress')->middleware(['check.login']);
-Route::match(['get', 'post'], '/order_comment', 'View\OrderController@toOrderComment')->middleware(['check.login']);
-Route::match(['get', 'post'], '/sumbit_comment', 'View\OrderController@commentAdd')->middleware(['check.login']);
-Route::match(['get', 'post'], '/order_content/{order_id}', 'View\OrderController@toOrderContent')->middleware(['check.login']);
-Route::get('/order_list', 'View\OrderController@toOrderList')->middleware(['check.login']);
-Route::get('/userinfo', 'View\MemberController@toUserInfo')->middleware(['check.login']);
-Route::get('/userhome', 'View\MemberController@toMyhome')->middleware(['check.login']);
-Route::get('/mydev', 'View\MemberController@toMydev')->middleware(['check.login']);
-Route::get('/myaddress', 'View\MemberController@toMyaddress')->middleware(['check.login']);
-Route::get('/mywish', 'View\MemberController@toMywish')->middleware(['check.login']);
-Route::get('/mycomment', 'View\MemberController@toMycomment')->middleware(['check.login']);
+  Route::match(['get', 'post'], '/order_commit', 'View\OrderController@toOrderCommit');
+  Route::match(['get', 'post'], '/order_confirm', 'View\OrderController@toOrderConfirm');
+  Route::match(['get', 'post'], '/buynow_confirm', 'View\OrderController@toBuyNow');
+  Route::match(['get', 'post'], '/editaddress', 'View\OrderController@toeditaddress');
+  Route::match(['get', 'post'], '/selectaddress', 'View\OrderController@toselectaddress');
+  Route::match(['get', 'post'], '/order_comment', 'View\OrderController@toOrderComment');
+  Route::match(['get', 'post'], '/sumbit_comment', 'View\OrderController@commentAdd');
+  Route::match(['get', 'post'], '/order_content/{order_id}', 'View\OrderController@toOrderContent');
+  Route::get('/order_list', 'View\OrderController@toOrderList');
+  Route::get('/userinfo', 'View\MemberController@toUserInfo');
+  Route::get('/userhome', 'View\MemberController@toMyhome');
+  Route::get('/mydev', 'View\MemberController@toMydev');
+  Route::get('/myaddress', 'View\MemberController@toMyaddress');
+  Route::get('/mywish', 'View\MemberController@toMywish');
+  Route::get('/mycomment', 'View\MemberController@toMycomment');
+  
+});
+
+
 
 /***********************************后台相关***********************************/
 

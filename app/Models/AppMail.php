@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class M3Email {
+class AppMail {
 
   public $from;  // 发件人邮箱
   public $to; // 收件人邮箱

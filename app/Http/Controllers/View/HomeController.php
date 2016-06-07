@@ -12,10 +12,13 @@ use Log;
 class HomeController extends Controller
 {
 
-  public function index()
+  public function index(Request $request)
   {
+    $ID = $request->session()->getId();
+
     $products = Product::all();
-    return view('home')->with('products', $products);
+    return view('home')->with('products', $products)
+        ->with('ID', $ID);
   }
 
 }

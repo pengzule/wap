@@ -29,7 +29,7 @@
   <div class="weui_cell">
       <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
       <div class="weui_cell_bd weui_cell_primary">
-          <input class="weui_input" type="number" placeholder="" id="phone" name="phone"/>
+          <input class="weui_input" type="text" placeholder="" id="phone" name="phone"/>
       </div>
   </div>
   <div class="weui_cell">
@@ -122,17 +122,15 @@
     });
 
     //当光标离开 手机时，验证手机
-    $("#phone").blur(function(){
-      checkPhone();
-    });
+    //$("#phone").blur(function(){
+      //checkPhone();
+   // });
 
 //当光标离开 密码时，验证密码
     $("#password").blur(function(){
       checkPassword();
     });
-
-
-
+//input内容为空时
 
   });
 
@@ -142,87 +140,87 @@
 
 
 <script type="text/javascript">
+
+
+
   var enable = true;
-  var exist = true;
+
   $('.bk_phone_code_send').click(function(event) {
-    if(enable == false) {
-      return;
-    }
-    
 
-    
-    var phone = $('input[name=phone]').val();
-    // 手机号不为空
-    if(phone == '') {
-      $('.bk_toptips').show();
-      $('.bk_toptips span').html('请输入手机号');
-      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-      return;
-    }
-    // 手机号格式
-    if(phone.length != 11 || phone[0] != '1') {
-      $('.bk_toptips').show();
-      $('.bk_toptips span').html('手机格式不正确');
-      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-      return;
-    }
-    if(exist == true) {
-      $('.bk_toptips').show();
-      $('.bk_toptips span').html('该手机号码已存在');
-      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-      return;
-    }
-
-    
-   
-
-    $(this).removeClass('bk_important');
-    $(this).addClass('bk_summary');
-    enable = false;
-    var num = 60;
-    var interval = window.setInterval(function() {
-      $('.bk_phone_code_send').html(--num + 's 重新发送');
-      if(num == 0) {
-        $('.bk_phone_code_send').removeClass('bk_summary');
-        $('.bk_phone_code_send').addClass('bk_important');
-        enable = true;
-        window.clearInterval(interval);
-        $('.bk_phone_code_send').html('重新发送');
+    if(checkPhone()){
+      if(enable == false) {
+        return;
       }
-    }, 1000);
-
-    $.ajax({
-      url: '/service/validate_phone/send',
-      type: 'POST',
-      dataType: 'json',
-      cache: false,
-      data: {phone: phone, _token: "{{csrf_token()}}"},
-      success: function(data) {
-        if(data == null) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html('服务端错误');
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-          return;
-        }
-        if(data.status != 0) {
-         
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html(data.message);
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-          return;
-        }
-
+      var exist = false;
+      var phone = $('input[name=phone]').val();
+      // 手机号不为空
+      if(phone == '') {
         $('.bk_toptips').show();
-        $('.bk_toptips span').html('发送成功');
+        $('.bk_toptips span').html('请输入手机号');
         setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-      },
-      error: function(xhr, status, error) {
-        console.log(xhr);
-        console.log(status);
-        console.log(error);
+        return;
       }
-    });
+      // 手机号格式
+      if(phone.length != 11 || phone[0] != '1') {
+        $('.bk_toptips').show();
+        $('.bk_toptips span').html('手机格式不正确');
+        setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+        return;
+      }
+
+      $(this).removeClass('bk_important');
+      $(this).addClass('bk_summary');
+      enable = false;
+      var num = 60;
+      var interval = window.setInterval(function() {
+        $('.bk_phone_code_send').html(--num + 's 重新发送');
+        if(num == 0) {
+          $('.bk_phone_code_send').removeClass('bk_summary');
+          $('.bk_phone_code_send').addClass('bk_important');
+          enable = true;
+          window.clearInterval(interval);
+          $('.bk_phone_code_send').html('重新发送');
+        }
+      }, 1000);
+
+      $.ajax({
+        url: '/service/validate_phone/send',
+        type: 'POST',
+        dataType: 'json',
+        cache: false,
+        data: {phone: phone, _token: "{{csrf_token()}}"},
+        success: function(data) {
+          console.log(data.status);
+          console.log(data.message);
+          if(data == null) {
+            $('.bk_toptips').show();
+            $('.bk_toptips span').html('服务端错误');
+            setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+            return;
+          }
+          if(data.status != 0) {
+
+            $('.bk_toptips').show();
+            $('.bk_toptips span').html(data.message);
+            setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+            return;
+          }
+
+          $('.bk_toptips').show();
+          $('.bk_toptips span').html('发送成功');
+          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+        },
+        error: function(xhr, status, error) {
+          console.log(xhr);
+          console.log(status);
+          console.log(error);
+        }
+      });
+    }
+
+
   });
+
 </script>
 <script type="text/javascript">
 
@@ -253,6 +251,7 @@
       cache: false,
       data: {phone: phone, _token: "{{csrf_token()}}"},
       success: function(data) {
+        console.log(data);
         if(data == null) {
           $('.bk_toptips').show();
           $('.bk_toptips span').html('服务端错误');
@@ -260,13 +259,17 @@
           return;
         }
         if(data.status != 0) {
-             document.getElementById('phone').value = ""
+            // document.getElementById('phone').value = "";
+
              $('.bk_toptips').show();
               $('.bk_toptips span').html(data.message);
               setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-        return;
+          result = false;
         }
-        
+        if(data.status == 0) {
+          result = true;
+        }
+
       },
       error: function(xhr, status, error) {
         console.log(xhr);
@@ -295,14 +298,12 @@
       return false;
     }
 
-    if(!isPhoneExist(mobile)){
+    if(isPhoneExist(mobile)){
       $('.bk_toptips').show();
-      $('.bk_toptips span').html('该手机号码已存在！');
-      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+      $('.bk_toptips span').html('qwqwwq');
       return false;
     }
-
-    return true;
+    return false;
   }
 
 

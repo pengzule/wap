@@ -2,19 +2,19 @@
 
 namespace App\Tool\SMS;
 
-use App\Models\M3Result;
+use App\Models\AppResult;
 
 class SendTemplateSMS
 {
     //主帐号
-    private $accountSid='8a48b5515493a1b70154a2d5233111d2';
+    private $accountSid='aaf98f8954939ed50154ae5ae4bd213a';
 
     //主帐号Token
-    private $accountToken='38fc611452b2477b84aad5512c91f718';
+    private $accountToken='9a417bde3e6d4d7dabea6dadcd1f844e';
 
     //应用Id
     //private $appId='aaf98f8954939ed50154a39d8f521549';
-    private $appId='8a48b5515493a1b70154a2d5671511d9';
+    private $appId='8a48b5515493a1b70154ae78f5071f76';
 
     //请求地址，格式如下，不需要写https://
     // (开发) Rest URL：https://sandboxapp.cloopen.com:8883
@@ -35,7 +35,7 @@ class SendTemplateSMS
      */
     public function sendTemplateSMS($to,$datas,$tempId)
     {
-        $m3_result = new M3Result;
+        $app_result = new AppResult;
 
         // 初始化REST SDK
         $rest = new CCPRestSDK($this->serverIP,$this->serverPort,$this->softVersion);
@@ -46,18 +46,18 @@ class SendTemplateSMS
         //  echo "Sending TemplateSMS to $to <br/>";
         $result = $rest->sendTemplateSMS($to,$datas,$tempId);
         if($result == NULL ) {
-            $m3_result->status = 3;
-            $m3_result->message = 'result error!';
+            $app_result->status = 3;
+            $app_result->message = 'result error!';
         }
         if($result->statusCode != 0) {
-            $m3_result->status = $result->statusCode;
-            $m3_result->message = $result->statusMsg;
+            $app_result->status = $result->statusCode;
+            $app_result->message = $result->statusMsg;
         }else{
-            $m3_result->status = 0;
-            $m3_result->message = '发送成功';
+            $app_result->status = 0;
+            $app_result->message = '发送成功';
         }
 
-        return $m3_result;
+        return $app_result;
     }
 }
 

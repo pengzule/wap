@@ -1,6 +1,6 @@
 <?php namespace App\Models;
 
-class BKWXPayConfig extends M3Result {
+class WXPayConfig extends AppResult {
 
   public $timestamp;
   public $nonceStr;

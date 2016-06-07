@@ -3,7 +3,7 @@
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Tool\UUID;
-use App\Models\M3Result;
+use App\Models\AppResult;
 
 class UploadController extends Controller {
 
@@ -14,20 +14,20 @@ class UploadController extends Controller {
 	 {
 	 	$width = $request->input("width", '');
 		$height = $request->input("height", '');
-		$m3_result = new M3Result();
+		$app_result = new AppResult();
 
 		if( $_FILES["file"]["error"] > 0 )
 		{
-			$m3_result->status = 2;
-			$m3_result->message = "未知错误, 错误码: " . $_FILES["file"]["error"];
-			return $m3_result->toJson();
+			$app_result->status = 2;
+			$app_result->message = "未知错误, 错误码: " . $_FILES["file"]["error"];
+			return $app_result->toJson();
 		}
 
     $file_size = $_FILES["file"]["size"];
 		if ( $file_size > 1024*1024) {
-			$m3_result->status = 2;
-			$m3_result->message = "请注意图片上传大小不能超过1M";
-			return $m3_result->toJson();
+			$app_result->status = 2;
+			$app_result->message = "请注意图片上传大小不能超过1M";
+			return $app_result->toJson();
 		}
 
 		$public_dir = sprintf('/upload/%s/%s/', $type, date('Ymd') );
@@ -43,26 +43,26 @@ class UploadController extends Controller {
 		$upload_file_path = $upload_dir . $upload_filename . '.' . $file_ext;
 		if (strlen($width) > 0) {
 			$public_uri = $public_dir . $upload_filename . '.' . $file_ext;
-			$m3_result->status = 0;
-			$m3_result->message = "上传成功";
-			$m3_result->uri = $public_uri;
+			$app_result->status = 0;
+			$app_result->message = "上传成功";
+			$app_result->uri = $public_uri;
 		} else {
 			// 从临时目标移到上传目录
 			if( move_uploaded_file($_FILES["file"]["tmp_name"], $upload_file_path) )
 			{
 				$public_uri = $public_dir . $upload_filename . '.' . $file_ext;
 
-				$m3_result->status = 0;
-				$m3_result->message = "上传成功";
-				$m3_result->uri = $public_uri;
+				$app_result->status = 0;
+				$app_result->message = "上传成功";
+				$app_result->uri = $public_uri;
 			}
 			else
 			{
-				$m3_result->status = 1;
-				$m3_result->message = "上传失败, 权限不足";
+				$app_result->status = 1;
+				$app_result->message = "上传失败, 权限不足";
 			}
 		}
 
-		return $m3_result->toJson();
+		return $app_result->toJson();
 	 }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\M3Result;
+use App\Models\AppResult;
 use App\Entity\PdtCollect;
 use App\Entity\CartItem;
 
@@ -12,19 +12,15 @@ class CartController extends Controller
 {
   public function addCart(Request $request, $product_id)
   {
-
     $count = $request->input('pro_count', '');
-
-    $m3_result = new M3Result;
-    $m3_result->status = 0;
-    $m3_result->message = '添加成功';
-
+    $app_result = new AppResult;
+    $app_result->status = 0;
+    $app_result->message = '添加成功';
 
     // 如果当前已经登录
     $member = $request->session()->get('member', '');
     if($member != '') {
       $cart_items = CartItem::where('member_id', $member->id)->get();
-
       $exist = false;
       foreach ($cart_items as $cart_item) {
         if($cart_item->product_id == $product_id) {
@@ -34,7 +30,6 @@ class CartController extends Controller
           break;
         }
       }
-
       if($exist == false) {
         $cart_item = new CartItem;
         $cart_item->product_id = $product_id;
@@ -42,18 +37,18 @@ class CartController extends Controller
         $cart_item->member_id = $member->id;
         $cart_item->save();
       }
-      $m3_result->status = 0;
-      $m3_result->message = $count;
-      return $m3_result->toJson();
+      $app_result->status = 0;
+      $app_result->message = $count;
+      return $app_result->toJson();
     }
-    $m3_result->status = 1;
-    $m3_result->message = '请先登录';
-    return $m3_result->toJson();
-    /*$bk_cart = $request->cookie('bk_cart');
-    $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
+    $app_result->status = 1;
+    $app_result->message = '请先登录';
+    return $app_result->toJson();
+    /*$offline_cart = $request->cookie('offline_cart');
+    $offline_cart_arr = ($offline_cart!=null ? explode(',', $offline_cart) : array());
 
 
-    foreach ($bk_cart_arr as &$value) {   // 一定要传引用
+    foreach ($offline_cart_arr as &$value) {   // 一定要传引用
       $index = strpos($value, ':');
       if(substr($value, 0, $index) == $product_id) {
         $count = ((int) substr($value, $index+1)) + 1;
@@ -63,26 +58,20 @@ class CartController extends Controller
     }
 
     if($count == 1) {
-      array_push($bk_cart_arr, $product_id . ':' . $count);
+      array_push($offline_cart_arr, $product_id . ':' . $count);
     }
 
-    return response($m3_result->toJson())->withCookie('bk_cart', implode(',', $bk_cart_arr));*/
+    return response($app_result->toJson())->withCookie('offline_cart', implode(',', $offline_cart_arr));*/
   }
 
   public function add(Request $request)
   {
-
     $product_id = $request->input('product_id', '');
-
-    $m3_result = new M3Result;
-
-
-
+    $app_result = new AppResult;
     // 如果当前已经登录
     $member = $request->session()->get('member', '');
     if($member != '') {
       $cart_items = CartItem::where('member_id', $member->id)->get();
-
       $exist = false;
       foreach ($cart_items as $cart_item) {
         if($cart_item->product_id == $product_id) {
@@ -92,44 +81,19 @@ class CartController extends Controller
           break;
         }
       }
-      $m3_result->status = 0;
-      $m3_result->message ='返回成功';
-      return $m3_result->toJson();
+      $app_result->status = 0;
+      $app_result->message ='返回成功';
+      return $app_result->toJson();
     }
-    $m3_result->status = 1;
-    $m3_result->message = '请先登录';
-    return $m3_result->toJson();
-    /*$bk_cart = $request->cookie('bk_cart');
-    $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
-
-
-    foreach ($bk_cart_arr as &$value) {   // 一定要传引用
-      $index = strpos($value, ':');
-      if(substr($value, 0, $index) == $product_id) {
-        $count = ((int) substr($value, $index+1)) + 1;
-        $value = $product_id . ':' . $count;
-        break;
-      }
-    }
-
-    if($count == 1) {
-      array_push($bk_cart_arr, $product_id . ':' . $count);
-    }
-
-    return response($m3_result->toJson())->withCookie('bk_cart', implode(',', $bk_cart_arr));*/
+    $app_result->status = 1;
+    $app_result->message = '请先登录';
+    return $app_result->toJson();
   }
 
   public function reduce(Request $request)
   {
-
     $product_id = $request->input('product_id', '');
-    $count = $request->input('count','');
-
-
-    $m3_result = new M3Result;
-
-
-
+    $app_result = new AppResult;
     // 如果当前已经登录
     $member = $request->session()->get('member', '');
     if($member != '') {
@@ -144,32 +108,15 @@ class CartController extends Controller
           break;
         }
       }
-      $m3_result->status = 0;
-      $m3_result->message = '返回成功';
+      $app_result->status = 0;
+      $app_result->message = '返回成功';
 
-      return $m3_result->toJson();
+      return $app_result->toJson();
     }
-    $m3_result->status = 1;
-    $m3_result->message = '请先登录';
-    return $m3_result->toJson();
-    /*$bk_cart = $request->cookie('bk_cart');
-    $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
+    $app_result->status = 1;
+    $app_result->message = '请先登录';
+    return $app_result->toJson();
 
-
-    foreach ($bk_cart_arr as &$value) {   // 一定要传引用
-      $index = strpos($value, ':');
-      if(substr($value, 0, $index) == $product_id) {
-        $count = ((int) substr($value, $index+1)) + 1;
-        $value = $product_id . ':' . $count;
-        break;
-      }
-    }
-
-    if($count == 1) {
-      array_push($bk_cart_arr, $product_id . ':' . $count);
-    }
-
-    return response($m3_result->toJson())->withCookie('bk_cart', implode(',', $bk_cart_arr));*/
   }
 
   public function cartChange(Request $request)
@@ -178,14 +125,14 @@ class CartController extends Controller
     $product_id = $request->input('product_id', '');
     $type = $request->input('type', '');
     $count = $request->input('count','');
-    $m3_result = new M3Result;
-    $m3_result->status = 0;
-    $m3_result->message = $count;
+    $app_result = new AppResult;
+    $app_result->status = 0;
+    $app_result->message = $count;
 
     if ($count == 1){
-      $m3_result->status = 1;
-      $m3_result->message = '数量不可为负';
-      return $m3_result->toJson();
+      $app_result->status = 1;
+      $app_result->message = '数量不可为负';
+      return $app_result->toJson();
     }
 
 
@@ -212,42 +159,25 @@ class CartController extends Controller
         }
       }
 
-      return $m3_result->toJson();
+      return $app_result->toJson();
     }
-    $m3_result->status = 1;
-    $m3_result->message = '请先登录';
-    return $m3_result->toJson();
-    /*$bk_cart = $request->cookie('bk_cart');
-    $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
+    $app_result->status = 1;
+    $app_result->message = '请先登录';
+    return $app_result->toJson();
 
-
-    foreach ($bk_cart_arr as &$value) {   // 一定要传引用
-      $index = strpos($value, ':');
-      if(substr($value, 0, $index) == $product_id) {
-        $count = ((int) substr($value, $index+1)) + 1;
-        $value = $product_id . ':' . $count;
-        break;
-      }
-    }
-
-    if($count == 1) {
-      array_push($bk_cart_arr, $product_id . ':' . $count);
-    }
-
-    return response($m3_result->toJson())->withCookie('bk_cart', implode(',', $bk_cart_arr));*/
   }
 
   public function deleteCart(Request $request)
   {
-    $m3_result = new M3Result;
-    $m3_result->status = 0;
-    $m3_result->message = '删除成功';
+    $app_result = new AppResult;
+    $app_result->status = 0;
+    $app_result->message = '删除成功';
 
     $product_ids = $request->input('product_ids', '');
     if($product_ids == '') {
-      $m3_result->status = 1;
-      $m3_result->message = '产品ID为空';
-      return $m3_result->toJson();
+      $app_result->status = 1;
+      $app_result->message = '产品ID为空';
+      return $app_result->toJson();
     }
     $product_ids_arr = explode(',', $product_ids);
 
@@ -255,41 +185,36 @@ class CartController extends Controller
     if($member != '') {
         // 已登录
         CartItem::whereIn('product_id', $product_ids_arr)->delete();
-        return $m3_result->toJson();
+        return $app_result->toJson();
     }
 
     $product_ids = $request->input('product_ids', '');
     if($product_ids == '') {
-      $m3_result->status = 1;
-      $m3_result->message = '产品ID为空';
-      return $m3_result->toJson();
+      $app_result->status = 1;
+      $app_result->message = '产品ID为空';
+      return $app_result->toJson();
     }
 
     // 未登录
-    $bk_cart = $request->cookie('bk_cart');
-    $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
-    foreach ($bk_cart_arr as $key => $value) {
+    $offline_cart = $request->cookie('offline_cart');
+    $offline_cart_arr = ($offline_cart!=null ? explode(',', $offline_cart) : array());
+    foreach ($offline_cart_arr as $key => $value) {
       $index = strpos($value, ':');
       $product_id = substr($value, 0, $index);
       // 存在, 删除
       if(in_array($product_id, $product_ids_arr)) {
-        array_splice($bk_cart_arr, $key, 1);
+        array_splice($offline_cart_arr, $key, 1);
         continue;
       }
     }
-
-    return response($m3_result->toJson())->withCookie('bk_cart', implode(',', $bk_cart_arr));
+    return response($app_result->toJson())->withCookie('offline_cart', implode(',', $offline_cart_arr));
   }
 
   public function addWish(Request $request, $product_id)
   {
-
-
-
-    $m3_result = new M3Result;
-    $m3_result->status = 0;
-    $m3_result->message = '收藏成功';
-
+    $app_result = new AppResult;
+    $app_result->status = 0;
+    $app_result->message = '收藏成功';
 
     // 如果当前已经登录
     $member = $request->session()->get('member', '');
@@ -301,45 +226,21 @@ class CartController extends Controller
       foreach ($wishes as $wish) {
         if($wish->product_id == $product_id) {
           PdtCollect::where('product_id',$product_id)->where('member_id', $member->id)->delete();
-          $m3_result->status = 1;
-          $m3_result->message = '取消收藏';
-          return $m3_result->toJson();
+          $app_result->status = 1;
+          $app_result->message = '取消收藏';
+          return $app_result->toJson();
         }
-
       }
-
       if($exist == false) {
         $wish = new PdtCollect;
         $wish->member_id = $member->id;
         $wish->product_id = $product_id;
         $wish->save();
       }
-
-
-
-      return $m3_result->toJson();
+      return $app_result->toJson();
     }
-    $m3_result->status = 1;
-    $m3_result->message = '请先登录';
-    return $m3_result->toJson();
-    /*$bk_cart = $request->cookie('bk_cart');
-    $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
-
-
-    foreach ($bk_cart_arr as &$value) {   // 一定要传引用
-      $index = strpos($value, ':');
-      if(substr($value, 0, $index) == $product_id) {
-        $count = ((int) substr($value, $index+1)) + 1;
-        $value = $product_id . ':' . $count;
-        break;
-      }
-    }
-
-    if($count == 1) {
-      array_push($bk_cart_arr, $product_id . ':' . $count);
-    }
-
-    return response($m3_result->toJson())->withCookie('bk_cart', implode(',', $bk_cart_arr));*/
+    $app_result->status = 1;
+    $app_result->message = '请先登录';
+    return $app_result->toJson();
   }
-
 }

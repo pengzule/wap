@@ -509,6 +509,18 @@ input.weui_btn_plain_default {
   height: 1.41176471em;
   line-height: 1.41176471;
 }
+.add_color{
+  width: 100%;
+  border: 0;
+  outline: 0;
+  -webkit-appearance: none;
+  background-color: transparent;
+  font-size: inherit;
+  color: red;
+  height: 1.41176471em;
+  line-height: 1.41176471;
+}
+
 .weui_input::-webkit-outer-spin-button,
 .weui_input::-webkit-inner-spin-button {
   -webkit-appearance: none;

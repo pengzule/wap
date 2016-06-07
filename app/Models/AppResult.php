@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class M3Result {
+class AppResult {
 
   public $status;
   public $message;

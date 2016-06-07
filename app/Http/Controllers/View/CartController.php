@@ -11,28 +11,18 @@ use Log;
 
 class CartController extends Controller
 {
-
-  public function toCart(Request $request)
-  {
-    $member_id = $request->input('data','');
-
-    echo json_encode($member_id);
-  }
-
   public function toCart(Request $request)
   {
     $cart_items = array();
-
-    $bk_cart = $request->cookie('bk_cart');
-    $bk_cart_arr = ($bk_cart!=null ? explode(',', $bk_cart) : array());
-
+    $offline_cart = $request->cookie('offline_cart');
+    $offline_cart_arr = ($offline_cart!=null ? explode(',', $offline_cart) : array());
     $member = $request->session()->get('member', '');
     if($member != '') {
-      $cart_items = $this->syncCart($member->id, $bk_cart_arr);
+      $cart_items = $this->syncCart($member->id, $offline_cart_arr);
       return response()->view('cart', ['cart_items' => $cart_items]);
     }
 
-    foreach ($bk_cart_arr as $key => $value) {
+    foreach ($offline_cart_arr as $key => $value) {
       $index = strpos($value, ':');
       $cart_item = new CartItem;
       $cart_item->id = $key;
@@ -47,12 +37,12 @@ class CartController extends Controller
     return view('cart')->with('cart_items', $cart_items);
   }
 
-  private function syncCart($member_id, $bk_cart_arr)
+  private function syncCart($member_id, $offline_cart_arr)
   {
     $cart_items = CartItem::where('member_id', $member_id)->get();
 
     $cart_items_arr = array();
-    foreach ($bk_cart_arr as $value) {
+    foreach ($offline_cart_arr as $value) {
       $index = strpos($value, ':');
       $product_id = substr($value, 0, $index);
       $count = (int) substr($value, $index+1);
@@ -87,7 +77,6 @@ class CartController extends Controller
       $cart_item->product = Product::find($cart_item->product_id);
       array_push($cart_items_arr, $cart_item);
     }
-
     return $cart_items_arr;
   }
 }

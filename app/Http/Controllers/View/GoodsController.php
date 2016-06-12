@@ -85,6 +85,7 @@ class GoodsController extends Controller
         ->with('category_id', $category)
         ->with('keyword', $keyword);
   }
+
   public function toProdSort(Request $request)
   {
     $orderDir = $request->input('orderDir','');
@@ -136,6 +137,5 @@ class GoodsController extends Controller
 
 
   }
-
 
 }

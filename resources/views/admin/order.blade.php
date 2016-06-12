@@ -31,7 +31,7 @@
 					<td>{{$order->order_no}}</td>
 					<td>{{$order->name}}</td>
 					<td>{{$order->total_price}}</td>									
-					<td>彭祖乐 / 13338286204 / 福建,福州市,仓山区 福建农林大学/350000 </td>
+					<td>{{$order->realname}} / {{$order->phone}} / {{$order->address}} </td>
          
                     <td>@if($order->payway == 1)
         			支付宝
@@ -51,6 +51,8 @@
 						<span class="label label-success radius">已发货</span>
 					@elseif($order->status == 5)
 						<span class="label label-success radius">已签收</span>
+					@elseif($order->status == 6)
+						<span class="label label-success radius">已评价</span>
 					@endif</td>
 					<td class="td-manage">
 						<a title="编辑" href="javascript:;" onclick="order_edit('编辑订单','/admin/order_edit?id={{$order->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>

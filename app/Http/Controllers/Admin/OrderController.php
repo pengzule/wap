@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Entity\Order;
-use App\Models\M3Result;
+use App\Models\AppResult;
 
 class OrderController extends Controller
 {
-  public function toOrder(Request $request)
+  public function toOrder()
   {
     $orders = Order::all();
     return view('admin.order')->with('orders', $orders);
@@ -27,10 +27,10 @@ class OrderController extends Controller
     $order->status = $request->input('status', 1);
     $order->save();
 
-    $m3_result = new M3Result;
-    $m3_result->status = 0;
-    $m3_result->message = '添加成功';
+    $app_result = new AppResult;
+    $app_result->status = 0;
+    $app_result->message = '添加成功';
 
-    return $m3_result->toJson();
+    return $app_result->toJson();
   }
 }

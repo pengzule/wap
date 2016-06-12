@@ -36,7 +36,6 @@ class CartController extends Controller
 
     return view('cart')->with('cart_items', $cart_items);
   }
-
   private function syncCart($member_id, $offline_cart_arr)
   {
     $cart_items = CartItem::where('member_id', $member_id)->get();

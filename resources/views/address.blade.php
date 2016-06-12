@@ -58,7 +58,7 @@ border-radius:3px;
 .U-guodu-box div{ color:#fff; line-height:20px; font-size:12px; margin:0px auto; height:100%; padding-top:10%; padding-bottom:10%;}
 </style>
 @yield('content')
-<div class="bk_toptips"><span></span></div>
+<div class="jqmkh_toptips"><span></span></div>
 </body>
 @yield('my-js')
 <!-- <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script> -->

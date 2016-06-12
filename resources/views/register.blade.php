@@ -49,7 +49,7 @@
       <div class="weui_cell_bd weui_cell_primary">
           <input class="weui_input" type="number" placeholder="" name='phone_code'/>
       </div>
-      <p class="bk_important bk_phone_code_send">发送验证码</p>
+      <a href="javascript:"  class="bk_important bk_phone_code_send ">发送验证码</a>
       <div class="weui_cell_ft">
       </div>
   </div>
@@ -121,10 +121,10 @@
       checkName();
     });
 
-    //当光标离开 手机时，验证手机
-    //$("#phone").blur(function(){
-      //checkPhone();
-   // });
+   // 当光标离开 手机时，验证手机
+    $("#phone").blur(function(){
+      checkPhone();
+    });
 
 //当光标离开 密码时，验证密码
     $("#password").blur(function(){
@@ -133,7 +133,6 @@
 //input内容为空时
 
   });
-
 
 
 </script>
@@ -242,13 +241,12 @@
   /**检查手机号码是否存在**/
   function isPhoneExist(phone) {
     var result = true;
-
-
     $.ajax({
       type: "POST",
       url: '/service/isPhoneExist',
       dataType: 'json',
       cache: false,
+      async:false,
       data: {phone: phone, _token: "{{csrf_token()}}"},
       success: function(data) {
         console.log(data);
@@ -260,14 +258,10 @@
         }
         if(data.status != 0) {
             // document.getElementById('phone').value = "";
-
              $('.bk_toptips').show();
               $('.bk_toptips span').html(data.message);
               setTimeout(function() {$('.bk_toptips').hide();}, 2000);
           result = false;
-        }
-        if(data.status == 0) {
-          result = true;
         }
 
       },
@@ -298,12 +292,12 @@
       return false;
     }
 
-    if(isPhoneExist(mobile)){
+    if(!isPhoneExist(mobile)){
       $('.bk_toptips').show();
-      $('.bk_toptips span').html('qwqwwq');
+      $('.bk_toptips span').html('该手机号码已存在');
       return false;
     }
-    return false;
+    return true;
   }
 
 

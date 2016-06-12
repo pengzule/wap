@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\AppResult;
 use App\Entity\PdtCollect;
 use App\Entity\CartItem;
+use App\Entity\Addr;
+use App\Entity\Product;
+use Log;
 
 class CartController extends Controller
 {
@@ -219,9 +222,7 @@ class CartController extends Controller
     // 如果当前已经登录
     $member = $request->session()->get('member', '');
     if($member != '') {
-
       $wishes = PdtCollect::where('member_id', $member->id)->get();
-
       $exist = false;
       foreach ($wishes as $wish) {
         if($wish->product_id == $product_id) {
@@ -242,5 +243,57 @@ class CartController extends Controller
     $app_result->status = 1;
     $app_result->message = '请先登录';
     return $app_result->toJson();
+  }
+
+  public function buyNow(Request $request)
+  {
+    Log::info("立即购买");
+    $product_id = $request->input('product_id', '');
+    $count = $request->input('count', '');
+    $member = $request->session()->get('member', '');
+
+    if($member != '') {
+      $cart_items = CartItem::where('member_id', $member->id)->get();
+
+      $exist = false;
+      foreach ($cart_items as $cart_item) {
+        if($cart_item->product_id == $product_id) {
+          $cart_item->count += $count;
+          $cart_item->save();
+          $exist = true;
+          break;
+        }
+      }
+
+      if($exist == false) {
+        $cart_item = new CartItem;
+        $cart_item->product_id = $product_id;
+        $cart_item->count = $count;
+        $cart_item->member_id = $member->id;
+        $cart_item->save();
+      }
+
+    }
+    $cart_items = CartItem::where('member_id', $member->id)->where('product_id', $product_id)->get();
+    $address = Addr::where('member_id',$member->id)->where('default',1)->first();
+
+    $cart_items_arr = array();
+    $cart_items_ids_arr = array();
+    $total_price = 0;
+    $name = '';
+    foreach ($cart_items as $cart_item) {
+      $cart_item->product = Product::find($cart_item->product_id);
+      if($cart_item->product != null) {
+        $total_price += $cart_item->product->price * $cart_item->count;
+        $name .= ('《'.$cart_item->product->name.'》');
+        array_push($cart_items_arr, $cart_item);
+        array_push($cart_items_ids_arr, $cart_item->id);
+      }
+    }
+
+    return view('order_confirm')->with('cart_items', $cart_items_arr)
+        ->with('total_price', $total_price)
+        ->with('address',$address);
+
   }
 }

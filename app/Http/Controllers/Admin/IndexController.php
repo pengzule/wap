@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\M3Result;
+use App\Models\AppResult;
 use App\Entity\Admin;
 
 class IndexController extends Controller
@@ -14,26 +14,26 @@ class IndexController extends Controller
     $username = $request->input('username', '');
     $password = $request->input('password', '');
 
-    $m3_result = new M3Result;
+    $app_result = new AppResult;
 
     if($username == '' || $password == '') {
-      $m3_result->status = 1;
-      $m3_result->message = "帐号或密码不能为空!";
-      return $m3_result->toJson();
+      $app_result->status = 1;
+      $app_result->message = "帐号或密码不能为空!";
+      return $app_result->toJson();
     }
 
-    $admin = Admin::where('username', $username)->where('password', md5('bk'. $password))->first();
+    $admin = Admin::where('username', $username)->where('password', md5('jqmkj'. $password))->first();
     if(!$admin) {
-      $m3_result->status = 2;
-      $m3_result->message = "帐号或密码错误!";
+      $app_result->status = 2;
+      $app_result->message = "帐号或密码错误!";
     } else {
-      $m3_result->status = 0;
-      $m3_result->message = "登录成功!";
+      $app_result->status = 0;
+      $app_result->message = "登录成功!";
 
       $request->session()->put('admin', $admin);
     }
 
-    return $m3_result->toJson();
+    return $app_result->toJson();
   }
 
   public function toLogin()

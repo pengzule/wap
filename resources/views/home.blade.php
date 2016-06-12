@@ -4,9 +4,7 @@
 
 @section('content')
 
-<div>
-    {{$ID}}
-</div>
+
     <header class="header">
         <div class="fix_nav">
             <div style="max-width:768px;margin:0 auto;height: 44px;position: relative;background:#000000;">

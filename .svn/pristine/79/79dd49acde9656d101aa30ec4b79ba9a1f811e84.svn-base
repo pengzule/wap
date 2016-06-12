@@ -1,0 +1,95 @@
+@extends('default')
+
+@section('title', '填写收货信息')
+
+@section('content')
+
+    <header class="header">
+        <div class="fix_nav">
+            <div class="nav_inner">
+                <a class="nav-left back-icon" href="javascript:history.back();">返回</a>
+                <div class="tit">收货地址</div>
+            </div>
+        </div>
+    </header>
+    <div class="container" >
+        <div class="row">
+            <div class="list-group mb10">
+                <input type="text" class="list-group-address " placeholder="收件人" name="realname" value="">
+                <input type="text" class="list-group-address " placeholder="联系电话" name="phone" value="">
+                <select id="s_province" class="list-group-address " name="s_province"></select>
+                <select id="s_city" class="list-group-address " name="s_city" ></select>
+                <select id="s_county"   class="list-group-address " name="s_county"></select>
+            <script type="text/javascript" src="/address/js/area.js"></script>
+                <script type="text/javascript">_init_area();</script>
+            <input type="text" placeholder="详细地址"  class="list-group-address " name="street" value="">
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="fixed-foot2">
+            <a href="#"> <div class="fixed_exit tit">
+                    <div onclick="onaddressClick();"class="tit">新增收货地址</div>
+                </div>
+            </a>
+        </div>
+    </footer>
+    <div class="clear"></div>
+
+@endsection
+
+@section('my-js')
+<script type="text/javascript">
+    function onaddressClick() {
+        var realname = $('input[name=realname]').val();
+        if(realname.length == 0) {
+            $('.jqmkj_toptips').show();
+            $('.jqmkj_toptips span').html('收货人不能为空');
+            setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
+            return;
+        }
+
+        var phone = $('input[name=phone]').val();
+        if(phone.length != 11 || phone[0] != 1) {
+            $('.jqmkj_toptips').show();
+            $('.jqmkj_toptips span').html('输入正确的手机号!');
+            setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
+            return;
+        }
+        var s_province = $('select[name=s_province]').val();
+        var s_city = $('select[name=s_city]').val();
+        var s_county = $('select[name=s_county]').val();
+        var street = $('input[name=street]').val();
+
+        $.ajax({
+            type: "POST",
+            url: '/service/editaddress',
+            dataType: 'json',
+            cache: false,
+            data: {realname: realname, phone: phone, s_province: s_province,s_city:s_city,s_county:s_county,street:street, _token: "{{csrf_token()}}"},
+            success: function(data) {
+                if(data == null) {
+                    $('.jqmkj_toptips').show();
+                    $('.jqmkj_toptips span').html('服务端错误');
+                    setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
+                    return;
+                }
+                if(data.status != 0) {
+                    $('.jqmkj_toptips').show();
+                    $('.jqmkj_toptips span').html(data.message);
+                    setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
+                    return;
+                }
+                location.href = "{!!$return_url!!}";
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    }
+
+</script>
+@endsection

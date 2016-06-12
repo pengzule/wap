@@ -98,9 +98,9 @@
             });
             for (var i = 0;i<product_ids_arr.length;i++){
                 if(comments_arr[i] == ''){
-                    $('.bk_toptips').show();
-                    $('.bk_toptips span').html('请输入评价');
-                    setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+                    $('.jqmkj_toptips').show();
+                    $('.jqmkj_toptips span').html('请输入评价');
+                    setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
                     return;
                 }
             }
@@ -123,15 +123,15 @@
                 success: function(data) {
                     console.log(data);
                     if(data == null) {
-                        $('.bk_toptips').show();
-                        $('.bk_toptips span').html('服务端错误');
-                        setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+                        $('.jqmkj_toptips').show();
+                        $('.jqmkj_toptips span').html('服务端错误');
+                        setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
                         return;
                     }
                     if(data.status != 0) {
-                        $('.bk_toptips').show();
-                        $('.bk_toptips span').html(data.message);
-                        setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+                        $('.jqmkj_toptips').show();
+                        $('.jqmkj_toptips span').html(data.message);
+                        setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
                         return;
                     }
 

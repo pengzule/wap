@@ -106,17 +106,14 @@
     });
 
     if(product_ids_arr.length == 0) {
-      $('.bk_toptips').show();
-      $('.bk_toptips span').html('请选择要结算的商品');
-      setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+      $('.jqmkj_toptips').show();
+      $('.jqmkj_toptips span').html('请选择要结算的商品');
+      setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
       return;
     }
 
-
     location.href = '/order_confirm?product_ids=' + product_ids_arr;
-    // $('input[name=product_ids]').val(product_ids_arr+'');
-    // $('input[name=is_wx]').val(is_wx+'');
-    // $('#order_commit').submit();
+
   }
 
   function _add(obj) {
@@ -132,15 +129,15 @@
       success: function(data) {
         console.log(data);
         if(data == null) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html('服务端错误');
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          $('.jqmkj_toptips').show();
+          $('.jqmkj_toptips span').html('服务端错误');
+          setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
           return;
         }
         if(data.status != 0) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html(data.message);
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          $('.jqmkj_toptips').show();
+          $('.jqmkj_toptips span').html(data.message);
+          setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
           return;
         }
 
@@ -169,15 +166,15 @@
       success: function(data) {
         console.log(data);
         if(data == null) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html('服务端错误');
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          $('.jqmkj_toptips').show();
+          $('.jqmkj_toptips span').html('服务端错误');
+          setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
           return;
         }
         if(data.status != 0) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html(data.message);
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          $('.jqmkj_toptips').show();
+          $('.jqmkj_toptips span').html(data.message);
+          setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
           return;
         }
 

@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/css/style.css?v=1?v=01291">
   <link rel="stylesheet" href="/css/member.css?v=01291">
   <link rel="stylesheet" href="/css/order3.css?v=01291"><meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="shortcut icon" href="/images/ico/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="yes" name="apple-mobile-web-app-capable">
@@ -54,12 +55,12 @@
 
 
 </head>
-<body>
+<body style="background-color:#fff">
 
 
 @yield('content')
 
-<div class="bk_toptips"><span></span></div>
+<div class="jqmkj_toptips"><span></span></div>
 </body>
 @yield('my-js')
 </html>

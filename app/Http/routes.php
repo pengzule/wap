@@ -49,13 +49,8 @@ Route::group(['prefix' => 'service'], function () {
   Route::get('cart/delete', 'Service\CartController@deleteCart');
   Route::get('wish/collect/{product_id}', 'Service\CartController@addWish');
 
-
-
-
-
   Route::post('alipay', 'Service\PayController@aliPay');
   Route::post('wxpay', 'Service\PayController@wxPay');
-
   Route::post('pay/ali_notify', 'Service\PayController@aliNotify');
   Route::get('pay/ali_result', 'Service\PayController@aliResult');
   Route::get('pay/ali_merchant', 'Service\PayController@aliMerchant');
@@ -67,12 +62,12 @@ Route::group(['middleware' => 'check.login'], function ()  {
 
   Route::match(['get', 'post'], '/order_commit', 'View\OrderController@toOrderCommit');
   Route::match(['get', 'post'], '/order_confirm', 'View\OrderController@toOrderConfirm');
-  Route::match(['get', 'post'], '/buynow_confirm', 'View\OrderController@toBuyNow');
   Route::match(['get', 'post'], '/editaddress', 'View\OrderController@toeditaddress');
   Route::match(['get', 'post'], '/selectaddress', 'View\OrderController@toselectaddress');
   Route::match(['get', 'post'], '/order_comment', 'View\OrderController@toOrderComment');
-  Route::match(['get', 'post'], '/sumbit_comment', 'View\OrderController@commentAdd');
+  Route::match(['get', 'post'], '/sumbit_comment', 'View\OrderController@comment');
   Route::match(['get', 'post'], '/order_content/{order_id}', 'View\OrderController@toOrderContent');
+  Route::match(['get', 'post'], '/service/buynow_confirm', 'Service\CartController@buyNow');
   Route::get('/order_list', 'View\OrderController@toOrderList');
   Route::get('/userinfo', 'View\MemberController@toUserInfo');
   Route::get('/userhome', 'View\MemberController@toMyhome');

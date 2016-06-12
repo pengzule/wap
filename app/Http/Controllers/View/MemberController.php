@@ -50,7 +50,7 @@ class MemberController extends Controller
     return view('userinfo')->with('member',$member);
   }
 
-  public function toMydev(Request $request)
+  public function toMydev()
   {
     return view('mydev');
   }
@@ -92,6 +92,5 @@ class MemberController extends Controller
     }
     return view('comments')->with('comments',$comments);
   }
-
 
 }

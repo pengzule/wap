@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Entity\Member;
-use App\Models\M3Result;
+use App\Models\AppResult;
 
 class MemberController extends Controller
 {
@@ -32,10 +32,10 @@ class MemberController extends Controller
     $member->email = $request->input('email', '');
     $member->save();
 
-    $m3_result = new M3Result;
-    $m3_result->status = 0;
-    $m3_result->message = '添加成功';
+    $app_result = new AppResult;
+    $app_result->status = 0;
+    $app_result->message = '添加成功';
 
-    return $m3_result->toJson();
+    return $app_result->toJson();
   }
 }

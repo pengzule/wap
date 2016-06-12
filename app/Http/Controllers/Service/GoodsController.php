@@ -19,4 +19,5 @@ class GoodsController extends Controller
 
     return $app_result->toJson();
   }
+
 }

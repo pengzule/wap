@@ -1,11 +1,8 @@
 @extends('default')
 
-
-
 @section('title', '填写收货信息')
 
 @section('content')
-
 
     <header class="header">
         <div class="fix_nav">
@@ -17,21 +14,16 @@
     </header>
     <div class="container" >
         <div class="row">
-
             <div class="list-group mb10">
                 <input type="text" class="list-group-address " placeholder="收件人" name="realname" value="">
                 <input type="text" class="list-group-address " placeholder="联系电话" name="phone" value="">
                 <select id="s_province" class="list-group-address " name="s_province"></select>
                 <select id="s_city" class="list-group-address " name="s_city" ></select>
                 <select id="s_county"   class="list-group-address " name="s_county"></select>
-
             <script type="text/javascript" src="/address/js/area.js"></script>
                 <script type="text/javascript">_init_area();</script>
             <input type="text" placeholder="详细地址"  class="list-group-address " name="street" value="">
             </div>
-
-
-
         </div>
     </div>
 
@@ -45,30 +37,24 @@
     </footer>
     <div class="clear"></div>
 
-
-
-
-
 @endsection
 
 @section('my-js')
 <script type="text/javascript">
-
-
     function onaddressClick() {
         var realname = $('input[name=realname]').val();
         if(realname.length == 0) {
-            $('.bk_toptips').show();
-            $('.bk_toptips span').html('收货人不能为空');
-            setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+            $('.jqmkj_toptips').show();
+            $('.jqmkj_toptips span').html('收货人不能为空');
+            setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
             return;
         }
 
         var phone = $('input[name=phone]').val();
         if(phone.length != 11 || phone[0] != 1) {
-            $('.bk_toptips').show();
-            $('.bk_toptips span').html('输入正确的手机号!');
-            setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+            $('.jqmkj_toptips').show();
+            $('.jqmkj_toptips span').html('输入正确的手机号!');
+            setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
             return;
         }
         var s_province = $('select[name=s_province]').val();
@@ -84,15 +70,15 @@
             data: {realname: realname, phone: phone, s_province: s_province,s_city:s_city,s_county:s_county,street:street, _token: "{{csrf_token()}}"},
             success: function(data) {
                 if(data == null) {
-                    $('.bk_toptips').show();
-                    $('.bk_toptips span').html('服务端错误');
-                    setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+                    $('.jqmkj_toptips').show();
+                    $('.jqmkj_toptips span').html('服务端错误');
+                    setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
                     return;
                 }
                 if(data.status != 0) {
-                    $('.bk_toptips').show();
-                    $('.bk_toptips span').html(data.message);
-                    setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+                    $('.jqmkj_toptips').show();
+                    $('.jqmkj_toptips span').html(data.message);
+                    setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
                     return;
                 }
                 location.href = "{!!$return_url!!}";
@@ -103,12 +89,7 @@
                 console.log(error);
             }
         });
-
-
     }
-
-
-
 
 </script>
 @endsection

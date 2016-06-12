@@ -200,15 +200,15 @@
       data: {pro_count: pro_count, _token: "{{csrf_token()}}"},
       success: function(data) {
         if(data == null) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html('服务端错误');
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          $('.jqmkj_toptips').show();
+          $('.jqmkj_toptips span').html('服务端错误');
+          setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
           return;
         }
         if(data.status != 0) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html(data.message);
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          $('.jqmkj_toptips').show();
+          $('.jqmkj_toptips span').html(data.message);
+          setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
           return;
         }
         var count = data.message;
@@ -235,22 +235,22 @@
       data: { _token: "{{csrf_token()}}"},
       success: function(data) {
         if(data == null) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html('服务端错误');
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          $('.jqmkj_toptips').show();
+          $('.jqmkj_toptips span').html('服务端错误');
+          setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
           return;
         }
         if(data.status != 0) {
-          $('.bk_toptips').show();
-          $('.bk_toptips span').html(data.message);
-          setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+          $('.jqmkj_toptips').show();
+          $('.jqmkj_toptips span').html(data.message);
+          setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
           $('.collect').removeClass("i-fav-active");
           return;
         }
         $('.collect').addClass("i-fav-active");
-        $('.bk_toptips').show();
-        $('.bk_toptips span').html(data.message);
-        setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+        $('.jqmkj_toptips').show();
+        $('.jqmkj_toptips span').html(data.message);
+        setTimeout(function() {$('.jqmkj_toptips').hide();}, 2000);
       },
       error: function(xhr, status, error) {
         console.log(xhr);
@@ -264,7 +264,7 @@
     var product_id = "{{$product->id}}";
     var pro_count =  $("#pro_count").val();
 
-    location.href = '/buynow_confirm?product_id=' + product_id + '&count=' + pro_count;
+    location.href = '/service/buynow_confirm?product_id=' + product_id + '&count=' + pro_count;
   }
 
 

@@ -127,7 +127,7 @@ class MemberController extends Controller
 
       $app_mail = new AppMail;
       $app_mail->to = $email;
-      $app_mail->cc = '295129789@qq.com';
+      $app_mail->cc = '542898452@qq.com';
       $app_mail->subject = '金钱猫科技验证';
       $app_mail->content = '请于24小时点击该链接完成验证. http://lacalhost/service/validate_email'
                         . '?member_id=' . $member->id
@@ -139,7 +139,7 @@ class MemberController extends Controller
       $tempEmail->deadline = date('Y-m-d H-i-s', time() + 24*60*60);
       $tempEmail->save();
 
-      Mail::send('email_register', ['m3_email' => $app_mail], function ($m) use ($app_mail) {
+      Mail::send('email_register', ['app_mail' => $app_mail], function ($m) use ($app_mail) {
           // $m->from('hello@app.com', 'Your Application');
           $m->to($app_mail->to, '尊敬的用户')
             ->cc($app_mail->cc)
@@ -159,16 +159,12 @@ class MemberController extends Controller
 
     $app_result = new AppResult;
 
-    // 校验
-    // ....
-
-    // 判断
-    // $validate_code_session = $request->session()->get('validate_code');
-    // if($validate_code != $validate_code_session) {
-    //   $app_result->status = 1;
-    //   $app_result->message = '验证码不正确';
-    //   return $app_result->toJson();
-    // }
+    $validate_code_session = $request->session()->get('validate_code');
+    if($validate_code != $validate_code_session) {
+      $app_result->status = 1;
+      $app_result->message = '验证码不正确';
+      return $app_result->toJson();
+    }
 
     $member = null;
     if(strpos($username, '@') == true) {
@@ -239,9 +235,7 @@ class MemberController extends Controller
 
   public function selectaddress(Request $request)
   {
-
     $id = $request->input('id', '');
-
     $addr =  Addr::where('default',1)->first();
     $addr->default = 0;
     $addr->save();
@@ -249,8 +243,6 @@ class MemberController extends Controller
     $addrs = Addr::where('id',$id)->first();
     $addrs->default = 1;
     $addrs->save();
-
-
 
     $app_result = new AppResult;
     $app_result->status = 0;
@@ -266,9 +258,6 @@ class MemberController extends Controller
     Log::info("用户退出登录",['user_id'=>$member->id]);
     return redirect('/login');
   }
-
-
-
 
   }
 

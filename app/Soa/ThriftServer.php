@@ -8,7 +8,7 @@ service PhpRemote{
 */
 	error_reporting(E_ALL);
 	//$thriftLib = '/jqm/smarthome/thrift/thrift-0.9.3/lib/php/lib';
-	$SoaRoot = '/jqm/smarthome/smarthome_v1/public/Soa';
+	$SoaRoot = '/mnt/hgfs/linux_code/wap/app/Soa';
 	require_once $SoaRoot. '/Thrift/ClassLoader/ThriftClassLoader.php';
 	require_once $SoaRoot. '/idl/PhpRemote/PhpRemote.php';
 	require_once $SoaRoot. '/idl/PhpRemote/Types.php';
@@ -21,7 +21,8 @@ service PhpRemote{
 	//use Thrift\Transport\TSocket;
 	use Thrift\Transport\TPhpStream;
 	use Thrift\Transport\TBufferedTransport;
-		
+	use App\Soa\idl\PhpRemote\PhpRemoteIf;
+	use App\Soa\idl\PhpRemote\PhpRemoteProcessor;
 
 	// Load
 	$loader = new ThriftClassLoader();
@@ -31,6 +32,7 @@ service PhpRemote{
 	if (php_sapi_name() == 'cli') {
   		ini_set("display_errors", "stderr");
 	}
+
 	
 	class PhpRemoteServer implements PhpRemoteIf 
 	{
@@ -44,7 +46,7 @@ service PhpRemote{
 		{
 			file_put_contents('Serverlog.txt',$inMethod,FILE_APPEND);
 			file_put_contents('Serverlog.txt',$inMethod,FILE_APPEND);
-			return 'PhpRemoteReturn';
+			return '连接成功';
 		}
 	};
 

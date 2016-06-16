@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Soa;
 /*
    +----------------------------------------------------------------------+
    |                  			   platform                    	  	  |
@@ -11,7 +11,7 @@
    | Authors: LaiZuopeng      CreateTime:2016-05-26       |
    +----------------------------------------------------------------------+
 */
-
+use App\Soa\ThriftClient;
 class SoaClient
 {
     private static $clientList = array();

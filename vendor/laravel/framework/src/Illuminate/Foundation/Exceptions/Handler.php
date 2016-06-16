@@ -10,8 +10,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Debug\ExceptionHandler as SymfonyDisplayer;
 use Illuminate\Contracts\Debug\ExceptionHandler as ExceptionHandlerContract;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class Handler implements ExceptionHandlerContract
 {
@@ -21,7 +19,6 @@ class Handler implements ExceptionHandlerContract
      * @var \Psr\Log\LoggerInterface
      */
     protected $log;
-    protected $member;
 
     /**
      * A list of the exception types that should not be reported.
@@ -36,15 +33,10 @@ class Handler implements ExceptionHandlerContract
      * @param  \Psr\Log\LoggerInterface  $log
      * @return void
      */
-    public function __construct(Request $request, LoggerInterface $log)
+    public function __construct(LoggerInterface $log)
     {
-        $this->member = Session::get('member_id','');
         $this->log = $log;
-        $this->message = $request->url();
-        //$this->user_id = $this->member->id;
-
     }
-
 
     /**
      * Report or log an exception.
@@ -55,8 +47,7 @@ class Handler implements ExceptionHandlerContract
     public function report(Exception $e)
     {
         if ($this->shouldReport($e)) {
-            $message = '{'.'user_id:'.$this->member.':'.$this->message.'}'.$e;
-            $this->log->error($message);
+            $this->log->error($e);
         }
     }
 

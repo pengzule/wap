@@ -8,7 +8,7 @@ service PhpRemote{
 */
 	error_reporting(E_ALL);
 	//$thriftLib = '/jqm/smarthome/thrift/thrift-0.9.3/lib/php/lib';
-	$SoaRoot = '/mnt/hgfs/linux_code/lumen-api/app/Soa';
+	$SoaRoot = '/mnt/hgfs/linux_code/wap/app/Soa-bak';
 	require_once $SoaRoot. '/Thrift/ClassLoader/ThriftClassLoader.php';
 	require_once $SoaRoot. '/idl/PhpRemote/PhpRemote.php';
 	require_once $SoaRoot. '/idl/PhpRemote/Types.php';
@@ -42,6 +42,7 @@ service PhpRemote{
 		}
  		public function getFunc($inMethod, $inParams)
 		{
+			$time = time();
 			file_put_contents('Serverlog.txt',$inMethod,FILE_APPEND);
 			file_put_contents('Serverlog.txt',$inMethod,FILE_APPEND);
 			return 'PhpRemoteReturn';

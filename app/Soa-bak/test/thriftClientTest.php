@@ -1,7 +1,7 @@
 <?php
 	error_reporting(E_ALL);
 	$GLOBALS['G_CONFIG'] = array();
-	$GLOBALS['G_CONFIG']['SoaRoot'] = '/mnt/hgfs/linux_code/lumen-api/app/Soa';
+	$GLOBALS['G_CONFIG']['SoaRoot'] = '/mnt/hgfs/linux_code/wap/app/Soa-bak';
 
 	//$SoaRoot = '/jqm/smarthome/smarthome_v1/public/Soa';
 	require($GLOBALS['G_CONFIG']['SoaRoot'] . '/SoaClient.php');

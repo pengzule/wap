@@ -14,6 +14,7 @@ use Thrift\Exception\TProtocolException;
 use Thrift\Protocol\TProtocol;
 use Thrift\Protocol\TBinaryProtocolAccelerated;
 use Thrift\Exception\TApplicationException;
+use Exception;
 
 
 interface PhpRemoteIf {

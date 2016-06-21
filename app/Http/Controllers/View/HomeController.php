@@ -29,7 +29,7 @@ class HomeController extends Controller
     //$thriftClient = new ThriftClient($soa,'xxx',3);
     echo 'getSoa-------------------------';
     //echo var_dump($soa);
-    $method = 'ClientMethoed';
+    $method = 'pengzule';
     $params = 'clientParams';
     $result = $soa->getAndSet($method, $params);
     echo $result;

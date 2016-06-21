@@ -2,6 +2,7 @@
 namespace App\Soa;
 use App\Soa\idl\PhpRemote\PhpRemoteClient;
 use App\Soa\idl\PhpRemote\PhpRemote_getFunc_args;
+use Log;
 	error_reporting(E_ALL);
 	//$thriftLib = '/jqm/smarthome/thrift/thrift-0.9.3/lib/php/lib';
 	//$SoaRoot = '/jqm/smarthome/smarthome_v1/public/Soa';
@@ -88,6 +89,7 @@ use App\Soa\idl\PhpRemote\PhpRemote_getFunc_args;
 		//if (array_search('--http', $argv)) {
 			  echo '--1--';
 			$socket = new THttpClient((string)$IpStr, (int)$PortStr, '/Soa/ThriftServer.php');
+			//$socket = new THttpClient((string)$IpStr, (int)$PortStr, '/test');
   	   	//} else {
     			//$socket = new TSocket('127.0.0.1', 6666);
   	  	//}
@@ -120,6 +122,7 @@ use App\Soa\idl\PhpRemote\PhpRemote_getFunc_args;
 			echo '--7--';
 			try {
 				echo '--8--';
+				Log::info('get');
 				$result = $this->client->getFunc($method, $params);
 				echo '--9--';
 				echo '*************call remote';

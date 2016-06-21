@@ -83,7 +83,7 @@
 		list($IpStr, $PortStr) = explode(":",strval($IpPortStr),2);
 		echo $baseUrl.'{Test}';
 		//if (array_search('--http', $argv)) {    		
-			$socket = new THttpClient((string)$IpStr, (int)$PortStr, '/Soa/ThriftServer.php');
+			$socket = new THttpClient((string)$IpStr, (int)$PortStr, '/Soa-bak/ThriftServer.php');
   	   	//} else {
     			//$socket = new TSocket('127.0.0.1', 6666);
   	  	//}

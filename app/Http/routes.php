@@ -1,5 +1,24 @@
 <?php
 
+
+
+/*
+|--------------------------------------------------------------------------
+| System Manager Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
+
+Route::get('/index', 'GenericAgentController@index' );
+Route::get('/parent', 'GenericAgentController@subchild' );
+
+
+Route::get('/xml', 'View\HomeController@xml');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -14,6 +33,10 @@
 Route::get('/test','View\TestController@index');
 Route::get('/', 'View\HomeController@index');
 Route::get('/home', 'View\HomeController@index');
+Route::get('/cate', 'View\HomeController@test');
+
+Route::get('/form', 'View\HomeController@form');
+
 
 Route::get('/login', 'View\MemberController@toLogin');
 Route::get('/register', 'View\MemberController@toRegister');

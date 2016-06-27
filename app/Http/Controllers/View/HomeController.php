@@ -3,36 +3,43 @@
 namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Entity\Product;
 use Log;
 use App\Soa\SoaClient;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
-  public function index(Request $request)
+  public function xml()
   {
-    error_reporting(E_ALL);
+    return view('xml');
+  }
+  public function index()
+  {
     $GLOBALS['G_CONFIG'] = array();
     $GLOBALS['G_CONFIG']['SoaRoot'] = '/mnt/hgfs/linux_code/wap/app/Soa';
-
-    //$SoaRoot = '/jqm/smarthome/smarthome_v1/public/Soa';
-    require($GLOBALS['G_CONFIG']['SoaRoot'] . '/SoaClient.php');
-    require($GLOBALS['G_CONFIG']['SoaRoot'] . '/ThriftClient.php');
     $config      = require($GLOBALS['G_CONFIG']['SoaRoot'] . '/soa_config.php');
 
     $GLOBALS['G_CONFIG'] = array_merge($GLOBALS['G_CONFIG'], $config);
-    echo json_encode($GLOBALS['G_CONFIG']);
-    echo 'test-------------------------1';
     $soa = SoaClient::getSoa('bbs','service');
-
     //$thriftClient = new ThriftClient($soa,'xxx',3);
-    echo 'getSoa-------------------------';
     //echo var_dump($soa);
-    $method = 'pengzule';
-    $params = 'clientParams';
-    $result = $soa->getAndSet($method, $params);
-    echo $result;
+    $method = '1';
+    $params = array("2");
+    $result = $soa->getAndSet($method, json_encode($params));
+    $result = json_decode($result);
+    return view('home')->with('products', $result);
+   // return $result;
+  }
+
+  public function test()
+  {
+    //return Redirect::to('/test');
+    return redirect('/test');
+  }
+  public function form()
+  {
+
+    return view('dataform');
   }
 
 }

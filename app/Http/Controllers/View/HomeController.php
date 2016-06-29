@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use Log;
 use App\Soa\SoaClient;
 use Illuminate\Support\Facades\Redirect;
+use App\Entity\Member;
 
 class HomeController extends Controller
 {
   public function xml()
   {
-    return view('xml');
+    $row = Member::all();
+    return view('xml')->with('row',$row);
   }
   public function index()
   {

@@ -26,7 +26,7 @@ service PhpRemote{
 	// Load
 	$loader = new ThriftClassLoader();
 	$loader->registerNamespace('Thrift',$SoaRoot. '/');
-	$loader->registerDefinition('PhpRemote',$SoaRoot. '/idl/PhpRemote');
+	$loader->registerDefinition('gen-php',$SoaRoot. '/idl/gen-php');
 	$loader->register();
 	if (php_sapi_name() == 'cli') {
   		ini_set("display_errors", "stderr");

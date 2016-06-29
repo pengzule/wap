@@ -28,28 +28,76 @@ class GenericAgentController extends Controller
 
     public function index()
     {
-        $ips = $this->genericAgentRepository->index('127.0.0.1:80');
-        $result = $this->thriftService->connect();
+        $result = $this->thriftService->connect('get app lists');
+        $result_arr = ($result!='' ? explode(';', $result) : array());
+        $baseUrl =  $GLOBALS['G_CONFIG']['soa_client']['bbs'];
+        list($http, $IpPortStr) = explode("//",strval($baseUrl),2);
+        list($IpStr, $PortStr) = explode(":",strval($IpPortStr),2);
+        list($GamStr, $PortStr) = explode(":",strval($result_arr[0]),2);
         $time = Carbon::now();
-        return view('form')->with('ips',$ips)
+        $new = array();
+        for($i=1;$i<count($result_arr)-1;$i++)
+        {
+            list($nameStr, $PortStr) = explode(":",strval($result_arr[$i]),2);
+            $ips= array($nameStr);
+            $IpPort = $IpStr.':'.$PortStr;
+            $IpPorts = array($IpPort);
+            $news = array_merge($ips,$IpPorts);
+            array_push($new,$news);
+        }
+        $loglevel = 'Warning';
+        $loglevel_arr = array('Trace','Debug','Warning','Info','Fail','Error','Normal','Message');
+
+        return view('form')->with('ips',$new)
             ->with('time',$time)
-            ->with('result',$result);
+            ->with('result',$result)
+            ->with('IpPort',$IpPortStr)
+            ->with('result_arr',$GamStr)
+            ->with('loglevel',$loglevel)
+            ->with('loglevel_arr',$loglevel_arr);
     }
 
 
     public function subchild(Request $request)
     {
-        $result = $this->thriftService->connect();
-        $name = $request->input('name','');
-        Log::info($name);
-        $ips = $this->genericAgentRepository->index($name);
+        $result = $this->thriftService->connect('get app lists');
+        $result_arr = ($result!='' ? explode(';', $result) : array());
+        $baseUrl =  $GLOBALS['G_CONFIG']['soa_client']['bbs'];
+        list($http, $IpPortStr) = explode("//",strval($baseUrl),2);
+        list($IpStr, $PortStr) = explode(":",strval($IpPortStr),2);
         $time = Carbon::now();
+        $new = array();
+        for($i=1;$i<count($result_arr)-1;$i++)
+        {
+            list($nameStr, $PortStr) = explode(":",strval($result_arr[$i]),2);
+            $ips= array($nameStr);
+            $IpPort = $IpStr.':'.$PortStr;
+            $IpPorts = array($IpPort);
+            $news = array_merge($ips,$IpPorts);
+            array_push($new,$news);
+        }
+        $loglevel = 'Debug';
+        $loglevel_arr = array('Trace','Debug','Warning','Info','Fail','Error','Normal','Message');
 
         $this->appResult->status = 0;
         $this->appResult->message= '返回成功';
-        $this->appResult->ips = $ips;
+        $this->appResult->ips = $new;
         $this->appResult->time = $time;
         $this->appResult->state = $result;
+        $this->appResult->loglevel = $loglevel;
+        $this->appResult->loglevel_arr = $loglevel_arr;
+
+        return   $this->appResult->toJson();
+    }
+
+    public function sendcommand(Request $request)
+    {
+        $command = $request->input('command','');
+        $result = $this->thriftService->connect($command);
+
+        $this->appResult->status = 0;
+        $this->appResult->message= '返回成功';
+        $this->appResult->return = $result;
 
         return   $this->appResult->toJson();
     }

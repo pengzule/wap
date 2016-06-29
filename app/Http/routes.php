@@ -15,10 +15,25 @@
 
 Route::get('/index', 'GenericAgentController@index' );
 Route::get('/parent', 'GenericAgentController@subchild' );
+Route::get('/sendcommand', 'GenericAgentController@sendcommand' );
 
 
 Route::get('/xml', 'View\HomeController@xml');
 
+/*
+|--------------------------------------------------------------------------
+| Broadcasting Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
+Route::get("/", function () {
+  return view("index");
+});
+Route::resource("items", "ItemController", ["except" => ["create", "edit"]]);//排除掉create和edit操作
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -31,7 +46,7 @@ Route::get('/xml', 'View\HomeController@xml');
 */
 
 Route::get('/test','View\TestController@index');
-Route::get('/', 'View\HomeController@index');
+//Route::get('/', 'View\HomeController@index');
 Route::get('/home', 'View\HomeController@index');
 Route::get('/cate', 'View\HomeController@test');
 

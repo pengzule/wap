@@ -11,7 +11,7 @@ namespace App\Soa;
    | Authors: LaiZuopeng      CreateTime:2016-05-26       |
    +----------------------------------------------------------------------+
 */
-use App\Soa\ThriftClient;
+//use App\Soa\ThriftClient;
 class SoaClient
 {
     private static $clientList = array();
@@ -36,6 +36,7 @@ class SoaClient
      */
     public static function getSoa($server, $service, $retryNum = 3)
     {
+
         if(!empty(self::$clientList[$server][$service])){
             return self::$clientList[$server][$service];
         }

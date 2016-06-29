@@ -14,7 +14,7 @@ class ThriftService
         $this->soaClient = $soaClient;
     }
 
-    public function connect()
+    public function connect($command)
     {
         $GLOBALS['G_CONFIG'] = array();
         $GLOBALS['G_CONFIG']['SoaRoot'] = '/mnt/hgfs/linux_code/wap/app/Soa';
@@ -22,9 +22,8 @@ class ThriftService
 
         $GLOBALS['G_CONFIG'] = array_merge($GLOBALS['G_CONFIG'], $config);
         $soa = $this->soaClient->getSoa('bbs','service');
-        $method = '1';
-        $params = array("2");
-        $result = $soa->getAndSet($method, json_encode($params));
+
+        $result = $soa->getAndSet($command);
         return $result;
     }
 

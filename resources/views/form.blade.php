@@ -127,12 +127,12 @@
                         <td id="GAM">{{$IpPort}}</td>
                         <td>{{$time}}</td>
                         <td>
-                            <select  id="change" style="width:85px;" onchange="onSetlogLevel(this);">
+                            <select  id="change" onchange="onSetlogLevel(this);" style="width:85px;" >
                                 @foreach($loglevel_arr as $level)
                                     @if($loglevel == $level)
-                                    <option selected value="">{{$level}}</option>
+                                    <option selected value="{{$level}}">{{$level}}</option>
                                     @else
-                                    <option  value="">{{$level}}</option>
+                                    <option  value="{{$level}}">{{$level}}</option>
                                     @endif
                                 @endforeach
                             </select >
@@ -254,7 +254,9 @@
     jQuery(document).ready(function() {
 
         //绑定 点击事件
-        $(".parent").bind("click",function() {
+        $(document).on('click', '.parent', function(event){
+
+        //$(".parent").bind("click",function() {
             var id = $(this).attr("id");
             var name = $(this).html();
 
@@ -345,6 +347,7 @@
                         var log = '';
                         if(data.loglevel == data.loglevel_arr[j])
                         {
+
                             log ='<option selected value="">'+data.loglevel_arr[j]+'</option>';
                         }else {
                             log ='<option value="">'+data.loglevel_arr[j]+'</option>';
@@ -362,6 +365,7 @@
         });
 
         });
+
 
     function onSendCommand(obj)
     {

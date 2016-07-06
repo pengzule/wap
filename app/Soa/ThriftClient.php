@@ -1,11 +1,12 @@
 <?php
 namespace App\Soa;
 
-require_once $GLOBALS['G_CONFIG']['SoaRoot']. '/idl/gen/GenericAgentIdl.php';
-use App\Soa\idl\gen\GenericAgentIdlClient;
+require_once __DIR__. '/idl/PhpRemote/PhpRemote.php';
+
+use App\Soa\idl\PhpRemote\PhpRemoteClient;
 use Thrift\ClassLoader\ThriftClassLoader;
 use Thrift\Protocol\TBinaryProtocol;
-use Thrift\Protocol\TCompactProtocol;
+//use Thrift\Protocol\TCompactProtocol;
 use Thrift\Transport\TSocket;
 use Thrift\Transport\TBufferedTransport;
 use Thrift\Transport\THttpClient;
@@ -60,7 +61,7 @@ class ThriftClient //implements SoaService
 		// Load
 		$loader = new ThriftClassLoader();
 		$loader->registerNamespace('Thrift',$GLOBALS['G_CONFIG']['SoaRoot']. '/');
-		$loader->registerDefinition('gen',$GLOBALS['G_CONFIG']['SoaRoot']. '/idl/gen');
+		$loader->registerDefinition('PhpRemote',$GLOBALS['G_CONFIG']['SoaRoot']. '/idl/PhpRemote');
 		$loader->register();
 
 		$this->service  = $service;
@@ -80,17 +81,17 @@ class ThriftClient //implements SoaService
 		list($IpStr, $PortStr) = explode(":",strval($IpPortStr),2);
 		//if (array_search('--http', $argv)) {
 
-		//$socket = new THttpClient((string)$IpStr, (int)$PortStr, '/Soa/ThriftServer.php');
+		$socket = new THttpClient((string)$IpStr, (int)$PortStr, '/Soa/ThriftServer.php');
 		//$socket = new THttpClient((string)$IpStr, (int)$PortStr, '/test');
 		//} else {
-		$socket = new TSocket((string)$IpStr,(int)$PortStr);
+		//$socket = new TSocket('127.0.0.1', 6666);
 		//}
 
-		//$socket->setTimeoutSecs(2);
+		$socket->setTimeoutSecs(2);
 		$transport = new TBufferedTransport($socket, 1024, 1024);
-		//$protocol = new TBinaryProtocol($transport);
-		$protocol = new TCompactProtocol($transport);
-		$client = new GenericAgentIdlClient($protocol);
+		$protocol = new TBinaryProtocol($transport);
+		//$protocol = new TCompactProtocol($transport);
+		$client = new  PhpRemoteClient($protocol);
 		$this->transport = $transport;
 		$this->client = $client;
 	}
@@ -103,13 +104,13 @@ class ThriftClient //implements SoaService
 	 *
 	 * @return mixed 远程方法返回的值
 	 */
-	public function getAndSet($params){
+	public function getAndSet($method, $params){
 		// 需要添加日志
 		$this->transport->open();
 		$result = '{result:null}';
 		try {
 			Log::info('connect to Thriftserver');
-			$result = $this->client->sendCommand($params);
+			$result = $this->client->getFunc($method, $params);
 		}
 		catch (Exception $e){
 			echo ' exception';

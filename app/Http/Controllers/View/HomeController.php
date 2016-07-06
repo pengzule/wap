@@ -25,12 +25,12 @@ class HomeController extends Controller
     $soa = SoaClient::getSoa('bbs','service');
     //$thriftClient = new ThriftClient($soa,'xxx',3);
     //echo var_dump($soa);
-    $method = '1';
+    $method = '2';
     $params = array("2");
     $result = $soa->getAndSet($method, json_encode($params));
-    $result = json_decode($result);
-    return view('home')->with('products', $result);
-   // return $result;
+    //$result = json_decode($result);
+   // return view('home')->with('products', $result);
+    return $result;
   }
 
   public function test()

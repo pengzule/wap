@@ -13,9 +13,10 @@
 |
 */
 
-Route::get('/index', 'GenericAgentController@index' );
+Route::get('/index', 'GenericAgentController@index');
 Route::get('/parent', 'GenericAgentController@subchild' );
 Route::get('/sendcommand', 'GenericAgentController@sendcommand' );
+
 
 
 Route::get('/xml', 'View\HomeController@xml');

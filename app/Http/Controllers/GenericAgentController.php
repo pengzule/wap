@@ -48,7 +48,7 @@ class GenericAgentController extends Controller
         $loglevel = 'Warning';
         $loglevel_arr = array('Trace','Debug','Warning','Info','Fail','Error','Normal','Message');
 
-        return view('form')->with('ips',$new)
+        return view('systemmanager')->with('ips',$new)
             ->with('time',$time)
             ->with('result',$result)
             ->with('IpPort',$IpPortStr)
@@ -79,15 +79,24 @@ class GenericAgentController extends Controller
         $loglevel = 'Debug';
         $loglevel_arr = array('Trace','Debug','Warning','Info','Fail','Error','Normal','Message');
 
-        $this->appResult->status = 0;
-        $this->appResult->message= '返回成功';
-        $this->appResult->ips = $new;
-        $this->appResult->time = $time;
-        $this->appResult->state = $result;
-        $this->appResult->loglevel = $loglevel;
-        $this->appResult->loglevel_arr = $loglevel_arr;
+        $data = ['time' => $time,
+                 'ips' => $new,
+                 'result'=>$result,
+                 'IpPort'=>$IpPortStr,
+                 'loglevel'=>$loglevel,
+                 'loglevel_arr'=>$loglevel_arr];
 
-        return   $this->appResult->toJson();
+        return view('systemmanager.show',$data);
+
+       // $this->appResult->status = 0;
+        //$this->appResult->message= '返回成功';
+       // $this->appResult->ips = $new;
+       // $this->appResult->time = $time;
+       // $this->appResult->state = $result;
+       // $this->appResult->loglevel = $loglevel;
+     //   $this->appResult->loglevel_arr = $loglevel_arr;
+
+      //  return   $this->appResult->toJson();
     }
 
     public function sendcommand(Request $request)

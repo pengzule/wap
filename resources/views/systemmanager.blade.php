@@ -43,19 +43,22 @@
         }
 
     </style>
-    <script type="text/javascript">
+
+    <!--<script>
+        $(document).ready(function() {
+            $('tr').addClass('odd');
+            $('tr:even').addClass('even'); //奇偶变色，添加样式
+        });
+    </script>
+         <script type="text/javascript">
 
         $(document).ready(function(){
             $("tr:even").css("background-color","#B2E0FF");
         });
 
     </script>
-    <script>
-        $(document).ready(function() {
-            $('tr').addClass('odd');
-            $('tr:even').addClass('even'); //奇偶变色，添加样式
-        });
-    </script>
+       -->
+
 
 </head>
 <body>
@@ -70,7 +73,7 @@
                     <li class="subMenu open " id="80"><a id="xml0" class="parent">{{$result_arr}} </a>
                         <ul>
                             @foreach($ips as $ip)
-                            <li><a ><i class="icon-chevron-right"></i>{{$ip[0]}}</a></li>
+                                <li><a ><i class="icon-chevron-right"></i>{{$ip[0]}}</a></li>
                             @endforeach
                         </ul>
                     </li>
@@ -112,93 +115,92 @@
 
                 <hr class="soft"/>
                 <div id="gaminfo">
-                <table>
-                    <tr>
-                        <th >Name</th>
-                        <th >IP:Port</th>
-                        <th >Time</th>
-                        <th >LogLevel</th>
-                        <th >Set State</th>
-                        <th >Received</th>
-                        <th >Send Command</th>
-                    </tr>
-                    <tr>
-                        <td id="GAM">{{$result_arr}}</td>
-                        <td id="GAM">{{$IpPort}}</td>
-                        <td>{{$time}}</td>
-                        <td>
-                            <select  id="change" onchange="onSetlogLevel(this);" style="width:85px;" >
-                                @foreach($loglevel_arr as $level)
-                                    @if($loglevel == $level)
-                                    <option selected value="{{$level}}">{{$level}}</option>
-                                    @else
-                                    <option  value="{{$level}}">{{$level}}</option>
-                                    @endif
-                                @endforeach
-                            </select >
-                        </td>
-                        <td>
-                            <select style="width:80px;">
-                                <option value="">Online</option>
-                                <option value="">Offline</option>
-                            </select >
-                        </td>
-                        <td id="state" class="received">{{$result}}</td>
-                        <td>
-                            <textarea  name="comment" rows="1" class=" pzl_textarea form-control" value="" ></textarea>
-                            <a  onclick="onSendCommand(this);"  class="btn ">Send</a>
-                        </td>
+                    <table class="data_list">
+                        <tr bgcolor="#B2E0FF">
+                            <th >Name</th>
+                            <th >IP:Port</th>
+                            <th >Time</th>
+                            <th >LogLevel</th>
+                            <th >Set State</th>
+                            <th >Received</th>
+                            <th >Send Command</th>
+                        </tr>
+                        <tr>
+                            <td id="GAM">{{$result_arr}}</td>
+                            <td id="GAM">{{$IpPort}}</td>
+                            <td>{{$time}}</td>
+                            <td>
+                                <select  id="change" onchange="onSetlogLevel(this);" style="width:85px;" >
+                                    @foreach($loglevel_arr as $level)
+                                        @if($loglevel == $level)
+                                            <option selected value="{{$level}}">{{$level}}</option>
+                                        @else
+                                            <option  value="{{$level}}">{{$level}}</option>
+                                        @endif
+                                    @endforeach
+                                </select >
+                            </td>
+                            <td>
+                                <select style="width:80px;">
+                                    <option value="">Online</option>
+                                    <option value="">Offline</option>
+                                </select >
+                            </td>
+                            <td id="state" class="received">{{$result}}</td>
+                            <td>
+                                <textarea  name="comment" rows="1" class=" pzl_textarea form-control" value="" ></textarea>
+                                <a  onclick="onSendCommand(this);"  class="btn ">Send</a>
+                            </td>
 
-                    </tr>
-                </table>
+                        </tr>
+                    </table>
                 </div>
 
                 <hr class="soft"/>
 
                 <div id="appinfo">
-                <table >
-                    <tr>
-                        <th >Name</th>
-                        <th >IP:Port</th>
-                        <th >Time</th>
-                        <th>LogLevel</th>
-                        <th >Set State</th>
-                        <th >Received</th>
-                        <th >Send Command</th>
-                    </tr>
+                    <table  class="data_list">
+                        <tr bgcolor="#B2E0FF">
+                            <th >Name</th>
+                            <th >IP:Port</th>
+                            <th >Time</th>
+                            <th>LogLevel</th>
+                            <th >Set State</th>
+                            <th >Received</th>
+                            <th >Send Command</th>
+                        </tr>
 
-                    @foreach($ips as $ip)
-                    <tr >
-                        <td>{{$ip[0]}}</td>
-                        <td>{{$ip[1]}}</td>
-                        <td>{{$time}}</td>
-                        <td>
-                            <select  id="change" style="width:85px;" onchange="onSetlogLevel(this);">
-                                @foreach($loglevel_arr as $level)
-                                    @if($loglevel == $level)
-                                        <option selected value="">{{$level}}</option>
-                                    @else
-                                        <option  >{{$level}}</option>
-                                    @endif
-                                @endforeach
-                            </select >
-                        </td>
-                        <td>
-                            <select style="width:80px;">
-                                <option value="">Online</option>
-                                <option value="">Offline</option>
-                            </select >
-                        </td>
-                        <td class="received">{{$result}}</td>
-                        <td>
-                            <textarea  name="comment" rows="1" class=" pzl_textarea form-control" value="" ></textarea>
-                            <a  onclick="onSendCommand(this);"  class="btn ">Send</a>
-                        </td>
-                    </tr>
-                    @endforeach
+                        @foreach($ips as $ip)
+                            <tr >
+                                <td>{{$ip[0]}}</td>
+                                <td>{{$ip[1]}}</td>
+                                <td>{{$time}}</td>
+                                <td>
+                                    <select  id="change" style="width:85px;" onchange="onSetlogLevel(this);">
+                                        @foreach($loglevel_arr as $level)
+                                            @if($loglevel == $level)
+                                                <option selected value="">{{$level}}</option>
+                                            @else
+                                                <option  >{{$level}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select >
+                                </td>
+                                <td>
+                                    <select style="width:80px;">
+                                        <option value="">Online</option>
+                                        <option value="">Offline</option>
+                                    </select >
+                                </td>
+                                <td class="received">{{$result}}</td>
+                                <td>
+                                    <textarea  name="comment" rows="1" class=" pzl_textarea form-control" value="" ></textarea>
+                                    <a  onclick="onSendCommand(this);"  class="btn ">Send</a>
+                                </td>
+                            </tr>
+                        @endforeach
 
-
-                </table>
+                    </table>
                 </div>
                 <hr class="soft"/>
 
@@ -242,12 +244,12 @@
 <script>
     //xmlDoc=loadXMLDoc("note.xml");
 
-   // x=xmlDoc.getElementsByTagName("parent");
+    // x=xmlDoc.getElementsByTagName("parent");
     //var i = 0;
-   // for(i ;i< x.length;i++)
+    // for(i ;i< x.length;i++)
     //{
     //    document.getElementById("xml"+i).innerHTML = x[i].childNodes[0].nodeValue;
-  //  }
+    //  }
 
 </script>
 <script type="text/javascript">
@@ -256,14 +258,14 @@
         //绑定 点击事件
         $(document).on('click', '.parent', function(event){
 
-        //$(".parent").bind("click",function() {
+            //$(".parent").bind("click",function() {
             var id = $(this).attr("id");
             var name = $(this).html();
 
             $.ajax({
                 type: "GET",
                 url: '/parent',
-                dataType: 'json',
+                dataType: '',
                 cache: false,
                 data: {name:name, _token: "{{csrf_token()}}"},
                 success: function(data) {
@@ -277,83 +279,9 @@
 
                     $('#parent').html(name);
                     $('#GAM').html(name);
-                    $('#state').html(data.state);
+                    $('#state').html(data.result);
 
-                    var top = '<tr bgcolor="#B2E0FF">'+
-                    '<th >'+'Name'+'</th>'+
-                    '<th >'+'IP:Port'+'</th>'+
-                    '<th >'+'Time'+'</th>'+
-                    '<th >'+'LogLevel'+'</th>'+
-                    '<th >'+'Set State'+'</th>'+
-                    '<th >'+'Received'+'</th>'+
-                    '<th >'+'Send Command'+'</th>'+
-                    '</tr>';
-
-                    $('#appinfo').append(top);
-                    var arr = data.time.date.split('.');
-
-                    for(var i=0; i<data.ips.length; i++) {
-
-                        if (i%2==0){
-                            var node =
-                                    '<tr >'+
-                                    '<td>'+data.ips[i][0]+'</td>'+
-                                    '<td>'+data.ips[i][1]+'</td>'+
-                                    '<td>'+arr[0]+'</td>'+
-                                    '<td >'+
-                                    '<select id="change" class="logselect" onchange="onSetlogLevel(this);" style="width:85px;" >'+
-                                    '</select >'+
-                                    '</td>'+
-                                    '<td >'+
-                                    '<select style="width:80px;">'+
-                                    '<option value="">'+'Online'+'</option>'+
-                                    '<option value="">'+'Offline'+'</option>'+
-                                    '</select>'+
-                                    '</td>'+
-                                    '<td>'+data.state+'</td>'+
-                                    '<td>'+
-                                    '<textarea  name="comment" rows="1" class=" pzl_textarea form-control" value="" >'+'</textarea>'+
-                                    '<a  onclick="onSendCommand(this);"  class="btn ">'+'Send'+'</a>'+
-                                    '</td>'+
-                                    '</tr>';
-                        }else{
-                            var node =
-                                    '<tr bgcolor="#B2E0FF">'+
-                                    '<td>'+data.ips[i][0]+'</td>'+
-                                    '<td>'+data.ips[i][1]+'</td>'+
-                                    '<td>'+arr[0]+'</td>'+
-                                    '<td >'+
-                                    '<select id="change" class="logselect" onchange="onSetlogLevel(this);" style="width:85px;" >'+
-                                    '</select >'+
-                                    '</td>'+
-
-                                    '<td>'+
-                                    '<select style="width:80px">'+
-                                    '<option value="">'+'Online'+'</option>'+
-                                    '<option value="">'+'Offline'+'</option>'+
-                                    '</select >'+
-                                    '</td>'+
-                                    '<td>'+data.state+'</td>'+
-                                    '<td>'+
-                                    '<textarea  name="comment" rows="1" class=" pzl_textarea form-control" value="" >'+'</textarea>'+
-                                    '<a  onclick="onSendCommand(this);"  class="btn ">'+'Send'+'</a>'+
-                                    '</td>'+
-                                    '</tr>';
-                        }
-
-                        $('#appinfo').append(node);
-                    }
-                    for(var j=0;j<data.loglevel_arr.length;j++){
-                        var log = '';
-                        if(data.loglevel == data.loglevel_arr[j])
-                        {
-
-                            log ='<option selected value="">'+data.loglevel_arr[j]+'</option>';
-                        }else {
-                            log ='<option value="">'+data.loglevel_arr[j]+'</option>';
-                        }
-                        $('.logselect').append(log);
-                    }
+                    $('#appinfo').html(data);
 
                 },
                 error: function(xhr, status, error) {
@@ -364,8 +292,7 @@
             });
         });
 
-        });
-
+    });
 
     function onSendCommand(obj)
     {
@@ -400,7 +327,7 @@
     {
         var _this = $(obj);
         //var _obj = document.getElementById('change').value;
-       var _obj = _this.val();
+        var _obj = _this.val();
 
         var command ='set loglevel '+ _obj.toLowerCase();
 
@@ -427,8 +354,8 @@
     }
 
 
-       
-    </script>
+
+</script>
 <!-- Themes switcher section ============================================================================================= -->
 
 <span id="themesBtn"></span>

@@ -9,7 +9,6 @@ use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\PdtContent;
 use App\Entity\PdtImages;
-use App\Entity\CommentImagesImages;
 use App\Entity\PdtComments;
 use App\Entity\CartItem;
 use App\Models\Appresult;
@@ -67,12 +66,21 @@ class GoodsController extends Controller
         }
       }
     }
-    return view('pdt_content')->with('product', $product)
+    $data = ['product'=>$product,
+    'pdt_content'=>$pdt_content,
+    'pdt_images'=>$pdt_images,
+    'count'=>$count,
+    'wish'=>$wish,
+    'counts'=>$counts
+    ];
+    return view('pdt_content',$data);
+
+   /* return view('pdt_content')->with('product', $product)
                               ->with('pdt_content', $pdt_content)
                               ->with('pdt_images', $pdt_images)
                               ->with('count', $count)
                               ->with('wish',$wish)
-                              ->with('counts',$counts);
+                              ->with('counts',$counts);*/
   }
 
   public function toSearch(Request $request)

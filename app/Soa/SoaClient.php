@@ -12,6 +12,8 @@ namespace App\Soa;
    +----------------------------------------------------------------------+
 */
 //use App\Soa\ThriftClient;
+use Illuminate\Support\Facades\Log;
+
 class SoaClient
 {
     private static $clientList = array();
@@ -44,7 +46,9 @@ class SoaClient
         //soa访问的地址
         $baseUrl    = '';
 
-        $config     = $GLOBALS['G_CONFIG']['soa_client'][$server];
+        //$config     = $GLOBALS['G_CONFIG']['soa_client'][$server];
+        $config     = config("soa_config.soa_client.$server");
+
 
         //如果有多个soa节点则进行随机负载
         if(is_string($config)){
@@ -56,10 +60,10 @@ class SoaClient
         }
 
         //选择协议 --默认都是thrift. yar过时，json....
-        if($GLOBALS['G_CONFIG']['soa_protocol'][$server] == 'json'){
+        if(config("soa_config.soa_protocol.$server") == 'json'){
             self::$clientList[$server][$service] = new JsonProtocol($baseUrl, $service, $retryNum);
         }
-	else if($GLOBALS['G_CONFIG']['soa_protocol'][$server] == 'yar'){
+	else if(config("soa_config.soa_protocol.$server" )== 'yar'){
             self::$clientList[$server][$service] = new Yar($baseUrl, $service, $retryNum);
         }
 	else{

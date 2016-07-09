@@ -11,7 +11,7 @@
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
 |
-*/
+
 
 Route::get('/index', 'GenericAgentController@index');
 Route::get('/parent', 'GenericAgentController@subchild' );
@@ -20,7 +20,7 @@ Route::get('/sendcommand', 'GenericAgentController@sendcommand' );
 
 
 Route::get('/xml', 'View\HomeController@xml');
-
+*/
 /*
 |--------------------------------------------------------------------------
 | Broadcasting Routes
@@ -30,11 +30,13 @@ Route::get('/xml', 'View\HomeController@xml');
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
 |
-*/
+
 Route::get("/", function () {
   return view("index");
 });
 Route::resource("items", "ItemController", ["except" => ["create", "edit"]]);//排除掉create和edit操作
+*/
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -47,9 +49,11 @@ Route::resource("items", "ItemController", ["except" => ["create", "edit"]]);//�
 */
 
 Route::get('/test','View\TestController@index');
-//Route::get('/', 'View\HomeController@index');
+
+
+Route::get('/', 'View\HomeController@index');
 Route::get('/home', 'View\HomeController@index');
-Route::get('/cate', 'View\HomeController@test');
+
 
 Route::get('/form', 'View\HomeController@form');
 
@@ -163,3 +167,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('order_edit', 'Admin\OrderController@toOrderEdit');
   });
 });
+
+
+

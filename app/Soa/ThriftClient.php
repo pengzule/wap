@@ -60,8 +60,8 @@ class ThriftClient //implements SoaService
 
 		// Load
 		$loader = new ThriftClassLoader();
-		$loader->registerNamespace('Thrift',$GLOBALS['G_CONFIG']['SoaRoot']. '/');
-		$loader->registerDefinition('PhpRemote',$GLOBALS['G_CONFIG']['SoaRoot']. '/idl/PhpRemote');
+		$loader->registerNamespace('Thrift', __DIR__. '/');
+		$loader->registerDefinition('PhpRemote', __DIR__. '/idl/PhpRemote');
 		$loader->register();
 
 		$this->service  = $service;
@@ -109,7 +109,6 @@ class ThriftClient //implements SoaService
 		$this->transport->open();
 		$result = '{result:null}';
 		try {
-			Log::info('connect to Thriftserver');
 			$result = $this->client->getFunc($method, $params);
 		}
 		catch (Exception $e){

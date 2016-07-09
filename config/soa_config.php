@@ -14,7 +14,7 @@
 
 return array(
     'soa_client' => array(
-        'bbs'   => 'http://192.168.226.79:6666',
+        'bbs'   => 'http://192.168.226.111:8080',
         'store'     => 'http://192.168.226.79:2002/v3/Soa/',
         'trade'     => 'http://192.168.226.79:6000/v2/Soa/',
         'tqmq'      => 'http://192.168.226.79:5001/v1/Soa/',
@@ -25,8 +25,8 @@ return array(
         '10.10.*.*',
     ),
     'soa_protocol' => array(
-	//'account'   => 'json',
-        //'store'     => 'yar',
+	'account'   => 'json',
+        'store'     => 'yar',
         'bbs'     => 'thrift',
     ),
 );

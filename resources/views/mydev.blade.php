@@ -1,6 +1,6 @@
 @extends('default')
 
-@section('title', '我的订单')
+@section('title', '我的设备')
 
 @section('content')
     <div class="fanhui_cou">
@@ -26,7 +26,33 @@
 
     <div class="clear"></div>
 
+    <!--
+      <div class="foot_index">
 
+      </div>
+      -->
+    <footer class="footer">
+        <div class="foot-con">
+            <div class="foot-con_2">
+                <a href="/home" >
+                    <i class="navIcon home"></i>
+                    <span class="text">首页</span>
+                </a>
+                <a href="/category">
+                    <i class="navIcon sort"></i>
+                    <span class="text">分类</span>
+                </a>
+                <a href="/cart">
+                    <i class="navIcon shop"></i>
+                    <span class="text">购物车</span>
+                </a>
+                <a href="/userhome" class="active">
+                    <i class="navIcon member"></i>
+                    <span class="text">我的</span>
+                </a>
+            </div>
+        </div>
+    </footer>
 
 
 

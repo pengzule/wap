@@ -65,21 +65,21 @@ Route::get('/login', 'View\MemberController@toLogin');
 Route::get('/register', 'View\MemberController@toRegister');
 Route::get('/logout', 'Service\MemberController@logout');
 
-
-/***********************************使用thrift连接lumen***********************************/
-
 Route::get('/category', 'View\CategoryController@index');
+//Route::get('/category', 'View\GoodsController@toCategory');
+
+//Route::get('/product/category_id/{category_id}', 'View\GoodsController@toProduct');
 Route::get('/product/category_id/{category_id}', 'View\PdtCategoryController@index');
+
+
+//Route::get('/product/{product_id}', 'View\GoodsController@toPdtContent');
+//Route::get('/product/{product_id}', 'View\HomeController@toPdtContent');
 Route::get('/product/{product_id}', 'View\PdtContentController@index');
-Route::get('/m_search/list', 'Service\PdtSearchController@index');
-Route::get('/prodsort', 'Service\PdtSortController@index');
-Route::get('/proddetail', 'View\PdtDetailController@index');
 
 
-
-
-
-
+Route::get('/m_search/list', 'View\GoodsController@toSearch');
+Route::get('/prodsort', 'View\GoodsController@toProdSort');
+Route::get('/proddetail', 'View\GoodsController@toProdDetail');
 Route::get('/myorder', 'View\OrderController@toMyOrder');
 
 Route::get('/cart', 'View\CartController@toCart');
@@ -124,15 +124,9 @@ Route::group(['middleware' => 'check.login'], function ()  {
   Route::match(['get', 'post'], '/sumbit_comment', 'View\OrderController@comment');
   Route::match(['get', 'post'], '/order_content/{order_id}', 'View\OrderController@toOrderContent');
   Route::match(['get', 'post'], '/service/buynow_confirm', 'Service\CartController@buyNow');
-
-  /***********************************使用thrift连接lumen***********************************/
-  Route::get('/userhome', 'View\PerlCenterController@index');
-
-
-
   Route::get('/order_list', 'View\OrderController@toOrderList');
   Route::get('/userinfo', 'View\MemberController@toUserInfo');
-
+  Route::get('/userhome', 'View\MemberController@toMyhome');
   Route::get('/mydev', 'View\MemberController@toMydev');
   Route::get('/myaddress', 'View\MemberController@toMyaddress');
   Route::get('/mywish', 'View\MemberController@toMywish');

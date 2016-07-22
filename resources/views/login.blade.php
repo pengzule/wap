@@ -21,7 +21,7 @@
             <br>
             <input name="password" type="password" class="form-control" placeholder="请输入密码"  style="-webkit-appearance:none;" autocomplete="off"  tabindex="2" />
             <br>
-            <input class="form-control" style="width: 45%;display:inline-block" type="text" placeholder="请输入验证码" name="validate_code"/>
+            <input class="form-control" style="width: 45%;display:inline-block" type="text" placeholder="请输入验证码" name="validate_code" tabindex="3"  />
             <img  src="/service/validate_code/create" style="float:right" class="jqmkj_validate_code"/>
 
             <label class="checkbox">

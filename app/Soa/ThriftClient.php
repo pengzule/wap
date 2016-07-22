@@ -6,7 +6,6 @@ require_once __DIR__. '/idl/PhpRemote/PhpRemote.php';
 use App\Soa\idl\PhpRemote\PhpRemoteClient;
 use Thrift\ClassLoader\ThriftClassLoader;
 use Thrift\Protocol\TBinaryProtocol;
-//use Thrift\Protocol\TCompactProtocol;
 use Thrift\Transport\TSocket;
 use Thrift\Transport\TBufferedTransport;
 use Thrift\Transport\THttpClient;
@@ -74,23 +73,16 @@ class ThriftClient //implements SoaService
 
 		$this->retryNum     = $retryNum;
 		$this->url          = $baseUrl;
-		//$this->url        = $baseUrl . 'ThriftService';
 
-		// $baseUrl = http://10.10.20.205:2002
 		list($http, $IpPortStr) = explode("//",strval($baseUrl),2);
 		list($IpStr, $PortStr) = explode(":",strval($IpPortStr),2);
-		//if (array_search('--http', $argv)) {
 
 		$socket = new THttpClient((string)$IpStr, (int)$PortStr, '/Soa/ThriftServer.php');
-		//$socket = new THttpClient((string)$IpStr, (int)$PortStr, '/test');
-		//} else {
-		//$socket = new TSocket('127.0.0.1', 6666);
-		//}
+
 
 		$socket->setTimeoutSecs(2);
 		$transport = new TBufferedTransport($socket, 1024, 1024);
 		$protocol = new TBinaryProtocol($transport);
-		//$protocol = new TCompactProtocol($transport);
 		$client = new  PhpRemoteClient($protocol);
 		$this->transport = $transport;
 		$this->client = $client;

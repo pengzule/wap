@@ -18,6 +18,9 @@ use Log;
 
 class GoodsController extends Controller
 {
+
+
+
   public function toCategory(Request $request)
   {
 
@@ -36,51 +39,55 @@ class GoodsController extends Controller
 
   public function toPdtContent(Request $request, $product_id)
   {
-    $product = Product::find($product_id);
-    $pdt_content = PdtContent::where('product_id', $product_id)->first();
-    $pdt_images = PdtImages::where('product_id', $product_id)->get();
-    $pdt_comments = PdtComments::where('product_id',$product_id)->get();
-    $counts = count($pdt_comments);
 
-    $count = 0;
-    $wish = '';
-    $member = $request->session()->get('member', '');
-    if($member != '') {
-      $cart_items = CartItem::where('member_id', $member->id)->get();
-      $wish = PdtCollect::where('member_id', $member->id)->where('product_id',$product_id)->first();
-      foreach ($cart_items as $cart_item) {
-        if($cart_item->product_id == $product_id) {
-          $count = $cart_item->count;
-          break;
-        }
-      }
-    } else {
-      $offline_cart = $request->cookie('offline_cart');
-      $offline_cart_arr = ($offline_cart!=null ? explode(',', $offline_cart) : array());
 
-      foreach ($offline_cart_arr as $value) {   // 一定要传引用
-        $index = strpos($value, ':');
-        if(substr($value, 0, $index) == $product_id) {
-          $count = (int) substr($value, $index+1);
-          break;
-        }
-      }
-    }
-    $data = ['product'=>$product,
-    'pdt_content'=>$pdt_content,
-    'pdt_images'=>$pdt_images,
-    'count'=>$count,
-    'wish'=>$wish,
-    'counts'=>$counts
-    ];
-    return view('pdt_content',$data);
+   $product = Product::find($product_id);
+   $pdt_content = PdtContent::where('product_id', $product_id)->first();
+   $pdt_images = PdtImages::where('product_id', $product_id)->get();
+   $pdt_comments = PdtComments::where('product_id',$product_id)->get();
+   $counts = count($pdt_comments);
 
-   /* return view('pdt_content')->with('product', $product)
-                              ->with('pdt_content', $pdt_content)
-                              ->with('pdt_images', $pdt_images)
-                              ->with('count', $count)
-                              ->with('wish',$wish)
-                              ->with('counts',$counts);*/
+   $count = 0;
+   $wish = '';
+   $member = $request->session()->get('member', '');
+   if($member != '') {
+     $cart_items = CartItem::where('member_id', $member->id)->get();
+     $wish = PdtCollect::where('member_id', $member->id)->where('product_id',$product_id)->first();
+     foreach ($cart_items as $cart_item) {
+       if($cart_item->product_id == $product_id) {
+         $count = $cart_item->count;
+         break;
+       }
+     }
+   } else {
+     $offline_cart = $request->cookie('offline_cart');
+     $offline_cart_arr = ($offline_cart!=null ? explode(',', $offline_cart) : array());
+
+     foreach ($offline_cart_arr as $value) {   // 一定要传引用
+       $index = strpos($value, ':');
+       if(substr($value, 0, $index) == $product_id) {
+         $count = (int) substr($value, $index+1);
+         break;
+       }
+     }
+   }
+   $data = ['product'=>$product,
+   'pdt_content'=>$pdt_content,
+   'pdt_images'=>$pdt_images,
+   'count'=>$count,
+   'wish'=>$wish,
+   'counts'=>$counts
+   ];
+   // dd($product);
+    //dd($data);
+   return view('pdt_content',$data);
+
+  /*return view('pdt_content')->with('product', $product)
+                             ->with('pdt_content', $pdt_content)
+                             ->with('pdt_images', $pdt_images)
+                             ->with('count', $count)
+                             ->with('wish',$wish)
+                             ->with('counts',$counts);*/
   }
 
   public function toSearch(Request $request)
@@ -122,12 +129,20 @@ class GoodsController extends Controller
     $app_result = new Appresult;
     $name = $request->input('name','');
     $product_id = $request->input('product_id','');
+
+
     if($name == 'comment'){
       $results =PdtComments::where('product_id',$product_id)->get();
       foreach($results as $result){
         $result->images = CommentImages::where('member_id',$result->member_id)->where('product_id',$result->product_id)->get();
       }
+      $app_result->status = 2;
+      $app_result->message = '返回成功';
+      $app_result->results =  $results;
+      Log::info('产品详情');
+      return $app_result->toJson();
     }else{
+
       $product = Product::where('id', $product_id)->first();
       $results = $product->summary;
       $app_result->status = 1;
@@ -137,11 +152,6 @@ class GoodsController extends Controller
       return $app_result->toJson();
     }
 
-    $app_result->status = 2;
-    $app_result->message = '返回成功';
-    $app_result->results =  $results;
-    Log::info('产品详情');
-    return $app_result->toJson();
 
 
   }
